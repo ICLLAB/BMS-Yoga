@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,6 +37,8 @@ public class LoginScreenActivity extends AppCompatActivity {
 
     private EditText emailText;
     private EditText pwText;
+    private TextView createA;
+
     Button lgnButton;
     ProgressDialog progressDialog;
 
@@ -48,13 +51,22 @@ public class LoginScreenActivity extends AppCompatActivity {
         emailText = findViewById(R.id.input_email);
         pwText = findViewById(R.id.input_password);
         lgnButton = findViewById(R.id.btn_login);
-
+        createA = findViewById(R.id.createA);
 
         emailText.requestFocus();
         lgnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 login();
+            }
+        });
+
+
+        createA.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginScreenActivity.this, "Create Account",
+                        Toast.LENGTH_LONG).show();
             }
         });
     }

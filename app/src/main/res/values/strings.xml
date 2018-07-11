@@ -15,5 +15,7 @@
     <string name="profileFrag">Profile Fragment</string>
     <string name="dashbaordFrag">Dashboard Fragment</string>
     <string name="Notification">Notification</string>
+    <string name="su_texxt">Create Account?</string>
+    <string name="f_pwd">Forgot Password?</string>
 
 </resources>
