@@ -1,0 +1,27 @@
+{
+  "name": "bms-icl",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^2.0.1",
+    "body-parser": "^1.18.3",
+    "datetime": "0.0.3",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.1.7",
+    "mongoose-sequence": "^4.0.1",
+    "morgan": "^1.9.0",
+    "time-stamp": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.5"
+  },
+  "description": ""
+}
