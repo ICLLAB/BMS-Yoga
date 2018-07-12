@@ -6,7 +6,6 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="editTextColor">@color/colorWhite</item>
-
         <item name="colorPrimary">@color/landing_text_color</item>
 
 
@@ -15,8 +14,6 @@
 
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowNoTitle">true</item>
-
-
 
     </style>
     <style name="TextLabel" parent="TextAppearance.AppCompat">
@@ -30,7 +27,12 @@
         <item name="actionMenuTextColor">@android:color/white</item>
 
     </style>
-
+    <style name="su_TextLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/landing_text_color</item>
+        <item name="colorControlNormal">@color/colorPrimaryTransBlack</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
 
 
 </resources>

@@ -17,10 +17,12 @@ import android.view.ViewGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.example.madhav.bms_yoga.R;
 
 public class dashboard extends Fragment {
+    TextView tipP;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +35,9 @@ public class dashboard extends Fragment {
         View v = inflater.inflate(R.layout.fragment_dashboard,container,false);
         android.support.v7.widget.Toolbar myToolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.my_toolbar);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+
+        tipP= v.findViewById(R.id.tip);
+        tipP.setText(getActivity().getIntent().getStringExtra("puttip"));
         return v;
     }
     @Override

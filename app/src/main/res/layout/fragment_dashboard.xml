@@ -18,10 +18,11 @@
         />
 
     <TextView
+        android:id="@+id/tip"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="20dp"
-        android:fontFamily="@font/roboto_italic"
+        android:fontFamily="@font/roboto"
         android:text="@string/dashbaordFrag"
         android:textAlignment="center"
         android:gravity="center"
@@ -29,7 +30,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:textColor="@color/colorPrimaryTransBlack"
 
-        android:textStyle="italic" />
+         />
 
 
 </FrameLayout>

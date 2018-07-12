@@ -18,26 +18,32 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
+
+import com.android.volley.RequestQueue;
 import com.example.madhav.bms_yoga.HomePage.HomeActivity;
 import com.example.madhav.bms_yoga.MainActivity;
 import com.example.madhav.bms_yoga.R;
 import com.example.madhav.bms_yoga.controller.VolleySingleton;
 import com.example.madhav.bms_yoga.model.mLogin;
 import com.example.madhav.bms_yoga.network.mAPI;
-
+import android.support.v4.app.FragmentManager;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.example.madhav.bms_yoga.network.mAPI.TIP_URL;
 
 public class LoginScreenActivity extends AppCompatActivity {
 
     private EditText emailText;
     private EditText pwText;
     private TextView createA;
+    private TextView forgotP;
 
     Button lgnButton;
     ProgressDialog progressDialog;
@@ -52,7 +58,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         pwText = findViewById(R.id.input_password);
         lgnButton = findViewById(R.id.btn_login);
         createA = findViewById(R.id.createA);
-
+        forgotP = findViewById(R.id.forgotP);
         emailText.requestFocus();
         lgnButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,8 +71,22 @@ public class LoginScreenActivity extends AppCompatActivity {
         createA.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(LoginScreenActivity.this, "Create Account",
-                        Toast.LENGTH_LONG).show();
+                /*Toast.makeText(LoginScreenActivity.this, "Create Account",
+                        Toast.LENGTH_LONG).show();*/
+                FragmentManager fm = getSupportFragmentManager();
+                create_account myDialogFragment = new create_account();
+                myDialogFragment.show(fm, "create_account_fragment");
+
+
+
+            }
+        });
+        forgotP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getSupportFragmentManager();
+                forgot_password fp = new forgot_password();
+                fp.show(fm, "forgot_password_fragment");
             }
         });
     }
@@ -83,10 +103,11 @@ public class LoginScreenActivity extends AppCompatActivity {
                         emailText.setText("");
                         pwText.setText("");
                         emailText.requestFocus();
+                        getTip();
                         Toast.makeText(LoginScreenActivity.this, "Login Successful",
                                 Toast.LENGTH_LONG).show();
-                        Intent i = new Intent(LoginScreenActivity.this, HomeActivity.class);
-                        startActivity(i);
+
+
                     }
                 },
                 new Response.ErrorListener()
@@ -112,6 +133,39 @@ public class LoginScreenActivity extends AppCompatActivity {
         };
         VolleySingleton.getInstance(this).addToRequestQueue(postRequest);
     }
+    private void getTip() {
+
+        StringRequest postRequest = new StringRequest(Request.Method.GET, mAPI.TIP_URL,
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+
+                        Intent i = new Intent(LoginScreenActivity.this, HomeActivity.class);
+                        i.putExtra("puttip",response);
+                        startActivity(i);
+
+                    }
+                },
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        Log.d("Error.Response", String.valueOf(error));
+                    }
+                }
+        )
+
+
+        ;
+        VolleySingleton.getInstance(this).addToRequestQueue(postRequest);
+    }
+
+
+
 
 
 }

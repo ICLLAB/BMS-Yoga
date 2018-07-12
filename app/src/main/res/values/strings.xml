@@ -17,5 +17,10 @@
     <string name="Notification">Notification</string>
     <string name="su_texxt">Create Account?</string>
     <string name="f_pwd">Forgot Password?</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="su_text_head">Create Account</string>
+    <string name="hint_name">Name</string>
+    <string name="fp_text_head">Forgot Password</string>
+    <string name="btn_fp_submit">SUBMIT</string>
 
 </resources>

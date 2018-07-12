@@ -4,6 +4,5 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:statusBarColor">@color/landing_text_color</item>
-
     </style>
 </resources>
