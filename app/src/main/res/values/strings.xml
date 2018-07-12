@@ -22,5 +22,7 @@
     <string name="hint_name">Name</string>
     <string name="fp_text_head">Forgot Password</string>
     <string name="btn_fp_submit">SUBMIT</string>
+    <string name="h_tips">Health Tips</string>
+    <string name="services">Services</string>
 
 </resources>
