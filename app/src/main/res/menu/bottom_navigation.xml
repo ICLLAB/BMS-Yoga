@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_dashboard"
-        android:icon="@drawable/dashboard_18dp"
-
-        android:title="@string/dashboard"/>
+        android:title="@string/dashboard"
+        android:icon="@drawable/ic_dashboard_grey_24dp"/>
 
     <item
         android:id="@+id/action_today"
-        android:icon="@drawable/today_18dp"
+        android:icon="@drawable/ic_today_grey_24dp"
         android:title="@string/today"/>
 
     <item
         android:id="@+id/action_Profile"
-        android:icon="@drawable/profile_18dp"
-
+        android:icon="@drawable/ic_account_circle_grey_24dp"
         android:title="@string/profile"/>
 
 </menu>
