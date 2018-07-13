@@ -6,12 +6,12 @@ var app=express();
 var smtpTransport = nodemailer.createTransport({
     service: "Gmail",
     auth: {
-        user: "hathwar.sanjana@gmail.com",
-        pass: "SAN7259473132"
+        user: "noreply.iclbmsce@gmail.com",
+        pass: "bms-icl123"
     }
 });
 var rand,mailOptions,host,link;
-
+ 
 app.get('/',function(req,res){
 res.sendfile('Public/index.html');
 });
