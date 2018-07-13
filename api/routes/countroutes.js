@@ -2,7 +2,6 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-
 const Count = require("../models/count");
 const Attendance = require("../models/attendance");
 
@@ -195,6 +194,47 @@ router.get("/getby", (req, res, next) =>
   });
 
      
+
+
+
+
+
+
+  router.get("/att/:countId", (req, res, next) => {
+    Count.find({
+      attendance:req.params.countId, 
+      "date": {
+              $gte: new Date((new Date().getTime() - (1* 24 * 60 * 60 * 1000)))
+              }
+      })
+     .sort({"date": -1 })
+      .exec()
+      .then(docs => {
+        res.status(200).json({
+          total: docs.length,
+          countroutes: docs.map(doc => {
+            return {
+              _id: doc._id,
+             // email: doc.email,
+              date: doc.date,
+              //zdate:doc.zdate,
+              request: {
+                type: "GET",
+                //url: "http://localhost:3000/counterroutes/" + doc._id
+              }
+            };
+          })
+        });
+      })
+      .catch(err => {
+        res.status(500).json({
+          error: err
+        });
+      });
+  });
+
+
+
   /*
 
 router.delete("/:orderId", (req, res, next) => {
