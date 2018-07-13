@@ -23,6 +23,8 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.madhav.bms_yoga.HomePage.HomeActivity;
+import com.example.madhav.bms_yoga.HomePage.profile;
+import com.example.madhav.bms_yoga.HomePage.today;
 import com.example.madhav.bms_yoga.MainActivity;
 import com.example.madhav.bms_yoga.R;
 import com.example.madhav.bms_yoga.controller.VolleySingleton;
@@ -99,6 +101,7 @@ public class LoginScreenActivity extends AppCompatActivity {
 
     private void login() {
         final mLogin mlog = new mLogin(emailText.getText().toString(),pwText.getText().toString());
+
         StringRequest postRequest = new StringRequest(Request.Method.POST, mAPI.LOGIN_URL,
                 new Response.Listener<String>()
                 {
@@ -133,9 +136,12 @@ public class LoginScreenActivity extends AppCompatActivity {
             {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("email", mlog.getmEmail());
+
                 params.put("password", mlog.getmPassword());
+
                 return params;
             }
+
         };
         VolleySingleton.getInstance(this).addToRequestQueue(postRequest);
     }

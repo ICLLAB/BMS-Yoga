@@ -10,10 +10,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.madhav.bms_yoga.R;
 
 public class profile extends Fragment {
+    TextView usn;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,6 +28,8 @@ public class profile extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile,container,false);
         android.support.v7.widget.Toolbar myToolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.my_toolbar_profile);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
+        usn = v.findViewById(R.id.username);
+        usn.setText(getActivity().getIntent().getStringExtra("putemail"));
         return v;
     }
     @Override
