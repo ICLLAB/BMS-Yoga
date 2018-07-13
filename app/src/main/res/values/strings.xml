@@ -24,5 +24,6 @@
     <string name="btn_fp_submit">SUBMIT</string>
     <string name="h_tips">Health Tips</string>
     <string name="services">Services</string>
+    <string name="weeky">Weeky Stats</string>
 
 </resources>

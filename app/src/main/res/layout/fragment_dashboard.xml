@@ -5,41 +5,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".HomePage.dashboard">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/landing_text_color"
-        android:elevation="4dp"
-        app:theme="@style/ToolBarStyle"
-        />
-
-
-
     <LinearLayout
+        android:id="@+id/l1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
+        android:background="@color/colorTrendsBackground"
+
+        >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/my_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/landing_text_color"
+            android:elevation="4dp"
+            app:theme="@style/ToolBarStyle"
+            />
+        <TextView
+            android:id="@+id/weeky"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="10dp"
+            android:layout_gravity="center"
+            android:text="@string/weeky"
+            android:textColor="@color/colorWhite"
+            />
+
+            <android.support.v7.widget.CardView
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:layout_width="150dp"
+                android:layout_height="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="20dp">
+
+            </android.support.v7.widget.CardView>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/l2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@+id/l1"
 
         >
         <TextView
             android:id="@+id/services"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="10dp"
+
+            android:layout_marginTop="15dp"
             android:layout_gravity="center"
             android:text="@string/services"
             android:textColor="@color/landing_text_color"
             android:textAppearance="@android:style/TextAppearance.Holo.Small"/>
 
         <android.support.v7.widget.CardView
-            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="110dp"
 
@@ -165,30 +193,34 @@
             </LinearLayout>
 
 
-
-
-
-
-
         </android.support.v7.widget.CardView>
+    </LinearLayout>
 
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/l2"
+        android:orientation="vertical">
         <TextView
+            android:layout_marginTop="15dp"
             android:id="@+id/powered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_margin="15dp"
+
+
             android:layout_gravity="center"
             android:text="@string/h_tips"
             android:textColor="@color/landing_text_color"
-            android:textAppearance="@android:style/TextAppearance.Holo.Small"/>
+            android:textAppearance="@android:style/TextAppearance.Holo.Small"
+            />
 
         <android.support.v7.widget.CardView
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp">
+            >
 
 
             <TextView
@@ -203,8 +235,6 @@
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/landing_text_color"
-
-
                 android:textStyle="bold" />
 
         </android.support.v7.widget.CardView>
