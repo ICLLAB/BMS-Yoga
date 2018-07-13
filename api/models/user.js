@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-
+const passportLocalMongoose = require("passport-local-mongoose");
+const dotenv = require("dotenv");
 
 var minuteFromNow = function(){
     var d = new Date();
@@ -33,7 +34,9 @@ const userSchema = mongoose.Schema({
     medications: { type: String, required: false },
     experience: { type: String, required: false },
     creation_time : { type : String, default: minuteFromNow },
-    lastLogin :{ type : String, default: minuteFromNow }
+    lastLogin :{ type : String, default: minuteFromNow },
+    resetPasswordToken:{ type: String },
+    resetPasswordExpires:{type:Date}
 
 });
 

@@ -80,7 +80,6 @@ router.post("/attendancecount", (req, res, next) => {
 
 
 
-
 router.get("/attendancecount/:countId", (req, res, next) => {
   Count.find({attendance:req.params.countId})
     .exec()

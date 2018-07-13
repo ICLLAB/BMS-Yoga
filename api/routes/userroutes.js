@@ -4,6 +4,10 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
+const async = require("async");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
+const dotenv = require("dotenv");
 
 
 
@@ -122,6 +126,7 @@ router.put("/:userId", (req, res, next) => {
 });
 
 
+
 router.post("/signup", (req, res, next) => {
   User.find({ email: req.body.email })
     .exec()
@@ -196,7 +201,9 @@ router.post("/login", (req, res, next) => {
             message: "Auth failed"
           });
         }
-        /*
+        
+
+
         if (result) {
           const token = jwt.sign
           (
@@ -204,12 +211,16 @@ router.post("/login", (req, res, next) => {
               email: user[0].email,
               userId: user[0]._id
             },
-            process.env.secret,
+            "secret",
+            //process.env.JWT_KEY,
+            //process.env.secret,
             {
                 expiresIn: "1h"
             }
           );
-          */  
+           
+        
+        
           if (result) {
             User.update({email:req.body.email},{$set : { lastLogin : minuteFromNow()}},function(err) {
                 if(err) 
@@ -219,10 +230,10 @@ router.post("/login", (req, res, next) => {
                } )
           return res.status(200).json({
             message: "Auth successful",
-           // token: token
+           token: token
           });
         }
-       // }
+       }
         res.status(401).json({
           message: "Auth failed"
         });
@@ -258,6 +269,151 @@ router.delete("/:userId", (req, res, next) => {
       });
     });
 });
+/*
 
+
+router.put("/:userId", (req, res, next) => {
+  User.findByIdAndUpdate({ _id: req.params.id }, req.body)
+  .then(function(){
+    User.findOne({_id:req.params.id})
+    .then(function(user)
+    {
+      res.send(user);
+    });
+  });
+});
+    
+*/
+
+
+
+
+
+
+
+/*
+
+
+
+
+// forgot password
+router.get('/forgot', function(req, res) {
+  console.log("adfas");
+  //res.render('forgot');
+});
+
+router.post('/forgot', function(req, res, next) {
+  async.waterfall([
+    function(done) {
+      crypto.randomBytes(20, function(err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function(token, done) {
+      User.findOne({ email: req.body.email }, function(err, user) {
+        if (!user) {
+        console.log('error', 'No account with that email address exists.');
+          return res.redirect('/forgot');
+        }
+
+        user.resetPasswordToken = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+
+        user.save(function(err) {
+          done(err, token, user);
+        });
+      });
+    },
+    function(token, user, done) {
+      var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail', 
+        auth: {
+          user: 'noreply.iclbmsce@gmail.com',
+          pass: "bms-icl123"// process.env.GMAILPW
+        }
+      });
+      var mailOptions = {
+        to: user.email,
+        from: 'noreply.iclbmsce@gmail.com',
+        subject: 'Node.js Password Reset',
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+          'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+          'http://' + req.headers.host + '/user/reset/' + token + '\n\n' +
+          'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        console.log('mail sent');
+        console.log('success', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+        done(err, 'done');
+      });
+    }
+  ], function(err) {
+    if (err) return next(err);
+    res.redirect('/forgot');
+  });
+});
+
+router.get('reset/:token', function(req, res) {
+  User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+    if (!user) {
+      console.log('error', 'Password reset token is invalid or has expired.');
+      return res.redirect('/forgot');
+    }
+    res.render('reset', {token: req.params.token});
+  });
+});
+
+router.post('reset/:token', function(req, res) {
+  async.waterfall([
+    function(done) {
+      User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
+        if (!user) {
+          console.log('error', 'Password reset token is invalid or has expired.');
+          return res.redirect('back');
+        }
+        if(req.body.password === req.body.confirm) {
+          user.setPassword(req.body.password, function(err) {
+            user.resetPasswordToken = undefined;
+            user.resetPasswordExpires = undefined;
+
+            user.save(function(err) {
+              req.login(user, function(err) {
+                done(err, user);
+              });
+            });
+          })
+        } else {
+          console.log("error", "Passwords do not match.");
+            return res.redirect('back');
+        }
+      });
+    },
+    function(user, done) {
+      var smtpTransport = nodemailer.createTransport({
+        service: 'Gmail', 
+        auth: {
+          user: 'noreply.iclbmsce@gmail.com',
+          pass: "bms-icl123"//process.env.GMAILPW
+        }
+      });
+      var mailOptions = {
+        to: user.email,
+        from: 'noreply.iclbmsce@gmail.com',
+        subject: 'Your password has been changed',
+        text: 'Hello,\n\n' +
+          'This is a confirmation that the password for your account ' + user.email + ' has just been changed.\n'
+      };
+      smtpTransport.sendMail(mailOptions, function(err) {
+        console.log('success', 'Success! Your password has been changed.');
+        done(err);
+      });
+    }
+  ], function(err) {
+    res.redirect('/campgrounds');
+  });
+});
+
+*/
 
 module.exports = router;
