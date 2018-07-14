@@ -9,6 +9,9 @@ const nodemailer = require("nodemailer");
 const crypto = require("crypto");
 const dotenv = require("dotenv");
 
+require('dotenv').config()
+jwt_key: process.env.JWT_KEY
+mail_key :process.env.MAIL_KEY
 
 
 
@@ -211,8 +214,8 @@ router.post("/login", (req, res, next) => {
               email: user[0].email,
               userId: user[0]._id
             },
-            "secret",
-            //process.env.JWT_KEY,
+          //  "secret",
+           process.env.JWT_KEY,
             //process.env.secret,
             {
                 expiresIn: "1h"
@@ -220,7 +223,7 @@ router.post("/login", (req, res, next) => {
           );
            
         
-        
+      
           if (result) {
             User.update({email:req.body.email},{$set : { lastLogin : minuteFromNow()}},function(err) {
                 if(err) 
@@ -246,6 +249,23 @@ router.post("/login", (req, res, next) => {
       });
     });
 });
+
+/*
+router.get('/logout', function(req, res) {
+  req.token.destroy();
+  return res.status(200).send();
+});
+
+
+
+
+
+
+router.get('/lsogout', function(req, res) {
+  res.status(200).send({ auth: false, token: null });
+});
+
+*/
 
 
 router.delete("/:userId", (req, res, next) => {
@@ -291,16 +311,13 @@ router.put("/:userId", (req, res, next) => {
 
 
 
-/*
+
 
 
 
 
 // forgot password
-router.get('/forgot', function(req, res) {
-  console.log("adfas");
-  //res.render('forgot');
-});
+
 
 router.post('/forgot', function(req, res, next) {
   async.waterfall([
@@ -314,7 +331,7 @@ router.post('/forgot', function(req, res, next) {
       User.findOne({ email: req.body.email }, function(err, user) {
         if (!user) {
         console.log('error', 'No account with that email address exists.');
-          return res.redirect('/forgot');
+     //     return res.redirect('/forgot');
         }
 
         user.resetPasswordToken = token;
@@ -330,7 +347,7 @@ router.post('/forgot', function(req, res, next) {
         service: 'Gmail', 
         auth: {
           user: 'noreply.iclbmsce@gmail.com',
-          pass: "bms-icl123"// process.env.GMAILPW
+          pass: process.env.MAIL_KEY
         }
       });
       var mailOptions = {
@@ -350,19 +367,21 @@ router.post('/forgot', function(req, res, next) {
     }
   ], function(err) {
     if (err) return next(err);
-    res.redirect('/forgot');
+    console.log("dfjdgfjkhjg")
+   // res.redirect('/forgot');
   });
 });
-
+/*
 router.get('reset/:token', function(req, res) {
   User.findOne({ resetPasswordToken: req.params.token, resetPasswordExpires: { $gt: Date.now() } }, function(err, user) {
     if (!user) {
       console.log('error', 'Password reset token is invalid or has expired.');
-      return res.redirect('/forgot');
+      //return res.redirect('/forgot');
     }
-    res.render('reset', {token: req.params.token});
+   // res.render('reset', {token: req.params.token});
   });
 });
+*/
 
 router.post('reset/:token', function(req, res) {
   async.waterfall([
@@ -372,20 +391,22 @@ router.post('reset/:token', function(req, res) {
           console.log('error', 'Password reset token is invalid or has expired.');
           return res.redirect('back');
         }
+       
         if(req.body.password === req.body.confirm) {
-          user.setPassword(req.body.password, function(err) {
+          User.setPassword(req.body.password, function(err) {
             user.resetPasswordToken = undefined;
             user.resetPasswordExpires = undefined;
-
             user.save(function(err) {
-              req.login(user, function(err) {
+              req.logIn(user, function(err) {
                 done(err, user);
               });
             });
           })
+
+                  
         } else {
           console.log("error", "Passwords do not match.");
-            return res.redirect('back');
+         //   return res.redirect('back');
         }
       });
     },
@@ -394,7 +415,7 @@ router.post('reset/:token', function(req, res) {
         service: 'Gmail', 
         auth: {
           user: 'noreply.iclbmsce@gmail.com',
-          pass: "bms-icl123"//process.env.GMAILPW
+          pass: process.env.MAIL_KEY
         }
       });
       var mailOptions = {
@@ -410,10 +431,10 @@ router.post('reset/:token', function(req, res) {
       });
     }
   ], function(err) {
-    res.redirect('/campgrounds');
+    //res.redirect('/campgrounds');
   });
 });
 
-*/
+
 
 module.exports = router;

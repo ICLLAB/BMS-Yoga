@@ -9,6 +9,7 @@ var minuteFromNow = function()
  d.setMinutes(d.getMinutes() + 30);
    var n = d.toLocaleString();
  return n;
+ 
 };
 
 const countSchema   = mongoose.Schema({
