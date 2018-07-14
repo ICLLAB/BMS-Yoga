@@ -7,6 +7,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomePage.profile">
 
+
     <LinearLayout
         android:id="@+id/pl1"
         android:layout_width="match_parent"
@@ -25,11 +26,12 @@
         <ImageView
             android:id="@+id/schedule_icon"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:layout_marginTop="15dp"
             android:src="@drawable/baseline_account_circle_white_48dp">
         </ImageView>
+
         <TextView
             android:id="@+id/username"
             android:layout_width="wrap_content"
@@ -37,11 +39,10 @@
             android:layout_gravity="center"
             android:layout_marginBottom="15dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/ursn"
-            android:textAlignment="center"
+            android:text="Hello"
+
 
             android:textColor="@color/colorWhite" />
-
     </LinearLayout>
 
 
