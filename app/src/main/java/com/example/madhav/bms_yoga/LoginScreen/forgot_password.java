@@ -53,7 +53,7 @@ EditText infw;
         });
         return view;
     }
-    
+
     private void fpw() {
        // final mLogin mlog = new mLogin(emailText.getText().toString(),pwText.getText().toString());
 
