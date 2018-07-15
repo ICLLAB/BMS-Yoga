@@ -28,8 +28,7 @@ public class profile extends Fragment {
         View v = inflater.inflate(R.layout.fragment_profile,container,false);
         android.support.v7.widget.Toolbar myToolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.my_toolbar_profile);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
-        usn = v.findViewById(R.id.username);
-        usn.setText(getActivity().getIntent().getStringExtra("putemail"));
+
         return v;
     }
     @Override

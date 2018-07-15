@@ -198,6 +198,7 @@ public class LoginScreenActivity extends AppCompatActivity {
 
                                // Get the current student (json object) data
                                String hea_tip = student.getString("health_tip");
+                               String Quotes = '"'+ hea_tip+'"';
                                //String lastName = student.getString("type");
                               // String age = student.getString("age");
 
@@ -206,7 +207,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                               // mTextView.append("\n\n");
 
                                Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
-                               n.putExtra("puttip",hea_tip);
+                               n.putExtra("puttip",Quotes);
                                startActivity(n);
                            }
                        }catch (JSONException e){
