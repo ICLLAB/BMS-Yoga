@@ -68,7 +68,7 @@ EditText infw;
                         //pwText.setText("");
                        // emailText.requestFocus();
                        // getTip();
-                        Toast.makeText(getContext(), "Email Sent Successful",
+                        Toast.makeText(getContext(), "Email Sent Successfully",
                                 Toast.LENGTH_LONG).show();
 
 
@@ -80,7 +80,7 @@ EditText infw;
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(error));
-                        Toast.makeText(getContext(), "Email Sent Successful",
+                        Toast.makeText(getContext(), "Failed",
                                 Toast.LENGTH_LONG).show();
                     }
                 }

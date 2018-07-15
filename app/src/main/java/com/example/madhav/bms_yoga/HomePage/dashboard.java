@@ -55,7 +55,6 @@ public class dashboard extends Fragment {
 
         tipP = v.findViewById(R.id.tip);
         tipP.setText(getActivity().getIntent().getStringExtra("puttip"));
-
         return v;
     }
 
@@ -81,12 +80,23 @@ public class dashboard extends Fragment {
         //Log.d(TAG, "initRecyclerView: init recyclerview");
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
+
+
         //RecyclerView recyclerView = getContext().findViewById(R.id.);
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(layoutManager);
+
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mNames,mClassCount);
         recyclerView.setAdapter(adapter);
+
+
+
+
+
     }
+
+
 
 }
 

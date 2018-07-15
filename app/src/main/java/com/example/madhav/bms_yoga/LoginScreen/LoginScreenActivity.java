@@ -52,9 +52,9 @@ public class LoginScreenActivity extends AppCompatActivity {
     private EditText pwText;
     private TextView createA;
     private TextView forgotP;
-
+    private ProgressBar pdia;
     Button lgnButton;
-    ProgressDialog progressDialog;
+
 
 
     @Override
@@ -67,11 +67,14 @@ public class LoginScreenActivity extends AppCompatActivity {
         lgnButton = findViewById(R.id.btn_login);
         createA = findViewById(R.id.createA);
         forgotP = findViewById(R.id.forgotP);
+        pdia = findViewById(R.id.progB);
+        pdia.setVisibility(View.INVISIBLE);
         emailText.requestFocus();
         lgnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                new LongOperation().execute("");
+
             }
         });
 
@@ -115,7 +118,6 @@ public class LoginScreenActivity extends AppCompatActivity {
                         getTip();
                         Toast.makeText(LoginScreenActivity.this, "Login Successful",
                                 Toast.LENGTH_LONG).show();
-
 
                     }
                 },
@@ -208,7 +210,9 @@ public class LoginScreenActivity extends AppCompatActivity {
 
                                Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
                                n.putExtra("puttip",Quotes);
+
                                startActivity(n);
+
                            }
                        }catch (JSONException e){
                            e.printStackTrace();
@@ -229,6 +233,45 @@ public class LoginScreenActivity extends AppCompatActivity {
        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
    }
 
+
+    private class LongOperation extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
+            }
+
+            login();
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //TextView txt = (TextView) findViewById(R.id.output);
+            // txt.setText("Executed"); // txt.setText(result);
+            pdia.setVisibility(View.INVISIBLE);
+            Log.d("async", "executed");
+
+            // might want to change "executed" for the returned string passed
+            // into onPostExecute() but that is upto you
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            pdia.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
 
 
 

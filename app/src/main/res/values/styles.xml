@@ -34,6 +34,8 @@
         <item name="colorControlHighlight">@color/colorAccent</item>
     </style>
 
-
+    <style name="pAccent" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
 </resources>
 

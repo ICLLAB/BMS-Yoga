@@ -115,7 +115,14 @@
                 android:textColor="@color/colorWhite"
                 />
         </LinearLayout>
+        <ProgressBar
+            android:id="@+id/progB"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:theme="@style/pAccent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+
 
 
 </android.support.constraint.ConstraintLayout>
