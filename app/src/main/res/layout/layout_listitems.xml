@@ -19,18 +19,20 @@
             android:layout_height="match_parent">
 
             <TextView
+                android:id="@+id/title"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
-                android:text="Title"
-                android:id="@+id/title"
                 android:layout_margin="15dp"
-                android:gravity="center"
-                android:layout_marginTop="5dp"
-                android:textColor="#000"
                 android:layout_marginBottom="5dp"
-                android:autoSizeTextType="uniform"
+                android:layout_marginTop="5dp"
+                android:autoSizeMaxTextSize="15sp"
                 android:autoSizeMinTextSize="8sp"
-                android:autoSizeMaxTextSize="15sp"/>
+                android:autoSizeTextType="uniform"
+
+                android:gravity="center"
+                android:text="Title"
+                android:textColor="@color/landing_text_color"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/classcount"
