@@ -28,7 +28,7 @@
         <activity android:name=".LoginScreen.LoginScreenActivity"></activity>
         <activity android:name=".HomePage.HomeActivity"></activity>
 
-
+        <service android:name=".HomePage.dashboard$AppService" />
     </application>
 
 </manifest>

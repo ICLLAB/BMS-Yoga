@@ -228,7 +228,7 @@
                 android:fontFamily="@font/roboto_italic"
                 android:gravity="center"
                 android:includeFontPadding="false"
-                android:text="@string/dashbaordFrag"
+
                 android:textAlignment="center"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/landing_text_color"

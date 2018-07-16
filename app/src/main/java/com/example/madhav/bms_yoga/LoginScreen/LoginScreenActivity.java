@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.madhav.bms_yoga.HomePage.HomeActivity;
+import com.example.madhav.bms_yoga.HomePage.dashboard;
 import com.example.madhav.bms_yoga.HomePage.profile;
 import com.example.madhav.bms_yoga.HomePage.today;
 import com.example.madhav.bms_yoga.MainActivity;
@@ -115,10 +116,14 @@ public class LoginScreenActivity extends AppCompatActivity {
                         emailText.setText("");
                         pwText.setText("");
                         emailText.requestFocus();
-                        getTip();
+                        //getTip();
+
                         Toast.makeText(LoginScreenActivity.this, "Login Successful",
                                 Toast.LENGTH_LONG).show();
+                        Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
+                        // n.putExtra("puttip",Quotes);
 
+                        startActivity(n);
                     }
                 },
                 new Response.ErrorListener()
@@ -147,35 +152,6 @@ public class LoginScreenActivity extends AppCompatActivity {
         };
         VolleySingleton.getInstance(this).addToRequestQueue(postRequest);
     }
-   /* private void getTip() {
-
-        StringRequest postRequest = new StringRequest(Request.Method.GET, mAPI.TIP_URL,
-                new Response.Listener<String>()
-                {
-                    @Override
-                    public void onResponse(String response) {
-                        // response
-                        Log.d("Response", response);
-                        Intent i = new Intent(LoginScreenActivity.this, HomeActivity.class);
-                        i.putExtra("puttip",response);
-                        startActivity(i);
-
-                    }
-                },
-                new Response.ErrorListener()
-                {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // error
-                        Log.d("Error.Response", String.valueOf(error));
-                    }
-                }
-        )
-
-
-        ;
-        VolleySingleton.getInstance(this).addToRequestQueue(postRequest);
-    }*/
 
    private void getTip() {
 
@@ -208,10 +184,10 @@ public class LoginScreenActivity extends AppCompatActivity {
                                //mTextView.append(firstName +" " + lastName +"\nage : " + age);
                               // mTextView.append("\n\n");
 
-                               Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
+                               /*Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
                                n.putExtra("puttip",Quotes);
 
-                               startActivity(n);
+                               startActivity(n);*/
 
                            }
                        }catch (JSONException e){
@@ -239,6 +215,7 @@ public class LoginScreenActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... params) {
+            login();
             for (int i = 0; i < 5; i++) {
                 try {
                     Thread.sleep(1000);
@@ -247,7 +224,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                 }
             }
 
-            login();
+
             return "Executed";
         }
 
