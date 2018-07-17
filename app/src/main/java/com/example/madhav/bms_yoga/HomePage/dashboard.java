@@ -92,13 +92,10 @@ public class dashboard extends Fragment {
 
     }
     private void initRecyclerView(){
-        //Log.d(TAG, "initRecyclerView: init recyclerview");
+
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
-
-
-        //RecyclerView recyclerView = getContext().findViewById(R.id.);
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -107,33 +104,8 @@ public class dashboard extends Fragment {
 
         mHandler = new Handler();
         startRepeatingTask();
-        // mHandlerTask.run();
-        //startRepeatingTask();
-       // stopRepeatingTask();
-    }
-
-    /*Handler mHandler = new Handler();
-
-    Runnable mHandlerTask = new Runnable()
-    {
-        @Override
-        public void run() {
-            getTip();
-            mHandler.postDelayed(mHandlerTask, INTERVAL);
-        }
-    };
-
-    void startRepeatingTask()
-    {
-        Log.d("test :","run ");
-        mHandlerTask.run();
 
     }
-
-    void stopRepeatingTask()
-    {
-        mHandler.removeCallbacks(mHandlerTask);
-    }*/
 
     private int mInterval = 10000; // 10 seconds refresh
     private Handler mHandler;

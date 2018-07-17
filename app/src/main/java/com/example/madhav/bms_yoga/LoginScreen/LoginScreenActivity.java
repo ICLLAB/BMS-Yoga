@@ -16,10 +16,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
+import android.content.SharedPreferences;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.madhav.bms_yoga.HomePage.HomeActivity;
@@ -44,8 +45,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TASK;
 import static com.example.madhav.bms_yoga.network.mAPI.TIP_URL;
+
+
+
 
 public class LoginScreenActivity extends AppCompatActivity {
 
@@ -56,6 +60,8 @@ public class LoginScreenActivity extends AppCompatActivity {
     private ProgressBar pdia;
     Button lgnButton;
 
+
+    RelativeLayout lf;
 
 
     @Override
@@ -71,6 +77,17 @@ public class LoginScreenActivity extends AppCompatActivity {
         pdia = findViewById(R.id.progB);
         pdia.setVisibility(View.INVISIBLE);
         emailText.requestFocus();
+
+        lf = findViewById(R.id.re1);
+
+        if(SaveSharedPreference.getLoggedStatus(getApplicationContext())) {
+            Intent intent = new Intent(LoginScreenActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            lf.setVisibility(View.VISIBLE);
+        }
+
         lgnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,12 +135,16 @@ public class LoginScreenActivity extends AppCompatActivity {
                         emailText.requestFocus();
                         //getTip();
 
+                        SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+                        Intent intent = new Intent(LoginScreenActivity.this, HomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK |FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                         Toast.makeText(LoginScreenActivity.this, "Login Successful",
                                 Toast.LENGTH_LONG).show();
-                        Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
+                        //Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
                         // n.putExtra("puttip",Quotes);
 
-                        startActivity(n);
+                       // startActivity(n);
                     }
                 },
                 new Response.ErrorListener()
