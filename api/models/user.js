@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
-const passportLocalMongoose = require("passport-local-mongoose");
+//const passportLocalMongoose = require("passport-local-mongoose");
 const dotenv = require("dotenv");
+const bcrypt = require('bcrypt'),
+Schema = mongoose.Schema;
 
 var minuteFromNow = function(){
     var d = new Date();
@@ -35,10 +37,21 @@ const userSchema = mongoose.Schema({
     experience: { type: String, required: false },
     creation_time : { type : String, default: minuteFromNow },
     lastLogin :{ type : String, default: minuteFromNow },
-    resetPasswordToken:{ type: String },
-    resetPasswordExpires:{type:Date}
-
+    reset_password_token: {
+      type: String
+    },
+    reset_password_expires: {
+      type: Date
+    }
 });
+
+
+userSchema.methods.comparePassword = function(password) {
+  return bcrypt.compareSync(password, this.hash_password);
+};
+
+
+//mongoose.model('User', userSchema);
 
 module.exports = mongoose.model('User', userSchema);
 

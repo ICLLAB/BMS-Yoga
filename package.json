@@ -17,6 +17,7 @@
     "dotenv": "^6.0.0",
     "env": "0.0.2",
     "express": "^4.16.3",
+    "hbs": "^4.0.1",
     "jsonwebtoken": "^8.3.0",
     "moment": "^2.22.2",
     "mongoose": "^5.1.7",
