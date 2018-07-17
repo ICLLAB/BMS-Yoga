@@ -12,28 +12,92 @@
         android:id="@+id/pl1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorTrendsBackground"
         android:orientation="vertical"
         >
         <android.support.v7.widget.Toolbar
             android:id="@+id/my_toolbar_profile"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:background="@color/landing_text_color"
             android:elevation="4dp"
             app:theme="@style/ToolBarStyle"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
 
 
+
+            <TextView
+                android:id="@+id/editBT"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_edit_grey_24dp"
+                android:drawableStart="@drawable/ic_edit_grey_24dp"
+                android:includeFontPadding="false"
+                android:text="@string/edit"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimaryTransBlack"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+
+
+
+            <TextView
+                android:id="@+id/aboutBT"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto"
+                android:gravity="center"
+                android:drawablePadding="10dp"
+                android:drawableLeft="@drawable/ic_about_grey_24dp"
+                android:drawableStart="@drawable/ic_about_grey_24dp"
+                android:includeFontPadding="false"
+                android:text="@string/abtus"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorPrimaryTransBlack"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:layout_marginLeft="20dp"
+            android:orientation="vertical">
+
+
+
+        <TextView
+            android:id="@+id/logoutBT"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto"
+            android:gravity="center"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/ic_lock_grey_24dp"
+            android:drawableStart="@drawable/ic_lock_grey_24dp"
+            android:includeFontPadding="false"
+            android:text="@string/logout"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimaryTransBlack"
+            />
+        </LinearLayout>
     </LinearLayout>
-    <Button
-        android:id="@+id/logoutBT"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="73dp"
-        android:text="Logout" />
+
 
 
 

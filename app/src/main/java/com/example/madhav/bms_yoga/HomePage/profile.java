@@ -15,14 +15,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.madhav.bms_yoga.LoginScreen.LoginScreenActivity;
 import com.example.madhav.bms_yoga.LoginScreen.SaveSharedPreference;
 import com.example.madhav.bms_yoga.R;
 
 public class profile extends Fragment {
-    TextView usn;
-    Button logoutBT;
+    TextView logoutBT;
+    //Button logoutBT;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,9 +59,12 @@ public class profile extends Fragment {
 
     public void logout()
     {
+        Toast.makeText(getContext(), "You have been successfully logged out!",
+                Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getActivity(), LoginScreenActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+        getActivity().finish();
     }
 
 

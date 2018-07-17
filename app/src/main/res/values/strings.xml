@@ -26,5 +26,8 @@
     <string name="services">Services</string>
     <string name="weeky">Weekly Stats</string>
     <string name="ursn">Username</string>
+    <string name="logout">Logout</string>
+    <string name="edit">Edit Profile</string>
+    <string name="abtus">About Us</string>
 
 </resources>
