@@ -4,9 +4,10 @@ const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
-//const timestamp = require('time-stamp');
 
 
+
+const adminRoutes = require("./api/routes/adminroutes");
 
 const trainerRoutes = require("./api/routes/trainerroutes");
 
@@ -19,12 +20,6 @@ const attendanceRoutes = require("./api/routes/attendanceroutes");
 const countRoutes = require("./api/routes/countroutes");
 
 
-
-//const bookingRoutes = require("./api/routes/bookingroutes");
-
-//const feedbackRoutes = require("./api/routes/feedback");
-
-//const packageRoutes = require("./api/routes/packageroutes");
 
 
 /*mongoose.connect('mongodb://node-shop:'+process.env.MONGO_ATLAS_PW+'@node-rest-shop-shard-00-00-ehc7x.mongodb.net:27017,node-rest-shop-shard-00-01-ehc7x.mongodb.net:27017,node-rest-shop-shard-00-02-ehc7x.mongodb.net:27017/test?ssl=true&replicaSet=node-rest-shop-shard-0&authSource=admin&retryWrites=true',
@@ -60,6 +55,8 @@ app.use((req, res, next) => {
 });
 
 
+app.use("/admin", adminRoutes);
+
 app.use("/trainer", trainerRoutes);
 
 app.use("/user", userRoutes);
@@ -72,19 +69,11 @@ app.use("/count", countRoutes);
 
 
 
-
-//app.use("/feedback", feedbackRoutes);
-//app.use("/attendance", attendanceRoutes);
-
-
-
 app.use((req, res, next) => {
   const error = new Error("Not found");
   error.status = 404;
   next(error);
 });
-
-
 
 
 app.use((error, req, res, next) => {
@@ -95,10 +84,6 @@ app.use((error, req, res, next) => {
     }
   });
 });
-
-
-
-
 
 
 module.exports = app;

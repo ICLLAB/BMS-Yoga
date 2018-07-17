@@ -8,16 +8,23 @@ const User = require("../models/user");
 const async = require("async");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+
+
+//env
 const dotenv = require("dotenv");
-//hbs = require('nodemailer-express-handlebars'),
-email = process.env.MAILER_EMAIL_ID || 'noreply.iclbmsce@gmail.com',
-pass = process.env.MAILER_PASSWORD || 'bms-icl123',
 
-module.exports = router;
+email = process.env.MAILER_EMAIL_ID,
+pass = process.env.MAILER_PASSWORD,
+
+
 require('dotenv').config()
-jwt_key: process.env.JWT_KEY
-mail_key :process.env.MAIL_KEY
 
+jwt_key: process.env.JWT_KEY
+mailer_email_id :process.env.MAILER_EMAIL_ID
+mailer_password :process.env.MAILER_PASSWORD
+mailer_service_provider:process.env.MAILER_SERVICE_PROVIDER
+
+//time updation
 
 
 var minuteFromNow = function(){
@@ -33,14 +40,16 @@ var minuteFromNow = function(){
 router.put("/:userId", (req, res, next) => {
   const id = req.params.userId;
  
- User.findOneAndUpdate({
-  _id: id }, {
+ User.update
+ ({
+  _id: id 
+  },
+   {
    $set:{
-     fname: req.body.f_name
-     }
-   },{
-     returnOriginal: false
-   })
+     f_name:req.body.f_name,
+     l_name: req.body.l_name
+       }
+  })
  .then(result =>{
    console.log(result);
    res.status(200).json({
@@ -58,10 +67,12 @@ router.put("/:userId", (req, res, next) => {
    });
  });
 });
-
 */
 
 
+
+
+//API TO EDIT PATIENT/ASPIRANT PROFILE (passing id)
 
 router.put("/:userId", (req, res, next) => {
   const id = req.params.userId;
@@ -92,7 +103,7 @@ router.put("/:userId", (req, res, next) => {
 
 
 
-
+//API TO GET PATIENT/ASPIRANT PROFILE
 
 router.get("/", (req, res, next) => {
   User.find()
@@ -124,11 +135,11 @@ router.get("/", (req, res, next) => {
 });
 
 
-// FIND BY MAIL
-/*
-router.get("/:userEmail", (req, res, next) => {
+//API TO GET PATIENT/ASPIRANT PROFILE(passing email)
+
+router.get("/email/:userEmail", (req, res, next) => {
   const email = req.params.userEmail;
-  User.find({ email: req.body.email })
+  User.find({email})
     .select('_id email username f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin')
     .exec()
     .then(doc => {
@@ -153,14 +164,14 @@ router.get("/:userEmail", (req, res, next) => {
     });
 });
 
-*/
 
 
+//API TO GET PATIENT/ASPIRANT PROFILE(passing id)
 
-router.get("/:userId", (req, res, next) => {
+router.get("/id/:userId", (req, res, next) => {
   const id = req.params.userId;
   User.findById(id)
-    .select('_id username f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin')
+    .select('_id username email f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin')
     .exec()
     .then(doc => {
       console.log("From database", doc);
@@ -187,7 +198,7 @@ router.get("/:userId", (req, res, next) => {
 
 
 
-
+//API TO ADD PATIENT/ASPIRANT PROFILE
 
 router.post("/signup", (req, res, next) => {
   User.find({ email: req.body.email })
@@ -202,7 +213,6 @@ router.post("/signup", (req, res, next) => {
             const user = new User({
               _id: new mongoose.Types.ObjectId(),
               email: req.body.email,
-             // password: hash,
               phone:req.body.phone,
               username:req.body.username,
               f_name: req.body.f_name,
@@ -210,7 +220,6 @@ router.post("/signup", (req, res, next) => {
               l_name: req.body.l_name,
               weight: req.body.weight,
               height: req.body.height,
-              phone: req.body.phone,
               medical_con: req.body.medical_con,
               pain_areas: req.body.pain_areas,
               medications: req.body.medications,
@@ -228,7 +237,7 @@ router.post("/signup", (req, res, next) => {
                     }
                    } )
                 res.status(201).json({
-                  message: "User created"
+                  message: "USER PROFILE CREATED"
                 });
               })
               .catch(err => {
@@ -238,10 +247,11 @@ router.post("/signup", (req, res, next) => {
                 });
               });
           }
-        
-      
     });
 });
+
+
+//API TO LOGIN PATIENT/ASPIRANT PROFILE
 
 router.post("/login", (req, res, next) => {
   User.find({ email: req.body.email })
@@ -259,8 +269,6 @@ router.post("/login", (req, res, next) => {
           });
         }
         
-
-
         if (result) {
           const success_token = jwt.sign
           (
@@ -268,16 +276,12 @@ router.post("/login", (req, res, next) => {
               email: user[0].email,
               userId: user[0]._id
             },
-          //  "secret",
            process.env.JWT_KEY,
-            //process.env.secret,
             {
                 expiresIn: "1h"
             }
           );
            
-        
-      
           if (result) {
             User.update({email:req.body.email},{$set : { lastLogin : minuteFromNow()}},function(err) {
                 if(err) 
@@ -305,6 +309,10 @@ router.post("/login", (req, res, next) => {
 });
 
 
+
+
+/*
+
 router.get('/logout', (req, res) => {
   req.user.removeToken(req.token).then(() => {
     res.status(200).send();
@@ -312,7 +320,10 @@ router.get('/logout', (req, res) => {
     res.status(400).send();
   });
 });
-/*
+
+
+
+
 router.get('/logout', function(req, res) {
   req.token.destroy();
   return res.status(200).send();
@@ -329,6 +340,9 @@ router.get('/lsogout', function(req, res) {
 
 */
 
+
+
+//API TO DELETE PATIENT/ASPIRANT PROFILE(passing id)
 
 router.delete("/:userId", (req, res, next) => {
   const id = req.params.userId;
@@ -353,42 +367,19 @@ router.delete("/:userId", (req, res, next) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//EAMIL CONFIGURATION
 
 const smtpTransport = nodemailer.createTransport({
-  service: process.env.MAILER_SERVICE_PROVIDER || 'Gmail',
+  service: process.env.MAILER_SERVICE_PROVIDER,
   auth: {
     user: email,
     pass: pass
   }
 });
 
-/*
-const handlebarsOptions = {
-  viewEngine: 'handlebars',
-  viewPath: path.resolve('./api/templates/'),
-  extName: '.html'
-};
-
-smtpTransport.use('compile', hbs(handlebarsOptions));
 
 
-
-*/
-
+//API TO FORGOT PASSWORD. PATIENT/ASPIRANT PROFILE
 
 router.post("/forgot", (req, res, next) => {
   async.waterfall([
@@ -421,12 +412,10 @@ router.post("/forgot", (req, res, next) => {
         from: email,
 
         subject: 'Password help has arrived!',
-        text: 'Click to reset Token :  http://localhost:3000/user/reset/' + token
+        text: 'Click to reset PASSSWORD :  http://localhost:3000/user/reset/' + token
         
       };
-     console.log(token);
       
-      //console.log("to  : "+this.test)
       smtpTransport.sendMail(data, function(err) {
         if (!err) {
           return res.json({ message: 'Kindly check your email for further instructions' });
@@ -443,10 +432,7 @@ router.post("/forgot", (req, res, next) => {
 
 );
 
-
-/**
- * Reset password
- */
+//API TO RESET PATIENT/ASPIRANT PROFILE
 
 
 router.post("/reset/:token", (req, res, next) => {
@@ -483,7 +469,7 @@ router.post("/reset/:token", (req, res, next) => {
 
             smtpTransport.sendMail(data, function(err) {
               if (!err) {
-                return res.json({ message: 'Password reset' });
+                return res.json({ message: 'Password reset SUCCESSFULL' });
               } else {
                 return done(err);
               }
