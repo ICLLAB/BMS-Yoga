@@ -32,7 +32,8 @@ const trainerSchema = mongoose.Schema({
     creation_time : { type : String, default: minuteFromNow },
     lastLogin :{ type : String, default: minuteFromNow },
     reset_password_token: {type: String},
-    reset_password_expires: {type: Date}
+    reset_password_expires: {type: Date},
+    tokky: {type: String},
 
 
 });

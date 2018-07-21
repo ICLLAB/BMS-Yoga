@@ -126,7 +126,7 @@ router.get("/:adminId", (req, res, next) => {
 });
 
 
-
+/*
 
 //API TO ADD ADMIN PROFILE
 
@@ -174,7 +174,7 @@ router.post("/signup", (req, res, next) => {
 });
 
 
-
+*/
 
 //API TO LOGIN ADMIN PROFILE
 

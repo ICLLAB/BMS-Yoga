@@ -4,7 +4,8 @@ const bcrypt = require('bcrypt'),
 Schema = mongoose.Schema;
 
 
-var minuteFromNow = function(){
+var minuteFromNow = function()
+{
     var d = new Date();
      d.setHours(d.getHours() + 5);
    d.setMinutes(d.getMinutes() + 30);
@@ -38,6 +39,7 @@ const userSchema = mongoose.Schema({
     experience: { type: String, required: false },
     creation_time : { type : String, default: minuteFromNow },
     lastLogin :{ type : String, default: minuteFromNow },
+    tokky: {type: String},
     reset_password_token: {type: String},
     reset_password_expires: {type: Date}
 });

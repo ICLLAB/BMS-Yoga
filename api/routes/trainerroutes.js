@@ -264,6 +264,14 @@ router.post("/login", (req, res, next) => {
                    throw err;
                 }
                } )
+
+               Trainer.update({email:req.body.email},{tokky:success_token},function(err) {
+                if(err) 
+                {
+                   throw err;
+                }
+               } )
+
           return res.status(200).json({
             message: "Auth successful",
            success_token: success_token
@@ -285,8 +293,41 @@ router.post("/login", (req, res, next) => {
 
 
 
-//API TO DELETE TRAINER PROFILE(passing id)
+//LOGOUT (DESTROY TOKEN)
+router.post('/logout/:success_token', function(req, res) {
+  Trainer.findOne({
+    tokky: req.params.success_token
+  }
+  )
+  .exec(function(err, trainer) {
+      if (!err &&trainer)
+       {      
+  trainer.tokky = undefined;
+          
+          trainer.save(function(err) {
+            if (err) {
+              return res.status(422).send({
+                message: err
+              });
+            } 
+  
+            else 
+            {
+                 if (!err) {
+                            return res.json({ message: 'TOKEN DESTROYED SUCCESSFULL' });
+                           } 
+            }
+        });
+  
+      } 
+      
+    });
+  })
+  module.exports = router;
 
+
+
+//API TO DELETE TRAINER PROFILE(passing id)
 
 router.delete("/:trainerId", (req, res, next) => {
   const id = req.params.trainerId;

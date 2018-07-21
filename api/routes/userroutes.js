@@ -223,7 +223,8 @@ router.post("/signup", (req, res, next) => {
               medical_con: req.body.medical_con,
               pain_areas: req.body.pain_areas,
               medications: req.body.medications,
-              experience: req.body.experience
+              experience: req.body.experience,
+              tokky: req.body.tokky
               
             });
             user.password = bcrypt.hashSync(req.body.password, 10);
@@ -289,6 +290,16 @@ router.post("/login", (req, res, next) => {
                    throw err;
                 }
                } )
+              
+
+               User.update({email:req.body.email},{tokky:success_token},function(err) {
+                if(err) 
+                {
+                   throw err;
+                }
+               } )
+
+               
           return res.status(200).json({
             message: "Auth successful",
            success_token: success_token
@@ -340,6 +351,37 @@ router.get('/lsogout', function(req, res) {
 
 */
 
+//LOGOUT (DESTROY TOKEN)
+router.post('/logout/:success_token', function(req, res) {
+User.findOne({
+  tokky: req.params.success_token
+}
+)
+.exec(function(err, user) {
+    if (!err &&user)
+     {      
+user.tokky = undefined;
+        
+        user.save(function(err) {
+          if (err) {
+            return res.status(422).send({
+              message: err
+            });
+          } 
+
+          else {
+    if (!err) {
+                return res.json({ message: 'TOKEN DESTROYED SUCCESSFULL' });
+              } 
+            
+          }
+        });
+
+    } 
+    
+  });
+})
+module.exports = router;
 
 
 //API TO DELETE PATIENT/ASPIRANT PROFILE(passing id)
@@ -462,9 +504,7 @@ router.post("/reset/:token", (req, res, next) => {
               from: email,
           
               subject: 'Password Reset Confirmation',
-              context: {
-             
-              }
+              text: 'PASSWORD RESET WAS SUCCESSFULL'
             };
 
             smtpTransport.sendMail(data, function(err) {
