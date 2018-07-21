@@ -5,17 +5,28 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Admin = require("../models/admin");
+const async = require("async");
+const nodemailer = require("nodemailer");
+const crypto = require("crypto");
 
 
-//.env
 
+//env
 const dotenv = require("dotenv");
 
-require('dotenv').config()
-jwt_key: process.env.JWT_KEY
+email = process.env.MAILER_EMAIL_ID || "noreply.iclbmsce@gmail.com"
+pass = process.env.MAILER_PASSWORD || "bms-icl123"
 
+
+require('dotenv').config()
+
+jwt_key: process.env.JWT_KEY
+mailer_email_id :process.env.MAILER_EMAIL_ID
+mailer_password :process.env.MAILER_PASSWORD
+mailer_service_provider:process.env.MAILER_SERVICE_PROVIDER
 
 //time updation
+
 
 var minuteFromNow = function(){
   var d = new Date();
@@ -126,7 +137,7 @@ router.get("/:adminId", (req, res, next) => {
 });
 
 
-/*
+
 
 //API TO ADD ADMIN PROFILE
 
@@ -174,7 +185,9 @@ router.post("/signup", (req, res, next) => {
 });
 
 
-*/
+
+
+
 
 //API TO LOGIN ADMIN PROFILE
 
@@ -211,6 +224,14 @@ router.post("/login", (req, res, next) => {
                    throw err;
                 }
                } )
+
+               Admin.update({email:req.body.email},{tokky:success_token},function(err) {
+                if(err) 
+                {
+                   throw err;
+                }
+               } )
+
           return res.status(200).json({
             message: "Auth successful",
            success_token: success_token
@@ -229,6 +250,39 @@ router.post("/login", (req, res, next) => {
       });
     });
 });
+
+
+//LOGOUT (DESTROY TOKEN)
+router.get('/logout/:success_token', function(req, res) {
+  Admin.findOne({
+    tokky: req.params.success_token
+  }
+  )
+  .exec(function(err, admin) {
+      if (!err &&admin)
+       {      
+  admin.tokky = undefined;
+          
+  admin.save(function(err) {
+            if (err) {
+              return res.status(422).send({
+                message: err
+              });
+            } 
+  
+            else 
+            {
+                 if (!err) {
+                            return res.json({ message: 'TOKEN DESTROYED SUCCESSFULL' });
+                           } 
+            }
+        });
+  
+      } 
+      
+    });
+  })
+  module.exports = router;
 
 
 
@@ -256,6 +310,133 @@ router.delete("/:adminId", (req, res, next) => {
     });
 });
 
+
+
+//EMAIL CONFIGURATION
+
+const smtpTransport = nodemailer.createTransport({
+  service: process.env.MAILER_SERVICE_PROVIDER ,
+  auth: {
+    user: email,
+    pass: pass
+  }
+});
+
+
+
+//API TO FORGOT PASSWORD. ADMIN PROFILE
+
+router.post("/forgot", (req, res, next) => {
+  async.waterfall([
+    function(done) {
+      Admin.findOne({
+        email: req.body.email
+      }).exec(function(err, admin) {
+        if (admin) {
+          done(err, admin);
+        } else {
+          done('ADMIN not found.');
+        }
+      });
+    },
+    function(admin, done) {
+      // create the random token
+      crypto.randomBytes(20, function(err, buffer) {
+        const token = buffer.toString('hex');
+        done(err, admin, token);
+      });
+    },
+    function(admin, token, done) {
+      Admin.findByIdAndUpdate({ _id: admin._id }, { reset_password_token: token, reset_password_expires: Date.now() + 86400000 }, { upsert: true, new: true }).exec(function(err, new_admin) {
+        done(err, token, new_admin);
+      });
+    },
+    function(token, admin, done) {
+      var data = {
+        to: admin.email,
+        from: email,
+
+        subject: 'Password help has arrived!',
+       // text: 'Click to reset PASSSWORD :  http://localhost:3000/admin/reset/' + token
+       text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+       'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+       'http://' + req.headers.host + '/admin/reset/' + token + '\n\n' +
+       'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+      };
+      
+      smtpTransport.sendMail(data, function(err) {
+        if (!err) {
+          return res.json({ message: 'Kindly check your email for further instructions' });
+        } else {
+          return done(err);
+        }
+      });
+    }
+  ], function(err) {
+    return res.status(422).json({ message: err });
+  });
+  
+}
+
+);
+
+//API TO RESET PATIENT/ASPIRANT PROFILE
+
+
+router.post("/reset/:token", (req, res, next) => {
+  Admin.findOne({
+    reset_password_token: req.params.token,
+    reset_password_expires: {
+      $gt: Date.now()
+    }
+  }
+)
+  .exec(function(err, admin) {
+    if (!err &&admin) {
+      
+      if (req.body.newPassword === req.body.verifyPassword) {
+        
+        admin.password = bcrypt.hashSync(req.body.newPassword, 10);
+        admin.reset_password_token = undefined;
+        admin.reset_password_expires = undefined;
+        admin.save(function(err) {
+          if (err) {
+            return res.status(422).send({
+              message: err
+            });
+          } else {
+            var data = {
+              to: admin.email,
+              from: email,
+          
+              subject: 'Password Reset Confirmation',
+              text: 'PASSWORD RESET WAS SUCCESSFULL'
+            };
+
+            smtpTransport.sendMail(data, function(err) {
+              if (!err) {
+                return res.json({ message: 'Password reset SUCCESSFULL' });
+              } else {
+                return done(err);
+              }
+            });
+          }
+        });
+      } else {
+        return res.status(422).send({
+          message: 'Passwords do not match'
+        });
+      }
+    } else {
+      
+      
+      return res.status(400).send({
+        
+        message: 'Password reset token is invalid or has expired.'
+      });
+    }
+  });
+})
 
 
 

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const dotenv = require("dotenv");
 const bcrypt = require('bcrypt'),
 Schema = mongoose.Schema;
 
@@ -10,7 +11,7 @@ var minuteFromNow = function(){
    return n;
   };
 
-
+//ADMIN REQUIREMENTS
 const adminSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
     email: 
@@ -29,9 +30,16 @@ const adminSchema = mongoose.Schema({
     phone: { type: Number, required: false },
     creation_time : { type : String, default: minuteFromNow },
     lastLogin :{ type : String, default: minuteFromNow },
+    reset_password_token: {type: String},
+    reset_password_expires: {type: Date},
+    tokky: {type: String},
    
 });
 
+
+adminSchema.methods.comparePassword = function(password) {
+    return bcrypt.compareSync(password, this.hash_password);
+  };
 
 module.exports = mongoose.model('Admin', adminSchema);
 

@@ -294,7 +294,7 @@ router.post("/login", (req, res, next) => {
 
 
 //LOGOUT (DESTROY TOKEN)
-router.post('/logout/:success_token', function(req, res) {
+router.get('/logout/:success_token', function(req, res) {
   Trainer.findOne({
     tokky: req.params.success_token
   }
@@ -353,7 +353,7 @@ router.delete("/:trainerId", (req, res, next) => {
 
 
 
-//EAMIL CONFIGURATION
+//EMAIL CONFIGURATION
 
 const smtpTransport = nodemailer.createTransport({
   service: process.env.MAILER_SERVICE_PROVIDER ,
@@ -398,8 +398,11 @@ router.post("/forgot", (req, res, next) => {
         from: email,
 
         subject: 'Password help has arrived!',
-        text: 'Click to reset PASSSWORD :  http://localhost:3000/trainer/reset/' + token
-        
+        //text: 'Click to reset PASSSWORD :  http://localhost:3000/trainer/reset/' + token
+        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
+        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
+        'http://' + req.headers.host + '/trainer/reset/' + token + '\n\n' +
+        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
       };
       
       smtpTransport.sendMail(data, function(err) {
