@@ -1,0 +1,44 @@
+$(document).ready(function() {
+    var table = $('#example').DataTable();
+ 
+    $('#example tbody').on( 'click', 'tr', function () {
+        if ( $(this).hasClass('selected') ) {
+            $(this).removeClass('selected');
+        }
+        else {
+            table.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+        }
+    } );
+ 
+    $('#button').click( function () {
+        table.row('.selected').remove().draw( false );
+    } );
+} );
+
+
+
+
+for(i=0;i<data.count;i++)
+        {
+            
+           // $("#example tbody").append("<tr> <td class='nr'>"+data.trainer[i]._id+" </td></tr>");
+            $('#example').DataTable().row.add( ["<h1 class='nr' style='color:red'>"+data.trainer[i]._id+" </h1>", (i+1),data.trainer[i].f_name,data.trainer[i].m_name,data.trainer[i].l_name,data.trainer[i].phone,data.trainer[i].creation_time,data.trainer[i].lastLogin,"<button class='mdl-button mdl-js-button mdl-button--icon mdl-button--colored use'><i class='material-icons'>delete</i></button>"] )
+            .draw()
+            .node();
+        }
+
+
+            columns: [
+                { title: "ID"},
+                { title: "SL_NO" },
+                { title: "First Name" },
+                { title: "Middle Name" },
+                { title: "Last Name" },
+                { title: "Phone" },
+                { title: "Creation Time" },
+                { title: "Last Login" },
+                { title: " " }
+                
+                
+            ]
