@@ -37,7 +37,7 @@ var minuteFromNow = function(){
 };
 
 
-
+/*
 
 ////API TO EDIT ADMIN PROFILE BASED ON ID
 
@@ -69,7 +69,7 @@ router.put("/:adminId", (req, res, next) => {
 
 
 
-
+*/
 
 //API TO GET ALL ADMIN PROFILE
 

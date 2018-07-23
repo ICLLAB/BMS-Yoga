@@ -37,15 +37,12 @@ var minuteFromNow = function(){
 
 
 
-//API TO EDIT TRAINER PROFILE
 
-router.put("/:trainerId", (req, res, next) => {
-  const id = req.params.trainerId;
-  const updateOps = {};
-  for (const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
-  }
-  Trainer.update({ _id: id }, { $set: updateOps })
+//API TO EDIT PATIENT/ASPIRANT PROFILE (passing email)
+
+router.put("/email/:trainerEmail", (req, res, next) => {
+  const email = req.params.trainerEmail; 
+  Trainer.update({email}, req.body)
     .exec()
     .then(result =>{
       console.log(result);
@@ -53,7 +50,33 @@ router.put("/:trainerId", (req, res, next) => {
           message: 'trainer details updated',
           request: {
               type: 'GET',
-              url: 'http://localhost:3000/trainer/'+ id
+              url: 'http://localhost:3000/trainer/email/'+ email
+          }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+
+
+//API TO EDIT TRAINER PROFILE (passing id)
+
+router.put("/id/:trainerId", (req, res, next) => {
+  const id = req.params.trainerId;
+  Trainer.update({ _id: id }, req.body)
+    .exec()
+    .then(result =>{
+      console.log(result);
+      res.status(200).json({
+          message: 'trainer details updated',
+          request: {
+              type: 'GET',
+              url: 'http://localhost:3000/trainer/id/'+ id
           }
       });
     })
@@ -118,7 +141,7 @@ router.get("/email/:trainerEmail", (req, res, next) => {
             trainer_details: doc,
             request: {
                 type: 'GET',
-                url: 'http://localhost:3000/trainer'
+                url: 'http://localhost:3000/trainer/email'
             }
         });
       } else {
@@ -150,7 +173,7 @@ router.get("/id/:trainerId", (req, res, next) => {
             trainer_details: doc,
             request: {
                 type: 'GET',
-                url: 'http://localhost:3000/trainer'
+                url: 'http://localhost:3000/trainer/id'
             }
         });
       } else {
@@ -164,14 +187,6 @@ router.get("/id/:trainerId", (req, res, next) => {
       res.status(500).json({ error: err });
     });
 });
-
-
-
-
-
-
-
-
 
 
 

@@ -35,52 +35,15 @@ var minuteFromNow = function(){
  return n;
 };
 
-//udemy
-/*
-router.put("/:userId", (req, res, next) => {
-  const id = req.params.userId;
- 
- User.update
- ({
-  _id: id 
-  },
-   {
-   $set:{
-     f_name:req.body.f_name,
-     l_name: req.body.l_name
-       }
-  })
- .then(result =>{
-   console.log(result);
-   res.status(200).json({
-       message: 'user details updated',
-       request: {
-           type: 'GET',
-           url: 'http://localhost:3000/user/'+ id
-       }
-   });
- })
- .catch(err => {
-   console.log(err);
-   res.status(500).json({
-     error: err
-   });
- });
-});
-*/
 
 
 
 
-//API TO EDIT PATIENT/ASPIRANT PROFILE (passing id)
+//API TO EDIT PATIENT/ASPIRANT PROFILE (passing email)
 
-router.put("/:userId", (req, res, next) => {
-  const id = req.params.userId;
-  const updateOps = {};
-  for (const ops of req.body) {
-    updateOps[ops.propName] = ops.value;
-  }
-  User.update({ _id: id }, { $set: updateOps })
+router.put("/email/:userEmail", (req, res, next) => {
+  const email = req.params.userEmail; 
+  User.update({email}, req.body)
     .exec()
     .then(result =>{
       console.log(result);
@@ -88,7 +51,32 @@ router.put("/:userId", (req, res, next) => {
           message: 'user details updated',
           request: {
               type: 'GET',
-              url: 'http://localhost:3000/user/'+ id
+              url: 'http://localhost:3000/user/email/'+ email
+          }
+      });
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: err
+      });
+    });
+});
+
+
+//API TO EDIT PATIENT/ASPIRANT PROFILE (passing id)
+
+router.put("/id/:userId", (req, res, next) => {
+  const id = req.params.userId; 
+  User.update({ _id: id }, req.body)
+    .exec()
+    .then(result =>{
+      console.log(result);
+      res.status(200).json({
+          message: 'user details updated',
+          request: {
+              type: 'GET',
+              url: 'http://localhost:3000/user/id/'+ id
           }
       });
     })
@@ -149,7 +137,7 @@ router.get("/email/:userEmail", (req, res, next) => {
             user_details: doc,
             request: {
                 type: 'GET',
-                url: 'http://localhost:3000/user'
+                url: 'http://localhost:3000/user/email'
             }
         });
       } else {
@@ -180,7 +168,7 @@ router.get("/id/:userId", (req, res, next) => {
             user_details: doc,
             request: {
                 type: 'GET',
-                url: 'http://localhost:3000/user'
+                url: 'http://localhost:3000/user/id'
             }
         });
       } else {
