@@ -2,6 +2,7 @@ package com.example.madhav.bms_yoga.LoginScreen;
 
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -42,6 +44,7 @@ public class create_account extends DialogFragment {
     private EditText ies;
     private EditText ips;
     private Button signUP;
+    private ProgressBar pdia_su;
     private ImageView dis;
 
     @Override
@@ -55,10 +58,13 @@ public class create_account extends DialogFragment {
         ips =  view.findViewById(R.id.input_password_su);
         signUP = view.findViewById(R.id.btn_signup);
         dis = view.findViewById(R.id.imageView_close);
+        pdia_su = view.findViewById(R.id.progB_signup);
+        pdia_su.setVisibility(View.INVISIBLE);
+
         signUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                register();
+                new LongOperationSignup().execute("");
             }
         });
 
@@ -88,7 +94,7 @@ public class create_account extends DialogFragment {
                         ins.requestFocus();
                         Toast.makeText(getContext(), "Account has been created successfully",
                                 Toast.LENGTH_LONG).show();
-
+                        getDialog().dismiss();
                     }
                 },
                 new Response.ErrorListener()
@@ -114,6 +120,46 @@ public class create_account extends DialogFragment {
             }
         };
         VolleySingleton.getInstance(getContext()).addToRequestQueue(postRequest);
+    }
+
+    private class LongOperationSignup extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            register();
+            for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
+            }
+
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //TextView txt = (TextView) findViewById(R.id.output);
+            // txt.setText("Executed"); // txt.setText(result);
+            pdia_su.setVisibility(View.INVISIBLE);
+            Log.d("async", "executed");
+
+            // might want to change "executed" for the returned string passed
+            // into onPostExecute() but that is upto you
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            pdia_su.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
     }
 
 }
