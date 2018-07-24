@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -30,7 +31,7 @@ import java.util.Map;
 public class forgot_password extends DialogFragment {
 EditText infw;
     private Button infwb;
-
+    private ImageView disF;
     public forgot_password() {
         // Required empty public constructor
     }
@@ -43,12 +44,19 @@ EditText infw;
         View view=  inflater.inflate(R.layout.fragment_forgot_password, container, false);
         infw = view.findViewById(R.id.input_email_fp);
         infwb = view.findViewById(R.id.btn_fp);
-
+        disF = view.findViewById(R.id.imageViewF_close);
 
         infwb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 fpw();
+            }
+        });
+
+        disF.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDialog().dismiss();
             }
         });
         return view;
@@ -57,7 +65,7 @@ EditText infw;
     private void fpw() {
        // final mLogin mlog = new mLogin(emailText.getText().toString(),pwText.getText().toString());
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://192.168.1.168:3000/user/forgot",
+        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://192.168.1.168:5000/forgot",
                 new Response.Listener<String>()
                 {
                     @Override
@@ -70,8 +78,6 @@ EditText infw;
                        // getTip();
                         Toast.makeText(getContext(), "Email Sent Successfully",
                                 Toast.LENGTH_LONG).show();
-
-
                     }
                 },
                 new Response.ErrorListener()

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,7 +42,7 @@ public class create_account extends DialogFragment {
     private EditText ies;
     private EditText ips;
     private Button signUP;
-
+    private ImageView dis;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -53,13 +54,21 @@ public class create_account extends DialogFragment {
         ies =  view.findViewById(R.id.input_email_su);
         ips =  view.findViewById(R.id.input_password_su);
         signUP = view.findViewById(R.id.btn_signup);
-
+        dis = view.findViewById(R.id.imageView_close);
         signUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 register();
             }
         });
+
+        dis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDialog().dismiss();
+            }
+        });
+
 
         return view;
     }
