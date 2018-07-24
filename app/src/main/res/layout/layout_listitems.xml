@@ -48,18 +48,40 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 android:textSize="30sp" />
 
+
             <ImageView
+                android:id="@+id/green_id"
                 android:layout_width="25dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="70dp"
                 android:layout_alignTop="@+id/classcount"
+                android:visibility="invisible"
                 android:src="@drawable/ic_arr_green" />
             <ImageView
+                android:id="@+id/greyu_id"
+                android:layout_width="25dp"
+                android:layout_height="40dp"
+                android:layout_marginLeft="70dp"
+                android:layout_alignTop="@+id/classcount"
+                android:visibility="invisible"
+                android:src="@drawable/ic_arr_grey_u" />
+            <ImageView
+                android:id="@+id/red_id"
                 android:layout_width="25dp"
                 android:layout_height="42dp"
                 android:layout_marginLeft="90dp"
+                android:visibility="invisible"
                 android:layout_alignTop="@+id/classcount"
                 android:src="@drawable/ic_arr_red" />
+
+            <ImageView
+                android:id="@+id/greyd_id"
+                android:layout_width="25dp"
+                android:layout_height="42dp"
+                android:layout_marginLeft="90dp"
+                android:visibility="invisible"
+                android:layout_alignTop="@+id/classcount"
+                android:src="@drawable/ic_arr_grey_d" />
 
         </RelativeLayout>
 

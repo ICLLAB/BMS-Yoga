@@ -3,7 +3,6 @@ package com.example.madhav.bms_yoga.HomePage;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +12,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +19,14 @@ import com.example.madhav.bms_yoga.LoginScreen.LoginScreenActivity;
 import com.example.madhav.bms_yoga.LoginScreen.SaveSharedPreference;
 import com.example.madhav.bms_yoga.R;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class profile extends Fragment {
     TextView logoutBT;
     //Button logoutBT;
+    TextView dispUser;
 
+    String mParam1;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,13 +40,22 @@ public class profile extends Fragment {
         android.support.v7.widget.Toolbar myToolbar = (android.support.v7.widget.Toolbar) v.findViewById(R.id.my_toolbar_profile);
         ((AppCompatActivity)getActivity()).setSupportActionBar(myToolbar);
         logoutBT = v.findViewById(R.id.logoutBT);
+        dispUser = v.findViewById(R.id.dispUser);
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("hello",MODE_PRIVATE);
+        String restoredText = prefs.getString("email", null);
 
+        if (restoredText != null) {
+            String name = prefs.getString("email", "No name defined");//"No name defined" is the default value.
+            //Log.d("EMAIL MACHA",name);
+            dispUser.setText(name);
+
+        }
         logoutBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Set LoggedIn status to false
-                SaveSharedPreference.setLoggedIn(getActivity(), false);
 
+                SaveSharedPreference.setLoggedIn(getActivity(), false);
                 // Logout
                 logout();
             }
@@ -59,6 +70,8 @@ public class profile extends Fragment {
 
     public void logout()
     {
+
+
         Toast.makeText(getContext(), "You have been successfully logged out!",
                 Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getActivity(), LoginScreenActivity.class);

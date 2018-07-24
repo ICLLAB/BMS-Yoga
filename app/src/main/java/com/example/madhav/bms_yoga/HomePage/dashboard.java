@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,8 @@ public class dashboard extends Fragment {
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mClassCount = new ArrayList<>();
     // private ArrayList<String> mImageUrls = new ArrayList<>();
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,6 +73,9 @@ public class dashboard extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
 
         tipP = v.findViewById(R.id.tip);
+
+
+
         //tipP.setText(getActivity().getIntent().getStringExtra("puttip"));
         return v;
     }
@@ -83,11 +89,17 @@ public class dashboard extends Fragment {
     private void getInfo(){
         Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
         // mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
+        String c = "12";
+
+
         mNames.add("No. of Sessions");
         mClassCount.add("12");
+
         //mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
         mNames.add("Health Score");
         mClassCount.add("03");
+
+
         initRecyclerView();
 
     }
@@ -97,12 +109,16 @@ public class dashboard extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView);
+
+        //imgView_g.setVisibility(View.INVISIBLE);
+
         recyclerView.setLayoutManager(layoutManager);
 
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mNames,mClassCount);
         recyclerView.setAdapter(adapter);
 
         mHandler = new Handler();
+
         startRepeatingTask();
 
     }

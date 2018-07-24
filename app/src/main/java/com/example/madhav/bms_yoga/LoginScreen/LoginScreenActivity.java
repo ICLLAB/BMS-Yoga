@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,8 +25,9 @@ import android.content.SharedPreferences;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.madhav.bms_yoga.HomePage.HomeActivity;
-import com.example.madhav.bms_yoga.HomePage.dashboard;
 import com.example.madhav.bms_yoga.HomePage.profile;
+import com.example.madhav.bms_yoga.HomePage.dashboard;
+
 import com.example.madhav.bms_yoga.HomePage.today;
 import com.example.madhav.bms_yoga.MainActivity;
 import com.example.madhav.bms_yoga.R;
@@ -57,7 +59,9 @@ public class LoginScreenActivity extends AppCompatActivity {
     private EditText pwText;
     private TextView createA;
     private TextView forgotP;
+
     private ProgressBar pdia;
+    TextView textview;
     Button lgnButton;
 
 
@@ -74,6 +78,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         lgnButton = findViewById(R.id.btn_login);
         createA = findViewById(R.id.createA);
         forgotP = findViewById(R.id.forgotP);
+
         pdia = findViewById(R.id.progB);
         pdia.setVisibility(View.INVISIBLE);
         emailText.requestFocus();
@@ -130,17 +135,26 @@ public class LoginScreenActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         // response
                         Log.d("Response", response);
-                        emailText.setText("");
-                        pwText.setText("");
-                        emailText.requestFocus();
+
                         //getTip();
 
                         SaveSharedPreference.setLoggedIn(getApplicationContext(), true);
+
                         Intent intent = new Intent(LoginScreenActivity.this, HomeActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK |FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         Toast.makeText(LoginScreenActivity.this, "Login Successful",
                                 Toast.LENGTH_LONG).show();
+
+
+                        SharedPreferences.Editor editor = getSharedPreferences("hello", MODE_PRIVATE).edit();
+                        editor.putString("email", emailText.getText().toString());
+                        editor.apply();
+
+
+                        emailText.setText("");
+                        pwText.setText("");
+                        emailText.requestFocus();
                         //Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
                         // n.putExtra("puttip",Quotes);
 

@@ -21,7 +21,10 @@ import java.util.ArrayList;
  */
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
-
+    ImageView imgView_g;
+    ImageView imgView_r;
+    ImageView imgView_grey_d;
+    ImageView imgView_grey_u;
     private static final String TAG = "RecyclerViewAdapter";
 
     //vars
@@ -34,6 +37,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public RecyclerViewAdapter(ArrayList<String> names,ArrayList<String> classcount) {
         mNames = names;
         mClassCount = classcount;
+
         //mImageUrls = imageUrls;
         // mContext = context;
     }
@@ -41,6 +45,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_listitems, parent, false);
+        imgView_g = view.findViewById(R.id.green_id);
+        imgView_r = view.findViewById(R.id.red_id);
+        imgView_grey_d = view.findViewById(R.id.greyd_id);
+        imgView_grey_u = view.findViewById(R.id.greyu_id);
+
         return new ViewHolder(view);
     }
 
@@ -56,7 +65,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.name.setText(mNames.get(position));
         holder.classC.setText(mClassCount.get(position));
 
+        //Log.d("test", mClassCount.get(position));
+        if(mClassCount.get(position) == "12")
+        {
+            imgView_g.setVisibility(View.VISIBLE);
+            imgView_grey_d.setVisibility(View.VISIBLE);
+        }
 
+        if(mClassCount.get(position) == "03")
+        {
+            imgView_r.setVisibility(View.VISIBLE);
+            imgView_grey_u.setVisibility(View.VISIBLE);
+            //imgView_gre.setVisibility(View.VISIBLE);
+        }
         /*holder.image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,6 +103,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             //image = itemView.findViewById(R.id.image_view);
             name = itemView.findViewById(R.id.title);
           classC = itemView.findViewById(R.id.classcount);
+
         }
+
     }
 }
