@@ -41,10 +41,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="10dp"
-                android:hint="@string/hint_email"
-                android:inputType="textEmailAddress"
+                android:hint="@string/hint_logIn"
+                android:inputType="none"
                 android:textColor="@color/colorTrendsBackground"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
 
         </android.support.design.widget.TextInputLayout>
         <android.support.design.widget.TextInputLayout

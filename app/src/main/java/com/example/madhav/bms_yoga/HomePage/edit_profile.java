@@ -98,7 +98,8 @@ public class edit_profile extends DialogFragment {
             email.setText(name);
 
         }
-        email.setFocusable(false);
+        email.setEnabled(false);
+        //email.setFocusable(false);
        // Log.d("test",name);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(

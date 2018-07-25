@@ -34,5 +34,6 @@
     <string name="btn_update">Update</string>
     <string name="hint_fname">First Name</string>
     <string name="hint_lname">Last Name</string>
+    <string name="hint_logIn">Logged in as</string>
 
 </resources>
