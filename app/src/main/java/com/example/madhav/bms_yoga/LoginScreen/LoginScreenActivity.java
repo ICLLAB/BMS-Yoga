@@ -147,7 +147,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
 
 
-                        SharedPreferences.Editor editor = getSharedPreferences("hello", MODE_PRIVATE).edit();
+                        SharedPreferences.Editor editor = getSharedPreferences("email_pref", MODE_PRIVATE).edit();
                         editor.putString("email", emailText.getText().toString());
                         editor.apply();
 

@@ -29,5 +29,10 @@
     <string name="logout">Logout</string>
     <string name="edit">Edit Profile</string>
     <string name="abtus">About Us</string>
+    <string name="ep_head">Edit</string>
+    <string name="hint_uname">Username</string>
+    <string name="btn_update">Update</string>
+    <string name="hint_fname">First Name</string>
+    <string name="hint_lname">Last Name</string>
 
 </resources>
