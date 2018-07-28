@@ -1,0 +1,26 @@
+ html, body {
+    height: 100%;
+    width: 100%;
+    display: table
+}
+
+.mdl-layout {
+  display: table-cell;
+  vertical-align: middle;
+  background: url("../images/bck2.jpg") center / cover;
+  background-size: cover;
+   
+}
+
+
+.card-login {
+    width: 20%;
+    margin: 0 auto;
+}
+
+.card-header{
+    background-color: #37474F;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
