@@ -19,6 +19,12 @@ const attendanceRoutes = require("./api/routes/attendanceroutes");
 
 const countRoutes = require("./api/routes/countroutes");
 
+const counterRoutes = require("./api/routes/counterroutes");
+
+const trailRoutes = require("./api/routes/trailroutes");
+
+const packageRoutes = require("./api/routes/packageroutes");
+
 
 
 
@@ -66,6 +72,12 @@ app.use("/tip", tipRoutes);
 app.use("/attendance", attendanceRoutes);
 
 app.use("/count", countRoutes);
+
+app.use("/counter", counterRoutes);
+
+app.use("/trail", trailRoutes);
+
+app.use("/package", packageRoutes);
 
 
 

@@ -8,6 +8,7 @@ const User = require("../models/user");
 const async = require("async");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const path = require('path');
 
 
 //env
@@ -440,17 +441,15 @@ router.post("/forgot", (req, res, next) => {
       var data = {
         to: user.email,
         from: email,
-
-        subject: 'Password help has arrived!',
-        //text: 'Click to reset PASSSWORD :  http://localhost:3000/user/reset/' + token
-        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        'http://' + req.headers.host + '/user/reset/' + token + '\n\n' +
-        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        subject: 'BMS-YOGA Password Reset',
+        text: 'Click the below link to reset\n\n' +
+        'http://' + req.headers.host + '/user/reset?token=' + token + '\n\n'
       };
-      
+     
       smtpTransport.sendMail(data, function(err) {
         if (!err) {
+          
+          //return res.sendFile(path.resolve('./public/reset-password.html'));
           return res.json({ message: 'Kindly check your email for further instructions' });
         } else {
           return done(err);
@@ -460,17 +459,18 @@ router.post("/forgot", (req, res, next) => {
   ], function(err) {
     return res.status(422).json({ message: err });
   });
-  
-}
-
-);
+});
 
 //API TO RESET PATIENT/ASPIRANT PROFILE
 
+router.get('/reset', function(req, res) {
+  res.sendFile(path.resolve('./public/user.html'));
+  //server.use(express.static(path.join(__dirname, './static')));
+});
 
-router.post("/reset/:token", (req, res, next) => {
+router.post("/reset", (req, res, next) => {
   User.findOne({
-    reset_password_token: req.params.token,
+    reset_password_token: req.body.token,
     reset_password_expires: {
       $gt: Date.now()
     }
@@ -522,6 +522,8 @@ router.post("/reset/:token", (req, res, next) => {
     }
   });
 })
+
+
 module.exports = router;
 
 

@@ -9,7 +9,7 @@ const Attendance = require("../models/attendance");
 
 
 
-// Handle incoming GET requests to patients
+// GET ALL THE LIST OF STUDENTS WHO ALL HAVE ATTENDED (ONLY IF BEEN MARKED)
 router.get("/attendancecount", (req, res, next) => {
   Count.find()
     .select("email attendance date zdate _id")
@@ -79,6 +79,7 @@ router.post("/attendancecount", (req, res, next) => {
 });
 
 
+//GET PARTICULAR PATIENT/ ASPIRANT DETAILS OF ALL DAYS ATTENDANCE
 
 router.get("/attendancecount/:countId", (req, res, next) => {
   Count.find({attendance:req.params.countId})
@@ -203,7 +204,7 @@ router.get("/getby", (req, res, next) =>
     Count.find({
       attendance:req.params.countId, 
       "date": {
-              $gte: new Date((new Date().getTime() - (1* 24 * 60 * 60 * 1000)))
+              $gte: new Date((new Date().getTime() - (4* 24 * 60 * 60 * 1000)))
               }
       })
      .sort({"date": -1 })

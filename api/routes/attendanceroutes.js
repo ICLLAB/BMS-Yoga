@@ -19,7 +19,7 @@ var minuteFromNow = function()
 
 
 
-
+//ADD PATIENT/ASPIRANT TO ATTENDANCE TAB
 
 router.post("/markattendance", (req, res, next) => {
   Attendance.find({ email: req.body.email })

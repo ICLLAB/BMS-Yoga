@@ -8,6 +8,7 @@ const Trainer = require("../models/trainer");
 const async = require("async");
 const nodemailer = require("nodemailer");
 const crypto = require("crypto");
+const path = require('path');
 
 
 //env
@@ -87,6 +88,8 @@ router.put("/id/:trainerId", (req, res, next) => {
       });
     });
 });
+
+
 
 
 
@@ -202,7 +205,8 @@ router.post("/signup", (req, res, next) => {
         return res.status(409).json({
           message: "Mail exists"
         });
-      } else {
+      }
+       else {
          
             const trainer = new Trainer({
               _id: new mongoose.Types.ObjectId(),
@@ -411,13 +415,9 @@ router.post("/forgot", (req, res, next) => {
       var data = {
         to: trainer.email,
         from: email,
-
-        subject: 'Password help has arrived!',
-        //text: 'Click to reset PASSSWORD :  http://localhost:3000/trainer/reset/' + token
-        text: 'You are receiving this because you (or someone else) have requested the reset of the password for your account.\n\n' +
-        'Please click on the following link, or paste this into your browser to complete the process:\n\n' +
-        'http://' + req.headers.host + '/trainer/reset/' + token + '\n\n' +
-        'If you did not request this, please ignore this email and your password will remain unchanged.\n'
+        subject: 'BMS-YOGA Password Reset',
+        text: 'Click the below link to reset\n\n' +
+        'http://' + req.headers.host + '/trainer/reset?token=' + token + '\n\n'
       };
       
       smtpTransport.sendMail(data, function(err) {
@@ -431,17 +431,19 @@ router.post("/forgot", (req, res, next) => {
   ], function(err) {
     return res.status(422).json({ message: err });
   });
-  
-}
-
-);
+});
 
 //API TO RESET PATIENT/ASPIRANT PROFILE
 
+router.get('/reset', function(req, res) {
+  res.sendFile(path.resolve('./public/trainer.html'));
+  //server.use(express.static(path.join(__dirname, './static')));
+});
 
-router.post("/reset/:token", (req, res, next) => {
+
+router.post("/reset", (req, res, next) => {
   Trainer.findOne({
-    reset_password_token: req.params.token,
+    reset_password_token: req.body.token,
     reset_password_expires: {
       $gt: Date.now()
     }
