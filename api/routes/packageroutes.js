@@ -6,13 +6,14 @@ const Package = require("../models/package");
 
 
 
-var minuteFromNow = function(){
+var minuteFromNow = function()
+{
     var d = new Date();
-     d.setHours(d.getHours() + 5);
-   d.setMinutes(d.getMinutes() + 30);
+     d.setHours(d.getHours() + 0);
+   d.setMinutes(d.getMinutes() + 0);
      var n = d.toLocaleString();
    return n;
-  };
+};
 
 
 //book for a particular class by the user [passed by email]
@@ -47,7 +48,7 @@ router.post("/packagebook/email/:emailId", (req, res, next) => {
        } )
       res.status(201).json
       ({
-        message: " CLASS BOOKED SUCCESSFULLY [passed by email]"
+        message: " CLASS BOOKED SUCCESSFULLY [passed by email] "
       });
     })
     .catch(err => {

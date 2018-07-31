@@ -6,8 +6,8 @@ Schema = mongoose.Schema;
 
 var minuteFromNow = function(){
     var d = new Date();
-     d.setHours(d.getHours() + 5);
-   d.setMinutes(d.getMinutes() + 30);
+     d.setHours(d.getHours() + 0);
+   d.setMinutes(d.getMinutes() + 0);
      var n = d.toLocaleString();
    return n;
   };

@@ -7,9 +7,6 @@ const Package = require("../models/package");
 
 
 
-
-
-
 /*
 
 //handle post request (take attendance)
@@ -50,6 +47,7 @@ router.post("/attendancecount/id/:packageId", (req, res, next) => {
       });
     });
 });
+
 
 */
 
@@ -166,22 +164,23 @@ router.post("/getbydate", (req, res, next) =>
   var endDate = req.body.endDate;
 
 //find all the record whose start & end date is between than starting & ending dates
- Counter.find({date: {$gte: startDate} , date:{$lte: endDate}},function(err, records) {
-
-          if (err)
+ Counter.find({date: {$gte: startDate} , date:{$lte: endDate}},function(err, records)
+  {
+         if (err)
               res.send(err);
           var formattedrecords=[];
           for(var i = 0;i<records.length;i++)
           {
-            formattedrecords.push(
+            formattedrecords.push
+            (
               {
                 "email":records[i].email,
                "date":records[i].date
               }
             )
           }
-          res.json(formattedrecords);
-      })
+        res.json(formattedrecords);
+  })
 });
 
 
@@ -226,12 +225,8 @@ router.get("/getby", (req, res, next) =>
   });
 
      
-
-
-
-
 //get data of last 7 days of particular user (INCLUDING TODAY)
-  //http://localhost:3000/counter/att/
+//http://localhost:3000/counter/att/
 
 
   router.get("/att/:counterEmail", (req, res, next) => {
@@ -240,7 +235,7 @@ router.get("/getby", (req, res, next) =>
       "date": {
               $gte: new Date((new Date().getTime() - (6* 24 * 60 * 60 * 1000)))
               }
-      })
+               })
      .sort({"date": -1 })
       .exec()
       .then(docs => {
