@@ -65,12 +65,7 @@ router.delete("/:centreId", (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-          message: 'centre deleted',
-          request: {
-              type: 'POST',
-              url: 'http://localhost:3000/centreId',
-              
-          }
+          message: 'centre deleted'
       });
     })
     .catch(err => {

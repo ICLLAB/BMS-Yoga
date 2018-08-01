@@ -22,12 +22,7 @@ router.get("/attendancecount", (req, res, next) => {
           return {
             _id: doc._id,
             attendance: doc.attendance,
-            date: doc.date,
-            //zdate:doc.zdate,
-            request: {
-              type: "GET",
-              //url: "http://localhost:3000/counterroutes/" + doc._id
-            }
+            date: doc.date
           };
         })
       });
@@ -62,12 +57,7 @@ router.post("/attendancecount", (req, res, next) => {
     .then(result => {
       console.log(result);
       res.status(201).json({
-        message: "attendance updated",
-        
-        request: {
-          type: "GET",
-      //    url: "http://localhost:3000/orders/" + result._id
-        }
+        message: "attendance updated"
       });
     })
     .catch(err => {
@@ -93,11 +83,7 @@ router.get("/attendancecount/:countId", (req, res, next) => {
         });
       }
       res.status(200).json({
-        count: count,
-        request: {
-          type: "GET"
-          //url: "http://localhost:3000/orders"
-        }
+        count: count
       });
     })
     .catch(err => {
@@ -173,13 +159,7 @@ router.get("/getby", (req, res, next) =>
           count: docs.map(doc => {
             return {
               //health_tip: doc.health_tip,
-              date: doc.date,
-             // _id: doc._id,
-              request: {
-                type: "GET",
-               // url: "http://localhost:3000/tip/"+ doc._id
-                
-              }
+              date: doc.date
             };
           })
         };
@@ -216,12 +196,7 @@ router.get("/getby", (req, res, next) =>
             return {
               _id: doc._id,
              // email: doc.email,
-              date: doc.date,
-              //zdate:doc.zdate,
-              request: {
-                type: "GET",
-                //url: "http://localhost:3000/counterroutes/" + doc._id
-              }
+              date: doc.date
             };
           })
         });

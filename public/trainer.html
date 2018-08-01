@@ -321,14 +321,17 @@ background: #EF6C00;
           //  alert(lastPart);
           
             var token = document.location.href.split('token=')[1];
-           // alert(token);
+            var v = window.location.href;
+            var y = window.location.origin;
+            var pathname = new URL(v).pathname;
+            var res = y + pathname;
             var data = "newPassword=" + document.getElementById('newPassword').value + '&verifyPassword=' + document.getElementById('verifyPassword').value + '&token=' + token;
           //  alert(data);
           //add heroku link here 
-            ajaxCall(data, "http://localhost:3000/trainer/reset", function(status, response) {
+            ajaxCall(data,res,function(status, response) {
                 if (status == 200) {
                   document.getElementById("result").style.color = 'green';
-                  document.getElementById('result').innerHTML = "Successfully Sent";
+                  document.getElementById('result').innerHTML = "PASSWORD RESET WAS SUCCESSFULL ";
                    // alert('successfully sent');
                   
                 } else {

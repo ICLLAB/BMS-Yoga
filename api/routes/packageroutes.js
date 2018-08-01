@@ -9,8 +9,8 @@ const Package = require("../models/package");
 var minuteFromNow = function()
 {
     var d = new Date();
-     d.setHours(d.getHours() + 0);
-   d.setMinutes(d.getMinutes() + 0);
+     d.setHours(d.getHours() + 5);
+   d.setMinutes(d.getMinutes() + 30);
      var n = d.toLocaleString();
    return n;
 };
@@ -317,15 +317,15 @@ router.get("/lastbooked/email/:userEmail", (req, res, next) => {
 
 
 
-//get data of CURRENT DAY(TODAYS) ATTENDANCE OF ALL USERS
+//get data of CURRENT DAY(TODAYS) BOOKINGS OF ALL USERS
 //http://localhost:3000/package/getbydate/
 //
 
 router.post("/getbydate", (req, res, next) =>
   {
-    const schedule = req.body.schedule;
+    const date = req.body.date;
    //find the details of users booked schedule for a particular class
-   Package.find({date: {$eq: schedule} })
+   Package.find({date: {$eq: date} })
     .select("email date center slot")
     .exec()
     .then(docs => {
@@ -359,10 +359,10 @@ router.post("/getbydate", (req, res, next) =>
 
 router.post("/date", (req, res, next) =>
   {
-    const schedule = req.body.schedule;
-    const place = req.body.place;
+    const date = req.body.date;
+    const center = req.body.center;
 
-Package.find({date: {$eq: schedule} , center:{$eq: place}})
+Package.find({date: {$eq: date} , center:{$eq: center}})
 .select("email date slot center")
 .exec()
 .then(docs => {
@@ -394,11 +394,11 @@ Package.find({date: {$eq: schedule} , center:{$eq: place}})
 
 router.post("/dateslot", (req, res, next) =>
   {
-    const schedule = req.body.schedule;
-    const place = req.body.place;
-    const time = req.body.time;
+    const date = req.body.date;
+    const center = req.body.center;
+    const slot = req.body.slot;
 
-Package.find({date: {$eq: schedule} , center:{$eq: place}, slot:{$eq: time}})
+Package.find({date: {$eq: date} , center:{$eq: center}, slot:{$eq: slot}})
 .select("email date slot center")
 .exec()
 .then(docs => {
@@ -423,6 +423,7 @@ Package.find({date: {$eq: schedule} , center:{$eq: place}, slot:{$eq: time}})
   });
 });
 });
+
 
 
 //to get all booked schedules BASED ON SLOT (=>  complete booking details PARTICULAR SLOT)
@@ -456,7 +457,7 @@ router.get("/slot/:userSlot", (req, res, next) => {
     });
 });
 
-
+/*
 //to get all booked schedules BASED ON DATE (=> complete booking details PARTICULAR DATE)
 //http://localhost:3000/package/date/
 
@@ -487,6 +488,8 @@ router.get("/date/:userDate", (req, res, next) => {
       res.status(500).json({ error: err });
     });
 });
+
+*/
 
 
 
@@ -524,7 +527,7 @@ router.get("/datee/", (req, res, next) => {
       });
   });
   
-
+/*****************************************************************************************************************/
   
   //to get all booked schedules BASED ON TODAYS DATE + CENTRE = JAYANAGAR + SLOT =1
   //http://localhost:3000/package/today/date/

@@ -8,8 +8,8 @@ const Trail = require("../models/trail");
 
 var minuteFromNow = function(){
     var d = new Date();
-     d.setHours(d.getHours() + 0);
-   d.setMinutes(d.getMinutes() + 0);
+     d.setHours(d.getHours() + 5);
+   d.setMinutes(d.getMinutes() + 30);
      var n = d.toLocaleString();
    return n;
   };
@@ -184,7 +184,7 @@ router.get("/id/:userId", (req, res, next) => {
 
 router.get("/email/:userEmail", (req, res, next) => {
   email =req.params.userEmail;
-  Trail.find({email})
+  Trail.findOne({email})
     .select('email id date slot center booking_time')
     .exec()
     .then(doc => {
@@ -252,9 +252,9 @@ router.get("/lastbooked/id/:userId", (req, res, next) => {
 
 router.get("/lastbooked/email/:userEmail", (req, res, next) => {
    email =req.params.userEmail;
-  Trail.find({email}).sort({"booking_time": -1}).limit(1)
+  Trail.findOne({email}).sort({"booking_time": -1}).limit(1)
  
-    .select('id date slot center booking_time')
+    .select('email id date slot center booking_time')
     .exec()
     .then(doc => {
       console.log("From database", doc);
@@ -278,6 +278,7 @@ router.get("/lastbooked/email/:userEmail", (req, res, next) => {
     });
 });
 
+/*************************************************************************************************************/
 
 
 //get data of CURRENT DAY(TODAYS) ATTENDANCE OF ALL USERS

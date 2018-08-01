@@ -30,8 +30,8 @@ mailer_service_provider:process.env.MAILER_SERVICE_PROVIDER
 
 var minuteFromNow = function(){
   var d = new Date();
-   d.setHours(d.getHours() + 0);
- d.setMinutes(d.getMinutes() + 0);
+   d.setHours(d.getHours() + 5);
+ d.setMinutes(d.getMinutes() + 30);
    var n = d.toLocaleString();
  return n;
 };
@@ -48,11 +48,7 @@ router.put("/email/:trainerEmail", (req, res, next) => {
     .then(result =>{
       console.log(result);
       res.status(200).json({
-          message: 'trainer details updated',
-          request: {
-              type: 'GET',
-              url: 'http://localhost:3000/trainer/email/'+ email
-          }
+          message: 'trainer details updated'
       });
     })
     .catch(err => {
@@ -74,11 +70,7 @@ router.put("/id/:trainerId", (req, res, next) => {
     .then(result =>{
       console.log(result);
       res.status(200).json({
-          message: 'trainer details updated',
-          request: {
-              type: 'GET',
-              url: 'http://localhost:3000/trainer/id/'+ id
-          }
+          message: 'trainer details updated'
       });
     })
     .catch(err => {
@@ -106,12 +98,7 @@ router.get("/", (req, res, next) => {
       count: docs.length,
       trainer: docs.map(doc => {
         return {
-          trainer_details: doc,
-          request: {
-            type: "GET",
-            url: "http://localhost:3000/trainer/"+ doc._id
-            
-          }
+          trainer_details: doc
         };
       })
     };
@@ -141,11 +128,7 @@ router.get("/email/:trainerEmail", (req, res, next) => {
       console.log("From database", doc);
       if (doc) {
         res.status(200).json({
-            trainer_details: doc,
-            request: {
-                type: 'GET',
-                url: 'http://localhost:3000/trainer/email'
-            }
+            trainer_details: doc
         });
       } else {
         res
@@ -173,11 +156,7 @@ router.get("/id/:trainerId", (req, res, next) => {
       console.log("From database", doc);
       if (doc) {
         res.status(200).json({
-            trainer_details: doc,
-            request: {
-                type: 'GET',
-                url: 'http://localhost:3000/trainer/id'
-            }
+            trainer_details: doc
         });
       } else {
         res
@@ -398,12 +377,7 @@ router.delete("/:trainerId", (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-          message: 'Trainer deleted',
-          request: {
-              type: 'POST',
-              url: 'http://localhost:3000/trainer',
-              
-          }
+          message: 'Trainer deleted'
       });
     })
     .catch(err => {

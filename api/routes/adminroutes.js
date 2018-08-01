@@ -30,8 +30,8 @@ mailer_service_provider:process.env.MAILER_SERVICE_PROVIDER
 
 var minuteFromNow = function(){
   var d = new Date();
-   d.setHours(d.getHours() + 0);
- d.setMinutes(d.getMinutes() + 0);
+   d.setHours(d.getHours() + 5);
+ d.setMinutes(d.getMinutes() + 30);
    var n = d.toLocaleString();
  return n;
 };
@@ -82,11 +82,7 @@ router.get("/", (req, res, next) => {
       count: docs.length,
       admin: docs.map(doc => {
         return {
-          admin_details: doc,
-          request: {
-            type: "GET",
-            url: "http://localhost:3000/admin/"+ doc._id   
-          }
+          admin_details: doc
         };
       })
     };
@@ -117,11 +113,7 @@ router.get("/:adminId", (req, res, next) => {
       console.log("From database", doc);
       if (doc) {
         res.status(200).json({
-            admin_details: doc,
-            request: {
-                type: 'GET',
-                url: 'http://localhost:3000/admin'
-            }
+            admin_details: doc
         });
       } else 
       {
@@ -294,12 +286,7 @@ router.delete("/:adminId", (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-          message: 'ADMIN profile deleted',
-          request: {
-              type: 'POST',
-              url: 'http://localhost:3000/admin',
-              
-          }
+          message: 'ADMIN profile deleted'
       });
     })
     .catch(err => {

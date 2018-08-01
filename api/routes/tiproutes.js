@@ -5,8 +5,8 @@ const mongoose = require("mongoose");
 
 var minuteFromNow = function(){
     var d = new Date();
-     d.setHours(d.getHours() + 0);
-   d.setMinutes(d.getMinutes() + 0);
+     d.setHours(d.getHours() + 5);
+   d.setMinutes(d.getMinutes() + 30);
      var n = d.toLocaleString();
    return n;
   };
@@ -26,12 +26,7 @@ router.get("/", (req, res, next) => {
           return {
             health_tip: doc.health_tip,
             type: doc.type,
-            _id: doc._id,
-            request: {
-              type: "GET",
-              url: "http://localhost:3000/tip/"+ doc._id
-              
-            }
+            _id: doc._id
           };
         })
       };
@@ -70,11 +65,7 @@ router.post("/", (req, res, next) => {
         createdTip: {
             health_tip: result.health_tip,
             type: result.type,
-            _id: result._id,
-            request: {
-                type: 'GET',
-                url: "http://localhost:3000/tip/" + result._id,
-            }
+            _id: result._id
             
         }
       });
@@ -96,11 +87,7 @@ router.get("/:tipId", (req, res, next) => {
       console.log("From database", doc);
       if (doc) {
         res.status(200).json({
-            tip: doc,
-            request: {
-                type: 'GET',
-                url: 'http://localhost:3000/tip'
-            }
+            tip: doc
         });
       } else {
         res
@@ -131,11 +118,7 @@ router.put("/:tipId", (req, res, next) => {
         }
        } ) 
       res.status(200).json({
-          message: 'tip details updated',
-          request: {
-              type: 'GET',
-              url: 'http://localhost:3000/tip/'+ id
-          }
+          message: 'tip details updated'
       });
     })
     .catch(err => {
@@ -152,12 +135,7 @@ router.delete("/:tipId", (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-          message: 'health tip deleted',
-          request: {
-              type: 'POST',
-              url: 'http://localhost:3000/tip',
-              
-          }
+          message: 'health tip deleted'
       });
     })
     .catch(err => {

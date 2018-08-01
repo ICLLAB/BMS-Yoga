@@ -91,7 +91,7 @@ router.post("/attendancecount/email/:packageEmail", (req, res, next) => {
 
 
 
-//TO GET COMPLETE DETAILS OF ALL PATIENTS   ===> ATTENDANCE DETAILS
+//TO GET COMPLETE DETAILS OF ALL PATIENTS   ===> ATTENDANCE DETAILS [from day 1 till end]
 //http://localhost:3000/counter/attendancecount/
 
 router.get("/attendancecount", (req, res, next) => {
@@ -122,7 +122,7 @@ router.get("/attendancecount", (req, res, next) => {
 
 
 
-//TO GET COMPLETE DETAILS OF  ===>  PARTICULAR PATIENTS ATTENDANCE DETAILS 
+//TO GET COMPLETE DETAILS OF  ===>  PARTICULAR PATIENTS ATTENDANCE DETAILS [from day 1 till end]
 //http://localhost:3000/counter/attendancecount/
 
 router.get("/attendancecount/:counterEmail", (req, res, next) => {
@@ -251,23 +251,21 @@ router.get("/getby", (req, res, next) =>
       })
       .catch(err => {
         res.status(500).json({
-          error: err
+          message: "No booking found for provided ID"
         });
       });
   });
+  
 
-
-//get data of CURRENT DAY(TODAYS) ATTENDANCE OF ALL USERS (who all have attended)
+//get data of any required DAY ATTENDANCE OF ALL USERS (who all have attended)
 //http://localhost:3000/counter/attended/
-
-
 
  
 router.post("/attended", (req, res, next) =>
 {
-  const schedule = req.body.schedule;
+  const date = req.body.date;
  //find the details of users booked schedule for a particular class
- Counter.find({date: {$eq: schedule} })
+ Counter.find({date: {$eq: date} })
   .select("email date center slot")
   .exec()
   .then(docs => {

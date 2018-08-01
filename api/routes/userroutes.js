@@ -30,8 +30,8 @@ mailer_service_provider:process.env.MAILER_SERVICE_PROVIDER
 
 var minuteFromNow = function(){
   var d = new Date();
-   d.setHours(d.getHours() + 0);
- d.setMinutes(d.getMinutes() + 0);
+   d.setHours(d.getHours() + 5);
+ d.setMinutes(d.getMinutes() + 30);
    var n = d.toLocaleString();
  return n;
 };
@@ -49,11 +49,7 @@ router.put("/email/:userEmail", (req, res, next) => {
     .then(result =>{
       console.log(result);
       res.status(200).json({
-          message: 'user details updated',
-          request: {
-              type: 'GET',
-              url: 'http://localhost:3000/user/email/'+ email
-          }
+          message: 'user details updated'
       });
     })
     .catch(err => {
@@ -74,11 +70,7 @@ router.put("/id/:userId", (req, res, next) => {
     .then(result =>{
       console.log(result);
       res.status(200).json({
-          message: 'user details updated',
-          request: {
-              type: 'GET',
-              url: 'http://localhost:3000/user/id/'+ id
-          }
+          message: 'user details updated'
       });
     })
     .catch(err => {
@@ -103,11 +95,7 @@ router.get("/", (req, res, next) => {
       count: docs.length,
       user: docs.map(doc => {
         return {
-          user_details: doc,
-          request: {
-            type: "GET",
-            url: "http://localhost:3000/user/"+ doc._id   
-          }
+          user_details: doc
         };
       })
     };
@@ -135,11 +123,7 @@ router.get("/email/:userEmail", (req, res, next) => {
       console.log("From database", doc);
       if (doc) {
         res.status(200).json({
-            user_details: doc,
-            request: {
-                type: 'GET',
-                url: 'http://localhost:3000/user/email'
-            }
+            user_details: doc
         });
       } else {
         res
@@ -166,11 +150,7 @@ router.get("/id/:userId", (req, res, next) => {
       console.log("From database", doc);
       if (doc) {
         res.status(200).json({
-            user_details: doc,
-            request: {
-                type: 'GET',
-                url: 'http://localhost:3000/user/id'
-            }
+            user_details: doc
         });
       } else {
         res
@@ -381,12 +361,7 @@ router.delete("/:userId", (req, res, next) => {
     .exec()
     .then(result => {
       res.status(200).json({
-          message: 'User deleted',
-          request: {
-              type: 'POST',
-              url: 'http://localhost:3000/user',
-              
-          }
+          message: 'User deleted'
       });
     })
     .catch(err => {
