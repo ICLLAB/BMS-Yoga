@@ -308,7 +308,7 @@ background: #EF6C00;
   
 <script type="text/javascript">
          var resetPasswordClickEvt = document.getElementById('resetPasswordClickEvt');
-        //var result = document.getElementById('result');
+        
         resetPasswordClickEvt.addEventListener('click', resetPasswordClicked);
         function resetPasswordClicked(event) {
          
@@ -317,8 +317,7 @@ background: #EF6C00;
             document.getElementById('result').innerHTML = "Please Wait .. ";
           
             event.preventDefault();
-            //var token = window.location.href.split("/").pop();
-          //  alert(lastPart);
+           
           
             var token = document.location.href.split('token=')[1];
             var v = window.location.href;
@@ -326,19 +325,18 @@ background: #EF6C00;
             var pathname = new URL(v).pathname;
             var res = y + pathname;
             var data = "newPassword=" + document.getElementById('newPassword').value + '&verifyPassword=' + document.getElementById('verifyPassword').value + '&token=' + token;
-          //  alert(data);
-          //add heroku link here 
+         
             ajaxCall(data,res, function(status, response) {
                 if (status == 200) {
                   document.getElementById("result").style.color = 'green';
                   document.getElementById('result').innerHTML = "PASSWORD RESET WAS SUCCESSFULL";
-                   // alert('successfully sent');
+                 
                   
                 } else {
                   document.getElementById("result").style.color = 'red';
                   document.getElementById('result').innerHTML = "Error";
                   
-                   // alert('Error', status)
+               
                 }
             });
             function ajaxCall(data, url, callback) {
