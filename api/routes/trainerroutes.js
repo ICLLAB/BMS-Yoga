@@ -28,7 +28,8 @@ mailer_service_provider:process.env.MAILER_SERVICE_PROVIDER
 //time updation
 
 
-var minuteFromNow = function(){
+var minuteFromNow = function()
+{
   var d = new Date();
    d.setHours(d.getHours() + 5);
  d.setMinutes(d.getMinutes() + 30);

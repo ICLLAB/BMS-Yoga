@@ -6,13 +6,14 @@ const Trail = require("../models/trail");
 
 
 
-var minuteFromNow = function(){
+var minuteFromNow = function()
+{
     var d = new Date();
      d.setHours(d.getHours() + 5);
    d.setMinutes(d.getMinutes() + 30);
      var n = d.toLocaleString();
    return n;
-  };
+};
 
 
 //book for a particular trail class by the user [passed by email]
