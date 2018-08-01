@@ -23,7 +23,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/landing_text_color"
             android:elevation="4dp"
-            app:theme="@style/ToolBarStyle"
+            android:theme="@style/ToolBarStyle"
             />
         <TextView
             android:id="@+id/weeky"

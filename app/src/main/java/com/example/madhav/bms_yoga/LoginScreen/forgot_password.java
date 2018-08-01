@@ -25,6 +25,8 @@ import com.example.madhav.bms_yoga.network.mAPI;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.example.madhav.bms_yoga.network.mAPI.FORGOT_URL;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -65,19 +67,16 @@ EditText infw;
     private void fpw() {
        // final mLogin mlog = new mLogin(emailText.getText().toString(),pwText.getText().toString());
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, "http://192.168.1.168:5000/forgot",
+        StringRequest postRequest = new StringRequest(Request.Method.POST, mAPI.FORGOT_URL,
                 new Response.Listener<String>()
                 {
                     @Override
                     public void onResponse(String response) {
                         // response
                         Log.d("Response", response);
-                      //  emailText.setText("");
-                        //pwText.setText("");
-                       // emailText.requestFocus();
-                       // getTip();
                         Toast.makeText(getContext(), "Email Sent Successfully",
                                 Toast.LENGTH_LONG).show();
+                        getDialog().dismiss();
                     }
                 },
                 new Response.ErrorListener()
@@ -97,9 +96,6 @@ EditText infw;
             {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("email", infw.getText().toString());
-
-               // params.put("password", mlog.getmPassword());
-
                 return params;
             }
 

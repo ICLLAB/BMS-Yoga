@@ -16,18 +16,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.madhav.bms_yoga.LoginScreen.LoginScreenActivity;
 import com.example.madhav.bms_yoga.LoginScreen.SaveSharedPreference;
 import com.example.madhav.bms_yoga.LoginScreen.create_account;
 import com.example.madhav.bms_yoga.R;
+import com.example.madhav.bms_yoga.controller.VolleySingleton;
+import com.example.madhav.bms_yoga.network.mAPI;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.example.madhav.bms_yoga.network.mAPI.LOGOUT_URL;
 
 public class profile extends Fragment {
     TextView logoutBT;
     //Button logoutBT;
 
-    TextView editBT;
+            TextView editBT;
 
     String mParam1;
     @Override
@@ -69,9 +80,10 @@ public class profile extends Fragment {
             public void onClick(View v) {
                 // Set LoggedIn status to false
 
-                SaveSharedPreference.setLoggedIn(getActivity(), false);
+
                 // Logout
                 logout();
+
             }
         });
         return v;
@@ -86,13 +98,61 @@ public class profile extends Fragment {
     {
 
 
+        SaveSharedPreference.setLoggedIn(getActivity(), false);
         Toast.makeText(getContext(), "You have been successfully logged out!",
                 Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getActivity(), LoginScreenActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+
+
+        LogOutToken();
         startActivity(intent);
+
+        //Log.d("Token man ",y);
+
         getActivity().finish();
+
     }
+
+
+
+
+    private void LogOutToken() {
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("token_pref",MODE_PRIVATE);
+        String restoredText = prefs.getString("tokky", null);
+
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                mAPI.LOGOUT_URL+restoredText,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+                        Log.d("Success.Response", String.valueOf(response));
+                        // Process the JSON
+
+
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+                        Log.d("Error.Response", String.valueOf(error));
+                    }
+                }
+        );
+
+        // Add JsonObjectRequest to the RequestQueue
+        // requestQueue.add(jsonObjectRequest);
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+    }
+
+
 
 
 

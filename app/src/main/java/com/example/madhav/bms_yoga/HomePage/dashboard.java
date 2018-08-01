@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -44,6 +45,8 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static android.content.Context.MODE_PRIVATE;
+
 public class dashboard extends Fragment {
     TextView tipP;
    // private final static int INTERVAL = 5000;//1000 * 60 * 2; //2 minutes
@@ -74,7 +77,9 @@ public class dashboard extends Fragment {
 
         tipP = v.findViewById(R.id.tip);
 
+        mHandler = new Handler();
 
+        startRepeatingTask();
 
         //tipP.setText(getActivity().getIntent().getStringExtra("puttip"));
         return v;
@@ -84,25 +89,19 @@ public class dashboard extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.dashboard_menu, menu);
         super.onCreateOptionsMenu(menu, inflater);
-        getInfo();
+
+        Attendence();
+
     }
-    private void getInfo(){
-        Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
+   /* private void getInfo(){
+        //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
         // mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
         String c = "12";
 
 
-        mNames.add("No. of Sessions");
-        mClassCount.add("12");
-
-        //mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Health Score");
-        mClassCount.add("03");
 
 
-        initRecyclerView();
-
-    }
+    }*/
     private void initRecyclerView(){
 
 
@@ -117,9 +116,7 @@ public class dashboard extends Fragment {
         RecyclerViewAdapter adapter = new RecyclerViewAdapter(mNames,mClassCount);
         recyclerView.setAdapter(adapter);
 
-        mHandler = new Handler();
 
-        startRepeatingTask();
 
     }
 
@@ -131,6 +128,7 @@ public class dashboard extends Fragment {
             try {
                 getTip(); //this function can change value of mInterval.
 
+
             } finally {
                 // 100% guarantee that this always happens, even if
                 // your update method throws an exception
@@ -140,7 +138,7 @@ public class dashboard extends Fragment {
     };
 
     void startRepeatingTask() {
-        Log.d("called","tip");
+        //Log.d("called","tip");
         mStatusChecker.run();
     }
 
@@ -167,7 +165,7 @@ public class dashboard extends Fragment {
                             for(int i=0;i<array.length();i++){
                                 // Get current json object
                                 JSONObject student = array.getJSONObject(i);
-
+                                //Log.d("test", String.valueOf(response.get("count")));
                                 // Get the current student (json object) data
                                 String hea_tip = student.getString("health_tip");
                                 String Quotes = '"'+ hea_tip+'"';
@@ -177,6 +175,7 @@ public class dashboard extends Fragment {
                                 // Display the formatted json data in text view
                                 //mTextView.append(firstName +" " + lastName +"\nage : " + age);
                                 // mTextView.append("\n\n");
+                               // tipP.setText(response.get("count") + Quotes);
                                 tipP.setText(Quotes);
                                /*Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
                                n.putExtra("puttip",Quotes);
@@ -203,6 +202,91 @@ public class dashboard extends Fragment {
         // requestQueue.add(jsonObjectRequest);
         VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
+
+    private void Attendence() {
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("email_pref",MODE_PRIVATE);
+        String restoredText = prefs.getString("email", null);
+
+
+        String name="";
+        if (restoredText != null) {
+            name = prefs.getString("email", "No name defined");//"No name defined" is the default value.
+            //Log.d("EMAIL MACHA",name);
+
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                mAPI.ATT_URL + name,
+                null,
+
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+
+                        // Process the JSON
+                        try{
+
+                            // Get the JSON array
+                            JSONArray array = response.getJSONArray("LAST_7_DAYS_ATTENDANCE_OF_PARTICULAR_USER");
+                            // Loop through the array elements
+
+                            mNames.add("No. of Sessions");
+                            //Log.d("test",response.get("total").toString());
+                            mClassCount.add(response.get("total").toString());
+
+                            //mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+                            mNames.add("Health Score");
+                            mClassCount.add("0");
+
+                            initRecyclerView();
+                            /*for(int i=0;i<array.length();i++){
+                                // Get current json object
+                                JSONObject student = array.getJSONObject(i);
+                                //Log.d("test", String.valueOf(response.get("count")));
+                                // Get the current student (json object) data
+                            //    String hea_tip = student.getString("health_tip");
+                            //    String Quotes = '"'+ hea_tip+'"';
+                                //String lastName = student.getString("type");
+                                // String age = student.getString("age");
+
+                                // Display the formatted json data in text view
+                                //mTextView.append(firstName +" " + lastName +"\nage : " + age);
+                                // mTextView.append("\n\n");
+                                 //tipP.setText(response.get("total") + Quotes);
+
+
+
+                               // tipP.setText(Quotes);
+                               /*Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
+                               n.putExtra("puttip",Quotes);
+
+                               startActivity(n);
+
+
+                            }*/
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+                        Log.d("Error.Response", String.valueOf(error));
+                    }
+                }
+        );
+
+        // Add JsonObjectRequest to the RequestQueue
+        // requestQueue.add(jsonObjectRequest);
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+    }
+
+
 
 
 

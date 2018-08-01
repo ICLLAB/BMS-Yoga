@@ -123,6 +123,8 @@ public class LoginScreenActivity extends AppCompatActivity {
                 fp.show(fm, "forgot_password_fragment");
             }
         });
+
+
     }
 
     private void login() {
@@ -152,6 +154,7 @@ public class LoginScreenActivity extends AppCompatActivity {
                         editor.apply();
 
 
+                        GetToken();
                         emailText.setText("");
                         pwText.setText("");
                         emailText.requestFocus();
@@ -188,61 +191,87 @@ public class LoginScreenActivity extends AppCompatActivity {
         VolleySingleton.getInstance(this).addToRequestQueue(postRequest);
     }
 
-   private void getTip() {
 
-       JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
-               Request.Method.GET,
-               mAPI.TIP_URL,
-               null,
-               new Response.Listener<JSONObject>() {
-                   @Override
-                   public void onResponse(JSONObject response) {
-                       // Do something with response
-                       //mTextView.setText(response.toString());
+    private void GetToken() {
+        SharedPreferences prefs = this.getSharedPreferences("email_pref",MODE_PRIVATE);
+        String restoredText = prefs.getString("email", null);
 
-                       // Process the JSON
-                       try{
-                           // Get the JSON array
-                           JSONArray array = response.getJSONArray("tip");
-                           // Loop through the array elements
-                           for(int i=0;i<array.length();i++){
-                               // Get current json object
-                               JSONObject student = array.getJSONObject(i);
 
-                               // Get the current student (json object) data
-                               String hea_tip = student.getString("health_tip");
-                               String Quotes = '"'+ hea_tip+'"';
-                               //String lastName = student.getString("type");
-                              // String age = student.getString("age");
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+                mAPI.EDIT_URL + restoredText,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
 
-                               // Display the formatted json data in text view
-                               //mTextView.append(firstName +" " + lastName +"\nage : " + age);
-                              // mTextView.append("\n\n");
+                        // Process the JSON
+                        try{
+                            // Get the JSON array
+                            JSONArray array = response.getJSONArray("user_details");
+                            // Loop through the array elements
+                            for(int i=0;i<array.length();i++){
+                                // Get current json object
+                                JSONObject student = array.getJSONObject(i);
+                                //Log.d("test", String.valueOf(response.get("count")));
+                                // Get the current student (json object) data
+                                String login_token = student.getString("tokky");
+                                //Log.d("token = ",login_token);
+                                //String Quotes = '"'+ hea_tip+'"';
+                                //String lastName = student.getString("type");
+                                // String age = student.getString("age");
 
+
+                                SharedPreferences.Editor editor = getSharedPreferences("token_pref", MODE_PRIVATE).edit();
+                                editor.putString("tokky",login_token);
+                                editor.apply();
+
+                                // Display the formatted json data in text view
+                                //mTextView.append(firstName +" " + lastName +"\nage : " + age);
+                                // mTextView.append("\n\n");
+                                // tipP.setText(response.get("count") + Quotes);
+                                //tipP.setText(Quotes);
                                /*Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
                                n.putExtra("puttip",Quotes);
 
                                startActivity(n);*/
 
-                           }
-                       }catch (JSONException e){
-                           e.printStackTrace();
-                       }
-                   }
-               },
-               new Response.ErrorListener(){
-                   @Override
-                   public void onErrorResponse(VolleyError error){
-                       // Do something when error occurred
-                       Log.d("Error.Response", String.valueOf(error));
-                   }
-               }
-       );
 
-       // Add JsonObjectRequest to the RequestQueue
-      // requestQueue.add(jsonObjectRequest);
-       VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
-   }
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+                        Log.d("Error.Response", String.valueOf(error));
+                    }
+                }
+        );
+
+        // Add JsonObjectRequest to the RequestQueue
+        // requestQueue.add(jsonObjectRequest);
+        VolleySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest);
+    }
+    /*public void CleanToken()
+    {
+        Log.d("Clear Token","Token Destroyed");
+        SharedPreferences prefsemail = this.getSharedPreferences("email_pref",MODE_PRIVATE);
+        SharedPreferences.Editor editoremail = prefsemail.edit();
+        editoremail.clear();
+        editoremail.commit();
+
+        SharedPreferences prefs = this.getSharedPreferences("token_pref",MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+    }*/
+
 
 
     private class LongOperation extends AsyncTask<String, Void, String> {
@@ -251,6 +280,9 @@ public class LoginScreenActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             login();
+
+
+
             for (int i = 0; i < 5; i++) {
                 try {
                     Thread.sleep(1000);
@@ -270,6 +302,7 @@ public class LoginScreenActivity extends AppCompatActivity {
             pdia.setVisibility(View.INVISIBLE);
             Log.d("async", "executed");
 
+
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you
         }
@@ -284,6 +317,8 @@ public class LoginScreenActivity extends AppCompatActivity {
         @Override
         protected void onProgressUpdate(Void... values) {}
     }
+
+
 
 
 

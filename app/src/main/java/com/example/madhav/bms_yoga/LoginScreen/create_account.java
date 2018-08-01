@@ -95,7 +95,7 @@ public class create_account extends DialogFragment {
                         Toast.makeText(getContext(), "Account has been created successfully",
                                 Toast.LENGTH_LONG).show();
                         getDialog().dismiss();
-                    }
+                }
                 },
                 new Response.ErrorListener()
                 {
