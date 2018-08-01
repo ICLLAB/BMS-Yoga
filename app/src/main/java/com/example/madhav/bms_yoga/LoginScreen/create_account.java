@@ -59,7 +59,7 @@ public class create_account extends DialogFragment {
         signUP = view.findViewById(R.id.btn_signup);
         dis = view.findViewById(R.id.imageView_close);
         pdia_su = view.findViewById(R.id.progB_signup);
-        pdia_su.setVisibility(View.INVISIBLE);
+        pdia_su.setVisibility(View.GONE);
 
         signUP.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -64,7 +64,7 @@ public class edit_profile extends DialogFragment {
         lname = v.findViewById(R.id.lname);
         close = v.findViewById(R.id.imageView_closeedit);
         pdia_ep = v.findViewById(R.id.progB_edit);
-        pdia_ep.setVisibility(View.INVISIBLE);
+        pdia_ep.setVisibility(View.GONE);
         e_button = v.findViewById(R.id.btn_update);
 
         e_button.setOnClickListener(new View.OnClickListener() {

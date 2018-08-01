@@ -80,7 +80,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         forgotP = findViewById(R.id.forgotP);
 
         pdia = findViewById(R.id.progB);
-        pdia.setVisibility(View.INVISIBLE);
+        pdia.setVisibility(View.GONE);
         emailText.requestFocus();
 
         lf = findViewById(R.id.re1);

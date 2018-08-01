@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +36,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.madhav.bms_yoga.LoginScreen.create_account;
 import com.example.madhav.bms_yoga.R;
 import com.example.madhav.bms_yoga.controller.VolleySingleton;
 import com.example.madhav.bms_yoga.network.mAPI;
@@ -49,6 +51,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class dashboard extends Fragment {
     TextView tipP;
+    ImageView schedule_icon;
    // private final static int INTERVAL = 5000;//1000 * 60 * 2; //2 minutes
     private static final String TAG = "dashboard";
 
@@ -76,7 +79,18 @@ public class dashboard extends Fragment {
         ((AppCompatActivity) getActivity()).setSupportActionBar(myToolbar);
 
         tipP = v.findViewById(R.id.tip);
+        schedule_icon = v.findViewById(R.id.schedule_icon);
 
+
+
+        schedule_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                schedule myDialogFragment = new schedule();
+                myDialogFragment.show(fm, "schedule_fragment");
+            }
+        });
         mHandler = new Handler();
 
         startRepeatingTask();

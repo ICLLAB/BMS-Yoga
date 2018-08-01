@@ -51,7 +51,7 @@ EditText infw;
         infwb = view.findViewById(R.id.btn_fp);
         disF = view.findViewById(R.id.imageViewF_close);
         pdia_fp = view.findViewById(R.id.progB_fgt);
-        pdia_fp.setVisibility(View.INVISIBLE);
+        pdia_fp.setVisibility(View.GONE);
 
         infwb.setOnClickListener(new View.OnClickListener() {
             @Override

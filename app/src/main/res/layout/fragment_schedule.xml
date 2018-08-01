@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="wrap_content"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomePage.schedule">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <TextView
+        android:id="@+id/createA"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:fontFamily="@font/roboto"
+        android:gravity="center"
+        android:layout_marginTop="15dp"
+
+        android:text="@string/sh_text_head"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/landing_text_color"
+        android:textStyle="bold" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_name_su"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+
+        android:theme="@style/su_TextLabel">
+
+        <EditText
+            android:id="@+id/input_name_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_date"
+            android:textColor="@color/colorTrendsBackground"
+            android:textSize="18sp"
+            />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_email_su"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="13dp"
+        android:theme="@style/su_TextLabel">
+
+        <EditText
+            android:id="@+id/input_centre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:hint="@string/hint_centre"
+
+            android:textColor="@color/colorTrendsBackground"
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_password_su"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="13dp"
+
+        android:theme="@style/su_TextLabel">
+
+        <EditText
+            android:id="@+id/input_slot"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:hint="@string/hint_slot"
+
+            android:textColor="@color/colorTrendsBackground"
+
+            android:textSize="18sp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/btn_book"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+
+        android:layout_marginTop="30dp"
+        android:background="@color/colorAccent"
+
+        android:text="@string/btn_book"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
+
+    <ProgressBar
+        android:id="@+id/progB_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:theme="@style/pAccent" />
+</LinearLayout>
+
+<ImageView
+    android:id="@+id/imageView_closeSch"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_alignParentTop="true"
+    android:layout_gravity="top|right"
+    android:layout_marginEnd="12dp"
+    android:layout_marginTop="12dp"
+    android:clickable="true"
+    android:src="@drawable/ic_close" />
+
+</RelativeLayout>
