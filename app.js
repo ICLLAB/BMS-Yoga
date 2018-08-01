@@ -25,6 +25,8 @@ const trailRoutes = require("./api/routes/trailroutes");
 
 const packageRoutes = require("./api/routes/packageroutes");
 
+const centreRoutes = require("./api/routes/centreroutes");
+
 
 
 
@@ -78,6 +80,8 @@ app.use("/counter", counterRoutes);
 app.use("/trail", trailRoutes);
 
 app.use("/package", packageRoutes);
+
+app.use("/centre", centreRoutes);
 
 
 

@@ -228,8 +228,52 @@ router.post("/signup", (req, res, next) => {
                        throw err;
                     }
                    } )
+                   async.waterfall([
+                    function(done) {
+                      Trainer.findOne({
+                        email: req.body.email
+                      }).exec(function(err, trainer) {
+                        if (trainer) {
+                          done(err, trainer);
+                        } else {
+                          done('TRAINER not found.');
+                        }
+                      });
+                    },
+                    function(trainer, done) {
+                      // create the random token
+                      crypto.randomBytes(20, function(err, buffer) {
+                        const token = buffer.toString('hex');
+                        done(err, trainer, token);
+                      });
+                    },
+                    function(trainer, token, done) {
+                      Trainer.findByIdAndUpdate({ _id: trainer._id }, { reset_password_token: token, reset_password_expires: Date.now() + 86400000 }, { upsert: true, new: true }).exec(function(err, new_trainer) {
+                        done(err, token, new_trainer);
+                      });
+                    },
+                    function(token, trainer, done) {
+                      var data = {
+                        to: trainer.email,
+                        from: email,
+                        subject: 'BMS-YOGA Password Reset',
+                        text: 'Click the below link to reset\n\n' +
+                        'http://' + req.headers.host + '/trainer/reset?token=' + token + '\n\n'
+                      };
+                      
+                      smtpTransport.sendMail(data, function(err) {
+                        if (!err) {
+                          return res.json({ message: 'Kindly check your email for further instructions' });
+                        } else {
+                          return done(err);
+                        }
+                      });
+                    }
+                  ], function(err) {
+                    return res.status(422).json({ message: err });
+                  });
                 res.status(201).json({
-                  message: "TRAINER PROFILE CREATED"
+                  message: "TRAINER PROFILE CREATED, MAIL HAS BEEN SENT TO TRAINER FOR RESET PASSWORD"
                 });
               })
               .catch(err => {
@@ -432,6 +476,8 @@ router.post("/forgot", (req, res, next) => {
     return res.status(422).json({ message: err });
   });
 });
+
+
 
 //API TO RESET PATIENT/ASPIRANT PROFILE
 

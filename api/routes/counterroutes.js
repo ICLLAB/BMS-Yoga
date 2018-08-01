@@ -98,7 +98,7 @@ router.post("/attendancecount/email/:packageEmail", (req, res, next) => {
 
 router.get("/attendancecount", (req, res, next) => {
   Counter.find()
-    .select("email slot")
+    .select("email slot date center")
     .populate('_id ')
     .exec()
     .then(docs => {
@@ -297,6 +297,41 @@ router.post("/attended", (req, res, next) =>
     });
   });
 });
+
+//get data of CURRENT DAY(TODAYS) ATTENDANCE OF ALL USERS (who all have attended)
+//http://localhost:3000/counter/today/date/
+  
+  
+  router.get("/today/date/", (req, res, next) => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+    Counter.find({date: {$eq: today}})
+      //Package.find({date})
+        .select('email  date slot center ')
+        .exec()
+        .then(doc => {
+          console.log("From database", doc);
+          if (doc) 
+          {
+            res.status(200).json({
+              TOTAL_COUNT_OF_BOOKINGS_BY_A_USERS_FOR_TODAY: doc.length,
+                ALL_BOOKING_DETAILS_OF_USER: doc
+            });
+          }
+           else {
+            res
+              .status(404)
+              .json({ message: "No booking found" });
+          }
+          
+        })
+        .catch
+        (err => {
+          console.log(err);
+          res.status(500).json({ error: err });
+        });
+    });
+    
 
 
 module.exports = router;

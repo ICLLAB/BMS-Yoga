@@ -165,7 +165,7 @@ router.get("/center/:userCenter", (req, res, next) => {
        else {
         res
           .status(404)
-          .json({ message: "No booking found for provided ID" });
+          .json({ message: "No centre" });
       }
       
     })
@@ -232,7 +232,7 @@ router.get("/email/:userEmail", (req, res, next) => {
        else {
         res
           .status(404)
-          .json({ message: "No booking found for provided ID" });
+          .json({ message: "No booking found for provided email" });
       }
       
     })
@@ -303,7 +303,7 @@ router.get("/lastbooked/email/:userEmail", (req, res, next) => {
       else {
        res
          .status(404)
-         .json({ message: "No booking found for provided ID" });
+         .json({ message: "No booking found for provided email" });
      }
    })
    .catch(err => {
@@ -424,7 +424,7 @@ Package.find({date: {$eq: schedule} , center:{$eq: place}, slot:{$eq: time}})
 });
 
 
-//to get all booked schedules BASED ON SLOT (=> EMAIL complete booking details PARTICULAR SLOT)
+//to get all booked schedules BASED ON SLOT (=>  complete booking details PARTICULAR SLOT)
 //http://localhost:3000/package/slot/
 
 router.get("/slot/:userSlot", (req, res, next) => {
@@ -444,7 +444,7 @@ router.get("/slot/:userSlot", (req, res, next) => {
        else {
         res
           .status(404)
-          .json({ message: "No booking found for provided ID" });
+          .json({ message: "No booking found for provided slot" });
       }
       
     })
@@ -456,7 +456,7 @@ router.get("/slot/:userSlot", (req, res, next) => {
 });
 
 
-//to get all booked schedules BASED ON DATE (=> EMAIL complete booking details PARTICULAR DATE)
+//to get all booked schedules BASED ON DATE (=> complete booking details PARTICULAR DATE)
 //http://localhost:3000/package/date/
 
 router.get("/date/:userDate", (req, res, next) => {
@@ -476,7 +476,7 @@ router.get("/date/:userDate", (req, res, next) => {
        else {
         res
           .status(404)
-          .json({ message: "No booking found for provided ID" });
+          .json({ message: "No booking found for provided date" });
       }
       
     })
@@ -486,5 +486,122 @@ router.get("/date/:userDate", (req, res, next) => {
       res.status(500).json({ error: err });
     });
 });
+
+
+
+//to get all booked schedules BASED ON TODAYS DATE 
+//http://localhost:3000/package/datee/
+
+
+router.get("/datee/", (req, res, next) => {
+  const now = new Date();
+  
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+  Package.find({date: {$eq: today}})
+      .select('email id date slot center booking_time')
+      .exec()
+      .then(doc => {
+        console.log("From database", doc);
+        if (doc) 
+        {
+          res.status(200).json({
+            TOTAL_COUNT_OF_SESSION_BOOKED_BY_USERS: doc.length,
+              ALL_BOOKING_DETAILS_OF_USER: doc
+          });
+        }
+         else {
+          res
+            .status(404)
+            .json({ message: "No booking found" });
+        }
+        
+      })
+      .catch
+      (err => {
+        console.log(err);
+        res.status(500).json({ error: err });
+      });
+  });
+  
+
+  
+  //to get all booked schedules BASED ON TODAYS DATE + CENTRE = JAYANAGAR + SLOT =1
+  //http://localhost:3000/package/today/date/
+  
+  
+  router.get("/today/date/", (req, res, next) => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+    const place = "jayanagar"
+    const time = "1"
+    Package.find({date: {$eq: today},center: {$eq: place},slot: {$eq: time}})
+      //Package.find({date})
+        .select('email id date slot center booking_time')
+        .exec()
+        .then(doc => {
+          console.log("From database", doc);
+          if (doc) 
+          {
+            res.status(200).json({
+              TOTAL_COUNT_OF_BOOKINGS_BY_ALL_USERS_FOR_TODAY: doc.length,
+                ALL_BOOKING_DETAILS_OF_USER: doc
+            });
+          }
+           else {
+            res
+              .status(404)
+              .json({ message: "No booking found" });
+          }
+          
+        })
+        .catch
+        (err => {
+          console.log(err);
+          res.status(500).json({ error: err });
+        });
+    });
+    
+  
+  
+  
+  //to get all booked schedules BASED ON TODAYS DATE 
+  //http://localhost:3000/package/datee/
+  
+  
+  router.get("/today/datee/", (req, res, next) => {
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const place = "jayanagar"
+    const time = "2"
+    Package.find({date: {$eq: today},center: {$eq: place},slot: {$eq: time}})
+      //Package.find({date})
+        .select('email id date slot center booking_time')
+        .exec()
+        .then(doc => {
+          console.log("From database", doc);
+          if (doc) 
+          {
+            res.status(200).json({
+              TOTAL_COUNT_OF_BOOKINGS_BY_ALL_USERS_FOR_TODAY: doc.length,
+                ALL_BOOKING_DETAILS_OF_USER: doc
+            });
+          }
+           else {
+            res
+              .status(404)
+              .json({ message: "No booking found" });
+          }
+          
+        })
+        .catch
+        (err => {
+          console.log(err);
+          res.status(500).json({ error: err });
+        });
+    });
+    
+
+    
+
 
 module.exports = router;
