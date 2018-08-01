@@ -88,7 +88,7 @@ router.put("/id/:userId", (req, res, next) => {
 
 router.get("/", (req, res, next) => {
   User.find()
- .select("_id email username f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin")
+ .select("_id email username f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin tokky")
   .exec()
   .then(docs => {
     const response = {
@@ -117,7 +117,7 @@ router.get("/", (req, res, next) => {
 router.get("/email/:userEmail", (req, res, next) => {
   const email = req.params.userEmail;
   User.find({email})
-    .select('_id email username f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin')
+    .select('_id email username f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin tokky')
     .exec()
     .then(doc => {
       console.log("From database", doc);
@@ -144,7 +144,7 @@ router.get("/email/:userEmail", (req, res, next) => {
 router.get("/id/:userId", (req, res, next) => {
   const id = req.params.userId;
   User.findById(id)
-    .select('_id username email f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin')
+    .select('_id username email f_name m_name l_name phone weight height medical_con pain_areas medications experience creation_time lastLogin tokky')
     .exec()
     .then(doc => {
       console.log("From database", doc);

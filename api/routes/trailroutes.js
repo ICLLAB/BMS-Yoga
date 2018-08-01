@@ -181,10 +181,9 @@ router.get("/id/:userId", (req, res, next) => {
 //to get particular users all booked schedules (=> EMAIL complete booking details)
 //http://localhost:3000/trail/email/
 
-
 router.get("/email/:userEmail", (req, res, next) => {
   email =req.params.userEmail;
-  Trail.findOne({email})
+  Trail.find({email})
     .select('email id date slot center booking_time')
     .exec()
     .then(doc => {
@@ -192,14 +191,14 @@ router.get("/email/:userEmail", (req, res, next) => {
       if (doc) 
       {
         res.status(200).json({
-          TRAIL_SESSION_TOTAL_COUNT: doc.length,
+          TOTAL_COUNT_OF_SESSION_BOOKED_BY_USERS: doc.length,
             ALL_BOOKING_DETAILS_OF_USER: doc
         });
       }
        else {
         res
           .status(404)
-          .json({ message: "No booking found for provided ID" });
+          .json({ message: "No booking found for provided email" });
       }
       
     })

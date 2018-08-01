@@ -91,7 +91,7 @@ router.put("/id/:trainerId", (req, res, next) => {
 
 router.get("/", (req, res, next) => {
   Trainer.find()
-  .select("_id email username f_name m_name l_name phone creation_time lastLogin")
+  .select("_id email username f_name m_name l_name phone creation_time lastLogin tokky")
   .exec()
   .then(docs => {
     const response = {
@@ -122,7 +122,7 @@ router.get("/", (req, res, next) => {
 router.get("/email/:trainerEmail", (req, res, next) => {
   const email = req.params.trainerEmail;
   Trainer.find({email})
-    .select('_id email phone username f_name m_name l_name phone creation_time lastLogin')
+    .select('_id email phone username f_name m_name l_name phone creation_time lastLogin tokky')
     .exec()
     .then(doc => {
       console.log("From database", doc);
@@ -150,7 +150,7 @@ router.get("/email/:trainerEmail", (req, res, next) => {
 router.get("/id/:trainerId", (req, res, next) => {
   const id = req.params.trainerId;
   Trainer.findById(id)
-    .select('_id email username f_name m_name l_name phone creation_time lastLogin')
+    .select('_id email username f_name m_name l_name phone creation_time lastLogin tokky')
     .exec()
     .then(doc => {
       console.log("From database", doc);
