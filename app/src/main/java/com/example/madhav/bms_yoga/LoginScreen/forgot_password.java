@@ -1,6 +1,7 @@
 package com.example.madhav.bms_yoga.LoginScreen;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -34,6 +36,7 @@ public class forgot_password extends DialogFragment {
 EditText infw;
     private Button infwb;
     private ImageView disF;
+    private ProgressBar pdia_fp;
     public forgot_password() {
         // Required empty public constructor
     }
@@ -47,11 +50,13 @@ EditText infw;
         infw = view.findViewById(R.id.input_email_fp);
         infwb = view.findViewById(R.id.btn_fp);
         disF = view.findViewById(R.id.imageViewF_close);
+        pdia_fp = view.findViewById(R.id.progB_fgt);
+        pdia_fp.setVisibility(View.INVISIBLE);
 
         infwb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fpw();
+                new LongOperationForgot().execute("");
             }
         });
 
@@ -102,5 +107,46 @@ EditText infw;
         };
         VolleySingleton.getInstance(getContext()).addToRequestQueue(postRequest);
     }
+
+    private class LongOperationForgot extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+            fpw();
+            for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
+            }
+
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //TextView txt = (TextView) findViewById(R.id.output);
+            // txt.setText("Executed"); // txt.setText(result);
+            pdia_fp.setVisibility(View.INVISIBLE);
+           // Log.d("async", "executed");
+
+            // might want to change "executed" for the returned string passed
+            // into onPostExecute() but that is upto you
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            pdia_fp.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }
+
 
 }

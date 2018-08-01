@@ -145,7 +145,7 @@ public class create_account extends DialogFragment {
             //TextView txt = (TextView) findViewById(R.id.output);
             // txt.setText("Executed"); // txt.setText(result);
             pdia_su.setVisibility(View.INVISIBLE);
-            Log.d("async", "executed");
+            //Log.d("async", "executed");
 
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you
