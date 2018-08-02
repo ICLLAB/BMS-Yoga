@@ -40,5 +40,6 @@
     <string name="hint_centre">Centre</string>
     <string name="hint_slot">Slot</string>
     <string name="btn_book">Book</string>
+    <string name="hint_session_count">Sessions Booked</string>
 
 </resources>

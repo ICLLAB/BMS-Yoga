@@ -19,12 +19,17 @@ import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.madhav.bms_yoga.R;
 import com.example.madhav.bms_yoga.controller.VolleySingleton;
 import com.example.madhav.bms_yoga.model.mSchedule;
 import com.example.madhav.bms_yoga.model.mSignup;
 import com.example.madhav.bms_yoga.network.mAPI;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -46,7 +51,7 @@ public class schedule extends DialogFragment {
     private EditText msd;
     private EditText msc;
     private EditText mss;
-
+    private EditText sc;
 
 
 
@@ -61,7 +66,9 @@ public class schedule extends DialogFragment {
         msd = v.findViewById(R.id.input_name_date);
         msc = v.findViewById(R.id.input_centre);
         mss = v.findViewById(R.id.input_slot);
-
+        sc = v.findViewById(R.id.session_count);
+        sc.setEnabled(false);
+        getSessionsCount();
         progB_book.setVisibility(View.GONE);
 
         imageView_closeSch.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +80,7 @@ public class schedule extends DialogFragment {
         btn_book.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 new LongOperationBook().execute("");
             }
         });
@@ -127,6 +135,46 @@ public class schedule extends DialogFragment {
         VolleySingleton.getInstance(getContext()).addToRequestQueue(postRequest);
     }
 
+    private void getSessionsCount() {
+        SharedPreferences prefs = this.getActivity().getSharedPreferences("email_pref",MODE_PRIVATE);
+        String restoredText = prefs.getString("email", null);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
+                Request.Method.GET,
+               mAPI.GET_SESSION_URL + restoredText,
+                null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Do something with response
+                        //mTextView.setText(response.toString());
+
+                        // Process the JSON
+                        try{
+                            // Get the JSON array
+                          //  JSONArray array = response.getJSONArray("TOTAL_COUNT_OF_SESSION_BOOKED_BY_USERS");
+                            String scT = response.get("TOTAL_COUNT_OF_SESSION_BOOKED_BY_USERS").toString();
+                            sc.setText(scT);
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error){
+                        // Do something when error occurred
+                        Log.d("Error.Response", String.valueOf(error));
+                    }
+                }
+        );
+
+        // Add JsonObjectRequest to the RequestQueue
+        // requestQueue.add(jsonObjectRequest);
+        VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
+    }
+
 
 
 
@@ -136,6 +184,7 @@ public class schedule extends DialogFragment {
 
         @Override
         protected String doInBackground(String... params) {
+
             book();
             for (int i = 0; i < 5; i++) {
                 try {

@@ -69,6 +69,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         int THRES = 4;
         int x = Integer.parseInt(mClassCount.get(position));
         //Log.d("x", String.valueOf(x));
+        if (x == 0)
+        {
+            imgView_grey_d.setVisibility(View.VISIBLE);
+            imgView_grey_u.setVisibility(View.VISIBLE);
+        }
         if(x < THRES)
         {
             imgView_r.setVisibility(View.VISIBLE);

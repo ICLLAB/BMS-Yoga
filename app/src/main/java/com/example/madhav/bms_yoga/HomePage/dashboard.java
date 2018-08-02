@@ -89,6 +89,7 @@ public class dashboard extends Fragment {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 schedule myDialogFragment = new schedule();
                 myDialogFragment.show(fm, "schedule_fragment");
+
             }
         });
         mHandler = new Handler();
