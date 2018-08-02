@@ -159,6 +159,8 @@ public class dashboard extends Fragment {
     void stopRepeatingTask() {
         mHandler.removeCallbacks(mStatusChecker);
     }
+
+
     private void getTip() {
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(

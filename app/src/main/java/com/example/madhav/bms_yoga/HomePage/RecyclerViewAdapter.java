@@ -25,7 +25,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     ImageView imgView_r;
     ImageView imgView_grey_d;
     ImageView imgView_grey_u;
-    int THRES = 4;
     private static final String TAG = "RecyclerViewAdapter";
 
     //vars
@@ -67,7 +66,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.classC.setText(mClassCount.get(position));
 
         //Log.d("test", mClassCount.get(position));
-
+        int THRES = 4;
         int x = Integer.parseInt(mClassCount.get(position));
         //Log.d("x", String.valueOf(x));
         if(x < THRES)
@@ -84,9 +83,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         }
 
-        if(mClassCount.get(position) == "03")
+        if(mClassCount.get(position) == "0")
         {
-            imgView_r.setVisibility(View.VISIBLE);
+            //imgView_r.setVisibility(View.VISIBLE);
+            imgView_grey_d.setVisibility(View.VISIBLE);
             imgView_grey_u.setVisibility(View.VISIBLE);
             //imgView_gre.setVisibility(View.VISIBLE);
         }
@@ -97,7 +97,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 Toast.makeText(mContext, mNames.get(position), Toast.LENGTH_SHORT).show();
             }
         });*/
-
     }
 
     @Override

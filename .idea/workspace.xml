@@ -28,34 +28,42 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="LoginScreenActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/LoginScreenActivity.java">
+      <file leaf-file-name="RecyclerViewAdapter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/RecyclerViewAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="79" column="45" lean-forward="false" selection-start-line="79" selection-start-column="45" selection-end-line="79" selection-end-column="45" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="profile.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/profile.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="530">
-              <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
+            <state relative-caret-position="1037">
+              <caret line="85" column="44" lean-forward="false" selection-start-line="85" selection-start-column="44" selection-end-line="85" selection-end-column="44" />
               <folding>
-                <element signature="e#2619#2954#0" expanded="true" />
+                <element signature="e#3179#3180#0" expanded="true" />
+                <element signature="e#3215#3216#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RecyclerViewAdapter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/RecyclerViewAdapter.java">
+      <file leaf-file-name="mSignup.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/model/mSignup.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="309">
-              <caret line="105" column="5" lean-forward="false" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+            <state relative-caret-position="102">
+              <caret line="6" column="30" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="6" selection-end-column="30" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mSchedule.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/model/mSchedule.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+              <folding>
+                <element signature="e#380#381#0" expanded="true" />
+                <element signature="e#411#412#0" expanded="true" />
+                <element signature="e#448#449#0" expanded="true" />
+                <element signature="e#481#482#0" expanded="true" />
+                <element signature="e#516#517#0" expanded="true" />
+                <element signature="e#547#548#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,59 +78,59 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="mSignup.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/model/mSignup.java">
+      <file leaf-file-name="dashboard.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/dashboard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+            <state relative-caret-position="17">
+              <caret line="95" column="29" lean-forward="false" selection-start-line="93" selection-start-column="8" selection-end-line="95" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="forgot_password.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/forgot_password.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="392">
-              <caret line="53" column="39" lean-forward="false" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="schedule.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="schedule.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/schedule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
+            <state relative-caret-position="439">
+              <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
               <folding>
-                <element signature="e#1189#1347#0" expanded="true" />
-                <element signature="e#1346#1347#0" expanded="true" />
-                <element signature="e#1386#1544#0" expanded="true" />
-                <element signature="e#1543#1544#0" expanded="true" />
+                <element signature="e#2093#2251#0" expanded="true" />
+                <element signature="e#2250#2251#0" expanded="true" />
+                <element signature="e#2290#2462#0" expanded="true" />
+                <element signature="e#2461#2462#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mAPI.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/network/mAPI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="170">
+              <caret line="10" column="34" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="fragment_schedule.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_schedule.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="107" column="35" lean-forward="false" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
           <provider editor-type-id="android-designer2">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="238">
+              <caret line="80" column="39" lean-forward="false" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="39" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
       <file leaf-file-name="create_account.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/create_account.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+            <state relative-caret-position="575">
+              <caret line="113" column="13" lean-forward="false" selection-start-line="113" selection-start-column="13" selection-end-line="113" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -131,14 +139,9 @@
       <file leaf-file-name="edit_profile.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/edit_profile.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="66" column="39" lean-forward="false" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="39" />
-              <folding>
-                <element signature="e#2153#2325#0" expanded="true" />
-                <element signature="e#2324#2325#0" expanded="true" />
-                <element signature="e#2361#2519#0" expanded="true" />
-                <element signature="e#2518#2519#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="238">
+              <caret line="93" column="35" lean-forward="false" selection-start-line="93" selection-start-column="35" selection-end-line="93" selection-end-column="35" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -169,6 +172,8 @@
       <find>restoredText</find>
       <find>G</find>
       <find>GetToKen</find>
+      <find>mHandler</find>
+      <find>startRepeatingTask</find>
     </findStrings>
   </component>
   <component name="GradleLocalSettings">
@@ -2210,22 +2215,23 @@
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_create_account.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_profile.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/RecyclerViewAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/profile.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_forgot_password.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/dashboard.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/network/mAPI.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_schedule.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/schedule.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/edit_profile.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/forgot_password.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/create_account.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/LoginScreenActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/dashboard.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/RecyclerViewAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/model/mSchedule.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/network/mAPI.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/schedule.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="133" />
     <option name="y" value="175" />
     <option name="width" value="1444" />
@@ -2246,9 +2252,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="ProjectPane" />
-      <pane id="Scratches" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2310,7 +2313,10 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="ProjectPane" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -2493,7 +2499,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
+    <editor active="true" />
     <layout>
       <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32885906" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2535,21 +2542,14 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/model/mLogin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2006">
           <caret line="118" column="35" lean-forward="false" selection-start-line="118" selection-start-column="35" selection-end-line="118" selection-end-column="35" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
@@ -2575,13 +2575,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2006">
           <caret line="118" column="35" lean-forward="false" selection-start-line="118" selection-start-column="35" selection-end-line="118" selection-end-column="35" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
@@ -2606,14 +2606,14 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="493">
           <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-28/android.jar!/android/view/View.class">
@@ -2651,33 +2651,33 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_launch_screen.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/bottom_navigation.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-28/android.jar!/android/app/Activity.class">
@@ -2702,25 +2702,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_profile.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_profile.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_edit_profile.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="46" column="36" lean-forward="false" selection-start-line="46" selection-start-column="36" selection-end-line="46" selection-end-column="36" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/today.java">
@@ -2732,65 +2732,64 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/dashboard_menu.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/services_navigation.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_listservices.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_listservices.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="12" column="27" lean-forward="false" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_listitems.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/layout_listitems.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
           <caret line="10" column="12" lean-forward="false" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
           <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_today.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
     </entry>
     <entry file="jar://$USER_HOME$/AppData/Local/Android/Sdk/platforms/android-28/android.jar!/android/content/Intent.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="15" column="84" lean-forward="false" selection-start-line="15" selection-start-column="84" selection-end-line="15" selection-end-column="84" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2811,47 +2810,47 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_forgot_password.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
           <caret line="68" column="38" lean-forward="false" selection-start-line="68" selection-start-column="29" selection-end-line="68" selection-end-column="38" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_screen.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="91" column="12" lean-forward="false" selection-start-line="91" selection-start-column="12" selection-end-line="91" selection-end-column="12" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
           <caret line="89" column="20" lean-forward="false" selection-start-line="89" selection-start-column="20" selection-end-line="89" selection-end-column="20" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_account.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_create_account.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="43" lean-forward="true" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/HomeActivity.java">
@@ -2866,27 +2865,29 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
           <caret line="268" column="29" lean-forward="false" selection-start-line="268" selection-start-column="29" selection-end-line="268" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/profile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/dashboard.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/LoginScreenActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="81" column="55" lean-forward="false" selection-start-line="81" selection-start-column="55" selection-end-line="81" selection-end-column="55" />
-          <folding>
-            <element signature="e#2828#3151#0" expanded="false" />
-            <element signature="e#3150#3151#0" expanded="false" />
-            <element signature="e#8269#10744#0" expanded="false" />
-            <element signature="e#10743#10744#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="544">
+          <caret line="79" column="45" lean-forward="false" selection-start-line="79" selection-start-column="45" selection-end-line="79" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/network/mAPI.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/forgot_password.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="85" lean-forward="false" selection-start-line="9" selection-start-column="85" selection-end-line="9" selection-end-column="85" />
+        <state relative-caret-position="459">
+          <caret line="53" column="39" lean-forward="false" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -2899,90 +2900,93 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/model/mSignup.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/RecyclerViewAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        <state relative-caret-position="1037">
+          <caret line="85" column="44" lean-forward="false" selection-start-line="85" selection-start-column="44" selection-end-line="85" selection-end-column="44" />
+          <folding>
+            <element signature="e#3179#3180#0" expanded="true" />
+            <element signature="e#3215#3216#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/model/mSchedule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="24" lean-forward="false" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
+          <folding>
+            <element signature="e#380#381#0" expanded="true" />
+            <element signature="e#411#412#0" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#516#517#0" expanded="true" />
+            <element signature="e#547#548#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/dashboard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="95" column="29" lean-forward="false" selection-start-line="93" selection-start-column="8" selection-end-line="95" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_schedule.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="107" column="35" lean-forward="false" selection-start-line="107" selection-start-column="25" selection-end-line="107" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/RecyclerViewAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="309">
-          <caret line="105" column="5" lean-forward="false" selection-start-line="105" selection-start-column="5" selection-end-line="105" selection-end-column="5" />
+        <state relative-caret-position="238">
+          <caret line="80" column="39" lean-forward="false" selection-start-line="80" selection-start-column="29" selection-end-line="80" selection-end-column="39" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/profile.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/model/mSignup.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="530">
-          <caret line="75" column="13" lean-forward="false" selection-start-line="75" selection-start-column="13" selection-end-line="75" selection-end-column="13" />
-          <folding>
-            <element signature="e#2619#2954#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/schedule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="459">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="37" selection-end-column="0" />
-          <folding>
-            <element signature="e#1189#1347#0" expanded="true" />
-            <element signature="e#1346#1347#0" expanded="true" />
-            <element signature="e#1386#1544#0" expanded="true" />
-            <element signature="e#1543#1544#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/edit_profile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="66" column="39" lean-forward="false" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="39" />
-          <folding>
-            <element signature="e#2153#2325#0" expanded="true" />
-            <element signature="e#2324#2325#0" expanded="true" />
-            <element signature="e#2361#2519#0" expanded="true" />
-            <element signature="e#2518#2519#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/forgot_password.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="392">
-          <caret line="53" column="39" lean-forward="false" selection-start-line="53" selection-start-column="39" selection-end-line="53" selection-end-column="39" />
+        <state relative-caret-position="102">
+          <caret line="6" column="30" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="6" selection-end-column="30" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/create_account.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="526">
-          <caret line="61" column="39" lean-forward="false" selection-start-line="61" selection-start-column="39" selection-end-line="61" selection-end-column="39" />
+        <state relative-caret-position="575">
+          <caret line="113" column="13" lean-forward="false" selection-start-line="113" selection-start-column="13" selection-end-line="113" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/LoginScreen/LoginScreenActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/edit_profile.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="79" column="45" lean-forward="false" selection-start-line="79" selection-start-column="45" selection-end-line="79" selection-end-column="45" />
+        <state relative-caret-position="238">
+          <caret line="93" column="35" lean-forward="false" selection-start-line="93" selection-start-column="35" selection-end-line="93" selection-end-column="35" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/network/mAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="34" lean-forward="false" selection-start-line="10" selection-start-column="25" selection-end-line="10" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/madhav/bms_yoga/HomePage/schedule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="439">
+          <caret line="135" column="0" lean-forward="true" selection-start-line="135" selection-start-column="0" selection-end-line="135" selection-end-column="0" />
+          <folding>
+            <element signature="e#2093#2251#0" expanded="true" />
+            <element signature="e#2250#2251#0" expanded="true" />
+            <element signature="e#2290#2462#0" expanded="true" />
+            <element signature="e#2461#2462#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -8,5 +8,6 @@ public class mAPI {
     public static String FORGOT_URL = "https://bms-icl-yoga.herokuapp.com/user/forgot";
     public static String ATT_URL = "https://bms-icl-yoga.herokuapp.com/counter/att/";
     public static String LOGOUT_URL =  "https://bms-icl-yoga.herokuapp.com/user/logout/";
+    public static String TRAIL_URL = "https://bms-icl-yoga.herokuapp.com/trail/trailbook/email/";
 
 }
