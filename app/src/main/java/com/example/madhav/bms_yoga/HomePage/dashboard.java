@@ -107,6 +107,7 @@ public class dashboard extends Fragment {
 
         Attendence();
 
+
     }
    /* private void getInfo(){
         //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
@@ -121,6 +122,7 @@ public class dashboard extends Fragment {
 
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+
 
         RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView);
 
@@ -221,6 +223,7 @@ public class dashboard extends Fragment {
     }
 
     private void Attendence() {
+
         SharedPreferences prefs = this.getActivity().getSharedPreferences("email_pref",MODE_PRIVATE);
         String restoredText = prefs.getString("email", null);
 
@@ -287,7 +290,9 @@ public class dashboard extends Fragment {
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
+
                     }
+
                 },
                 new Response.ErrorListener(){
                     @Override

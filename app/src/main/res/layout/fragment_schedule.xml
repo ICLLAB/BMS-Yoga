@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 xmlns:tools="http://schemas.android.com/tools"
+
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"
 xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".HomePage.schedule">
 
 <LinearLayout
+    android:id="@+id/schedule"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     >
 
     <TextView
-        android:id="@+id/createA"
+        android:id="@+id/TrailAcc"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -27,6 +29,26 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:textColor="@color/landing_text_color"
         android:textStyle="bold" />
 
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/input_layout_email_ep"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="13dp"
+        android:theme="@style/su_TextLabel">
+
+        <EditText
+            android:id="@+id/session_count"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:drawablePadding="10dp"
+            android:hint="@string/hint_session_count"
+            android:inputType="none"
+            android:textColor="@color/colorTrendsBackground"
+            android:textSize="14sp" />
+
+    </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_name_su"
         android:layout_width="match_parent"
@@ -89,26 +111,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
             android:textSize="18sp" />
     </android.support.design.widget.TextInputLayout>
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/input_layout_email_ep"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginRight="15dp"
-        android:layout_marginTop="13dp"
-        android:theme="@style/su_TextLabel">
 
-        <EditText
-            android:id="@+id/session_count"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:drawablePadding="10dp"
-            android:hint="@string/hint_session_count"
-            android:inputType="none"
-            android:textColor="@color/colorTrendsBackground"
-            android:textSize="14sp" />
-
-    </android.support.design.widget.TextInputLayout>
     <Button
         android:id="@+id/btn_book"
         android:layout_width="fill_parent"

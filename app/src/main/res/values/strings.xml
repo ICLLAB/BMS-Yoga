@@ -35,11 +35,12 @@
     <string name="hint_fname">First Name</string>
     <string name="hint_lname">Last Name</string>
     <string name="hint_logIn">Logged in as</string>
-    <string name="sh_text_head">Schedule</string>
+    <string name="sh_text_head">Trail Class Schedule</string>
     <string name="hint_date">Date</string>
     <string name="hint_centre">Centre</string>
     <string name="hint_slot">Slot</string>
     <string name="btn_book">Book</string>
-    <string name="hint_session_count">Sessions Booked</string>
+    <string name="hint_session_count">Available Trail Classes</string>
+    <string name="shp_text_head">Package Booking</string>
 
 </resources>

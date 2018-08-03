@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,7 @@ public class schedule extends DialogFragment {
     private EditText mss;
     private EditText sc;
 
-
+    Fragment fragment = null;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -69,6 +70,10 @@ public class schedule extends DialogFragment {
         sc = v.findViewById(R.id.session_count);
         sc.setEnabled(false);
         getSessionsCount();
+       // Log.d("testzzz","123");
+       // Log.d("test",sc.getText().toString());
+
+
         progB_book.setVisibility(View.GONE);
 
         imageView_closeSch.setOnClickListener(new View.OnClickListener() {
@@ -153,9 +158,35 @@ public class schedule extends DialogFragment {
                             // Get the JSON array
                           //  JSONArray array = response.getJSONArray("TOTAL_COUNT_OF_SESSION_BOOKED_BY_USERS");
                             String scT = response.get("TOTAL_COUNT_OF_SESSION_BOOKED_BY_USERS").toString();
-                            sc.setText(scT);
+                            //sc.setText(scT);
+
+                            int a = Integer.parseInt(scT);
+
+                            setty(a);
 
 
+                            if(a >= 5)
+                            {
+                                getDialog().dismiss();
+                               //getDialog().hide();
+                                btn_book.setEnabled(false);
+                                btn_book.setText("Trail Classes Expired");
+                                btn_book.setBackgroundColor(0xFFFF0000);
+
+                                FragmentManager fm = getActivity().getSupportFragmentManager();
+                               // Window window = myDialog.getWindow();
+
+                                package_book myDialogFragment = new package_book();
+                                myDialogFragment.show(fm, "package_book_fragment");
+
+
+
+                            }
+
+
+
+
+                            //Log.d("test","");
                         }catch (JSONException e){
                             e.printStackTrace();
                         }
@@ -175,6 +206,17 @@ public class schedule extends DialogFragment {
         VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
 
+
+    public void setty(int a)
+
+    {
+        int MAX = 5;
+
+        int res = MAX - a;
+
+       // Log.d("test",String.valueOf(res));
+        sc.setText(String.valueOf(res));
+    }
 
 
 
