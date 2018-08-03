@@ -24,3 +24,7 @@
     padding-top: 20px;
     padding-bottom: 20px;
 }
+#loginprogress{
+    display: none;
+    margin: auto;
+  }

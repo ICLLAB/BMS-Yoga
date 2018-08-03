@@ -36,9 +36,9 @@ $(function (){
         
         $.ajax({
             type: 'GET',
-            url: 'https://protected-plateau-97422.herokuapp.com/trainer',
+            url: 'https://bms-icl-yoga.herokuapp.com/trainer/',
             success: function(data) {
-                $.getJSON("https://protected-plateau-97422.herokuapp.com/trainer/", function (data) {
+                $.getJSON("https://bms-icl-yoga.herokuapp.com/trainer/", function (data) {
 
           var all = new Array();
 
@@ -151,7 +151,7 @@ $(function (){
             
 
            //data[0] hidden id
-            var deletionString = 'https://protected-plateau-97422.herokuapp.com/trainer/' + data[0];
+            var deletionString = 'https://bms-icl-yoga.herokuapp.com/trainer/' + data[0];
            // console.log(data[0]);
             $.ajax({
             type: 'DELETE',
@@ -181,7 +181,7 @@ $(function (){
             $.ajax({
               type: 'POST',
               
-             url: 'https://protected-plateau-97422.herokuapp.com/trainer/signup',
+             url: 'https://bms-icl-yoga.herokuapp.com/trainer/signup',
 
               data: ko.toJS(new TrainerClass({  f_name:  this.newTrainerFName(),m_name:  x,l_name:  y,phone:  this.newTrainerPhone(),username: this.newTrainerUName(),email:  this.newTrainerEmail(),password:  this.newTrainerPassword()})),
               success: function(data) { alert("hi");

@@ -1,0 +1,111 @@
+function attendanceClass(data) {
+  this.date = ko.observable(data.date);
+  this.center = ko.observable(data.center);
+  this.slot = ko.observable(data.slot);
+  this.editable = ko.observable(false);
+}
+
+function TrainerClass(data) {
+  this.type = ko.observable(data.type);
+  this.health_tip = ko.observable(data.health_tip);
+  
+  this.editable = ko.observable(false);
+} 
+function viewModel(){
+  var self = this;
+  self.Uattend  = ko.observableArray([]);
+  self.newdate = ko.observable();
+  self.newcenter = ko.observable();
+  self.newslot = ko.observable();
+  self.trainer  = ko.observableArray([]);
+  self.newTrainertype = ko.observable();
+  self.newTrainertip = ko.observable();
+
+
+
+self.attendance = function() {
+  
+
+
+  console.log('next in ');
+ ex=ko.toJS(new attendanceClass({ date: this.newdate(), center:  this.newcenter(), slot: this.newslot()}));
+
+
+//console.log(ex);
+// ex1=ko.toJS(new attendanceClass({ schedule: this.newschedule(), place:  this.newplace(), time: this.newtime()}));
+
+console.log(ex);
+//  console.log(x);
+  //console.log(username);
+  $.ajax({
+    type: 'POST',
+    
+   url: 'https://bms-icl-yoga.herokuapp.com/package/dateslot/',
+
+    data: ex ,
+    success: function(response,textStatus,jqXHR) {
+
+      
+        //console.log(response);
+        for(var i=0;i<response.total;i++){
+           // alert(response.CURRENT_DAY_BOOKINGS[i].email);
+            $("#tab tbody").append("<tr> <td>"+(i+1)+" </td> <td class='em'>"+response.CURRENT_DAY_BOOKINGS[i].email+" </td><td> <button class='attend'>yes</button></td></tr>");
+          }
+
+          $("#myModal").modal('show');
+          $('.attend').click(function () {
+            //console.log("hi");
+          var $r = $(this).closest("tr");
+          var $email =$r.find(".em").text();
+          this.disabled = true;
+          $.ajax({
+              type: 'POST',              
+             url: 'https://bms-icl-yoga.herokuapp.com/counter/attendancecount/email/' + $email,           
+              data: ex,
+              success: function(data) {
+                //location.reload();
+                alert("Attendence added");
+               
+
+            }
+          })
+          });
+    
+      
+      }
+  })
+
+
+};
+
+self.sendtip = function() {
+  console.log('saved');
+ 
+//  console.log(x);
+  //console.log(username);
+  $.ajax({
+    type: 'POST',
+    
+   url: 'https://bms-icl-yoga.herokuapp.com/tip',
+      
+    data: ko.toJS(new TrainerClass({ type: this.newTrainertype(), health_tip:  this.newTrainertip()})),
+    success: function(data) {
+      alert("sent", data); //the new item is returned with an ID
+      window.history.go(0);
+    }
+})};
+
+} 
+
+function reload()
+{
+  //alert("hi");
+  location.reload();
+  //window.histroy.go(0);
+}
+
+
+ko.applyBindings(new viewModel());
+
+
+
