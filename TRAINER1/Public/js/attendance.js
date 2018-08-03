@@ -20,9 +20,7 @@ function viewModel(){
   self.trainer  = ko.observableArray([]);
   self.newTrainertype = ko.observable();
   self.newTrainertip = ko.observable();
-
-
-
+  ex1=ko.toJS(new attendanceClass({ date: this.newdate(), center:  this.newcenter(), slot: this.newslot()}));
 self.attendance = function() {
   
 
@@ -31,12 +29,6 @@ self.attendance = function() {
  ex=ko.toJS(new attendanceClass({ date: this.newdate(), center:  this.newcenter(), slot: this.newslot()}));
 
 
-//console.log(ex);
-// ex1=ko.toJS(new attendanceClass({ schedule: this.newschedule(), place:  this.newplace(), time: this.newtime()}));
-
-console.log(ex);
-//  console.log(x);
-  //console.log(username);
   $.ajax({
     type: 'POST',
     
@@ -76,6 +68,9 @@ console.log(ex);
   })
 
 
+
+
+
 };
 
 self.sendtip = function() {
@@ -94,6 +89,27 @@ self.sendtip = function() {
       window.history.go(0);
     }
 })};
+$('#showw').click(function (){
+alert("he");
+
+  console.log('saved');
+  $.ajax({
+    type: 'POST',
+    
+   url: 'https://bms-icl-yoga.herokuapp.com/counter/attendants',
+      
+   data:ex,
+    success: function(response,textStatus,jqXHR) {
+      console.log(response.total);
+        for (var i=0;i<response.total;i++){
+        $("#grid2 tbody").append("<tr> <td>"+(i+1)+" </td> <td>"+response.CURRENT_DAY_BOOKINGS[i].email+"</td></tr>");
+          
+    }
+ 
+    }
+})
+});
+
 
 } 
 
@@ -103,6 +119,8 @@ function reload()
   location.reload();
   //window.histroy.go(0);
 }
+
+
 
 
 ko.applyBindings(new viewModel());

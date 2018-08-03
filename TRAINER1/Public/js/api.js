@@ -1,34 +1,24 @@
-function TrainerClass(data) {
-    this.type = ko.observable(data.type);
-    this.health_tip = ko.observable(data.health_tip);
-    
-    this.editable = ko.observable(false);
-} 
-function viewModel(){
-    var self = this;
-    self.trainer  = ko.observableArray([]);
-    self.newTrainertype = ko.observable();
-    self.newTrainertip = ko.observable();
-self.sendtip = function() {
+$('.attend').click(function (){
+
+
     console.log('saved');
-   
-  //  console.log(x);
-    //console.log(username);
     $.ajax({
-      type: 'POST',
+      type: 'GET',
       
-     url: 'https://protected-plateau-97422.herokuapp.com/tip',
+     url: 'https://bms-icl-yoga.herokuapp.com/counter/today/date',
         
-      data: ko.toJS(new TrainerClass({ type: this.newTrainertype(), health_tip:  this.newTrainertip()})),
+     
       success: function(data) {
-        alert("sent", data); //the new item is returned with an ID
-        window.history.go(0);
+        $.getJSON("https://bms-icl-yoga.herokuapp.com/counter/today/date", function (data) {
+          for (var i=0;i<data.TOTAL_COUNT_OF_BOOKINGS_BY_A_USERS_FOR_TODAY;i++){
+          $("#grid2 tbody").append("<tr> <td>"+(i+1)+" </td> <td>"+data.ALL_BOOKING_DETAILS_OF_USER[i].email+"</td></tr>");
+            
       }
-})};
+     })
+      }
+})});
 
 
-} 
-ko.applyBindings(new viewModel());
 
 
 
