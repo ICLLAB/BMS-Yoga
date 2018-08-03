@@ -291,13 +291,54 @@ router.post("/attended", (req, res, next) =>
   });
 });
 
+
+
+
+//get data of any required DATE+CENTER+SLOT ATTENDANCE OF ALL USERS (DATE+CENTER+SLOT who all have attended)
+//http://localhost:3000/counter/attendants/
+
+ 
+router.post("/attendants", (req, res, next) =>
+{
+  const date = req.body.date;
+  const center = req.body.center;
+  const slot = req.body.slot;
+
+ //attendance details of users booked schedule for a particular class
+ Counter.find({date: {$eq: date} , center:{$eq: center}, slot:{$eq: slot}})
+  .select("email date center slot")
+  .exec()
+  .then(docs => {
+    const response = {
+     total: docs.length,
+      CURRENT_DAY_BOOKINGS: docs.map(doc => {
+        return {
+          email: doc.email,
+          id:doc._id,
+          booked_date: doc.date,
+          center: doc.center,
+          slot:doc.slot
+        };
+      })
+    };
+    res.status(200).json(response);
+  })
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({
+      error: err
+    });
+  });
+});
+
+
 //get data of CURRENT DAY(TODAYS) ATTENDANCE OF ALL USERS (who all have attended)
 //http://localhost:3000/counter/today/date/
   
   
   router.get("/today/date/", (req, res, next) => {
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     Counter.find({date: {$eq: today}})
       //Package.find({date})
         .select('email  date slot center ')

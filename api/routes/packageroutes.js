@@ -500,7 +500,7 @@ router.get("/date/:userDate", (req, res, next) => {
 router.get("/datee/", (req, res, next) => {
   const now = new Date();
   
-  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
   Package.find({date: {$eq: today}})
       .select('email id date slot center booking_time')
       .exec()
@@ -535,7 +535,7 @@ router.get("/datee/", (req, res, next) => {
   
   router.get("/today/date/", (req, res, next) => {
     const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()+1);
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
     const place = "jayanagar"
     const time = "1"
     Package.find({date: {$eq: today},center: {$eq: place},slot: {$eq: time}})
@@ -605,7 +605,7 @@ router.get("/datee/", (req, res, next) => {
     });
     
 
-    
+    /*TESTING*/
 
 
 module.exports = router;
