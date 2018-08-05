@@ -28,8 +28,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     private static final String TAG = "RecyclerViewAdapter";
 
     //vars
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mClassCount = new ArrayList<>();
+    private ArrayList<String> mNames;
+    private ArrayList<String> mClassCount;
 
     // private ArrayList<String> mImageUrls = new ArrayList<>();
     private Context mContext;
@@ -61,6 +61,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
                 .asBitmap()
                 .load(mImageUrls.get(position))
                 .into(holder.image);*/
+
 
         holder.name.setText(mNames.get(position));
         holder.classC.setText(mClassCount.get(position));

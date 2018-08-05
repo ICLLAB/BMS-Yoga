@@ -36,15 +36,15 @@
     <string name="hint_lname">Last Name</string>
     <string name="hint_logIn">Logged in as</string>
     <string name="sh_text_head">Trail Class Schedule</string>
-    <string name="hint_date">Date</string>
+    <string name="hint_date">Pick a date</string>
     <string name="hint_centre">Centre</string>
     <string name="hint_slot">Slot</string>
     <string name="btn_book">Book</string>
     <string name="btn_bookPack">Book Package</string>
     <string name="select_centre">Select Centre</string>
     <string name="select_slot">Select Slot</string>
-
     <string name="hint_session_count">Available Trail Classes</string>
+    <string name="hint_session_count_tv">0</string>
     <string name="shp_text_head">Package Booking</string>
     <string-array name="centres">
         <item>jayanagar</item>

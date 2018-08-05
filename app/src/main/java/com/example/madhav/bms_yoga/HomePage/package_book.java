@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -47,7 +48,7 @@ public class package_book extends DialogFragment {
     public package_book() {
         // Required empty public constructor
     }
-    private EditText mpsd;
+    private TextView mpsd;
     private Spinner mpsc;
     private Spinner mpss;
     Calendar myCalendar = Calendar.getInstance();

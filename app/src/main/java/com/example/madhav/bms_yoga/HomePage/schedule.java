@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -55,11 +56,11 @@ public class schedule extends DialogFragment {
         // Required empty public constructor
     }
 
-    //mobile schedile date , centre , slot
-    private EditText msd;
+    //mobile schedule date , centre , slot
+    private TextView msd;
     private Spinner msc;
     private Spinner mss;
-    private EditText sc;
+    private TextView sc;
 
     Fragment fragment = null;
     Calendar myCalendar = Calendar.getInstance();

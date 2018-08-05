@@ -56,7 +56,7 @@ public class dashboard extends Fragment {
     ProgressBar progB_dash;
    // private final static int INTERVAL = 5000;//1000 * 60 * 2; //2 minutes
     private static final String TAG = "dashboard";
-
+    RecyclerView recyclerView;
     //vars
     private ArrayList<String> mNames = new ArrayList<>();
     private ArrayList<String> mClassCount = new ArrayList<>();
@@ -83,7 +83,7 @@ public class dashboard extends Fragment {
         tipP = v.findViewById(R.id.tip);
         schedule_icon = v.findViewById(R.id.schedule_icon);
         progB_dash = v.findViewById(R.id.progB_dash);
-
+       recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
 
         schedule_icon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,28 +106,23 @@ public class dashboard extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.dashboard_menu, menu);
-        Attendence();
+
 
         super.onCreateOptionsMenu(menu, inflater);
 
+        Attendence();
+        //getInfo();
 
-       // getInfo();
 
     }
-   /* private void getInfo(String a){
+  /*  private void getInfo(){
         //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
         // mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
         //String c = "12";
+        Attendence();
 
-        mNames.add("No. of Sessions");
-        //Log.d("test",response.get("total").toString());
-        mClassCount.add(a);
 
-        //mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
-        mNames.add("Health Score");
-        mClassCount.add("0");
 
-        initRecyclerView();
 
 
     }*/
@@ -137,7 +132,7 @@ public class dashboard extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
 
 
-        RecyclerView recyclerView = (RecyclerView) getActivity().findViewById(R.id.recyclerView);
+
 
         //imgView_g.setVisibility(View.INVISIBLE);
 
@@ -248,6 +243,7 @@ public class dashboard extends Fragment {
 
         }
 
+
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 mAPI.ATT_URL + name,
@@ -261,17 +257,25 @@ public class dashboard extends Fragment {
 
                         // Process the JSON
                         try{
+
                             JSONArray array = response.getJSONArray("LAST_7_DAYS_ATTENDANCE_OF_PARTICULAR_USER");
                             // Get the JSON array
                             // Loop through the array elements
-                            mNames.add("No. of Sessions");
+                          /*  mNames.add("No. of Sessions");
                             //Log.d("test",response.get("total").toString());
                             mClassCount.add("12");
 
                             //mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
                             mNames.add("Health Score");
                             mClassCount.add("0");
-                            initRecyclerView();
+                            initRecyclerView();*/
+                            mNames.add("No. of Sessions");
+                            //Log.d("test",response.get("total").toString());
+                            mClassCount.add(response.get("total").toString());
+
+                            //mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+                            mNames.add("Health Score");
+                            mClassCount.add("0");
 
 
                             /*for(int i=0;i<array.length();i++){
@@ -301,7 +305,11 @@ public class dashboard extends Fragment {
                             }*/
                         }catch (JSONException e){
                             e.printStackTrace();
+
                         }
+
+
+                        initRecyclerView();
 
                     }
 
@@ -313,10 +321,12 @@ public class dashboard extends Fragment {
                         Log.d("Error.Response", String.valueOf(error));
                     }
                 }
+
         );
 
         // Add JsonObjectRequest to the RequestQueue
         // requestQueue.add(jsonObjectRequest);
+
         VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
     /*private class LongOperationLoad extends AsyncTask<String, Void, String> {
