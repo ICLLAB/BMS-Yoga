@@ -1,6 +1,7 @@
 package com.example.madhav.bms_yoga.HomePage;
 
 
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -12,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -32,7 +35,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -43,19 +50,19 @@ import static android.content.Context.MODE_PRIVATE;
 public class schedule extends DialogFragment {
     ImageView imageView_closeSch;
     ProgressBar progB_book;
-    Button btn_book;
+    Button btn_book,btn_bookPack;
     public schedule() {
         // Required empty public constructor
     }
 
     //mobile schedile date , centre , slot
     private EditText msd;
-    private EditText msc;
-    private EditText mss;
+    private Spinner msc;
+    private Spinner mss;
     private EditText sc;
 
     Fragment fragment = null;
-
+    Calendar myCalendar = Calendar.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -68,6 +75,8 @@ public class schedule extends DialogFragment {
         msc = v.findViewById(R.id.input_centre);
         mss = v.findViewById(R.id.input_slot);
         sc = v.findViewById(R.id.session_count);
+        btn_bookPack = v.findViewById(R.id.btn_bookPack);
+        btn_bookPack.setVisibility(View.GONE);
         sc.setEnabled(false);
         getSessionsCount();
        // Log.d("testzzz","123");
@@ -89,12 +98,65 @@ public class schedule extends DialogFragment {
                 new LongOperationBook().execute("");
             }
         });
+
+        btn_bookPack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getDialog().dismiss();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                // Window window = myDialog.getWindow();
+
+                package_book myDialogFragment = new package_book();
+                myDialogFragment.show(fm, "package_book_fragment");
+
+            }
+        });
+        msd.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+
+                // TODO Auto-generated method stub
+               /* new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();*/
+
+
+                DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        updateLabel();
+                    }
+                }, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
+                long now = System.currentTimeMillis() - 1000;
+                dialog.getDatePicker().setMaxDate(now+(1000*60*60*24*7));
+                dialog.show();
+            }
+        });
+
+
         return v;
+    }
+
+    private void updateLabel() {
+        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        msd.setText(sdf.format(myCalendar.getTime()));
     }
 
 
     private void book() {
-        final mSchedule msch = new mSchedule(msd.getText().toString(),msc.getText().toString(),mss.getText().toString());
+        final mSchedule msch = new mSchedule(msd.getText().toString(),msc.getSelectedItem().toString(),mss.getSelectedItem().toString());
         SharedPreferences prefs = this.getActivity().getSharedPreferences("email_pref",MODE_PRIVATE);
         String restoredText = prefs.getString("email", null);
 
@@ -106,11 +168,11 @@ public class schedule extends DialogFragment {
                         // response
                         Log.d("Response", response);
 
-                        Toast.makeText(getContext(), "Your class is scheduled on "+msd.getText(),
+                        Toast.makeText(getContext(), "Your trail class is scheduled on "+msd.getText(),
                                 Toast.LENGTH_LONG).show();
                         msd.setText("");
-                        msc.setText("");
-                        mss.setText("");
+                        msc.setSelection( 0 );
+                        mss.setSelection( 0 );
                         msd.requestFocus();
                         getDialog().dismiss();
                     }
@@ -167,20 +229,16 @@ public class schedule extends DialogFragment {
 
                             if(a >= 5)
                             {
-                                getDialog().dismiss();
+
                                //getDialog().hide();
                                 btn_book.setEnabled(false);
                                 btn_book.setText("Trail Classes Expired");
                                 btn_book.setBackgroundColor(0xFFFF0000);
-
-                                FragmentManager fm = getActivity().getSupportFragmentManager();
-                               // Window window = myDialog.getWindow();
-
-                                package_book myDialogFragment = new package_book();
-                                myDialogFragment.show(fm, "package_book_fragment");
-
-
-
+                                msc.setEnabled(false);
+                                msd.setText("");
+                                msd.setEnabled(false);
+                                mss.setEnabled(false);
+                                btn_bookPack.setVisibility(View.VISIBLE);
                             }
 
 

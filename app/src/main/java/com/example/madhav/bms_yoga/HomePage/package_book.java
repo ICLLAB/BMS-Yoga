@@ -1,6 +1,7 @@
 package com.example.madhav.bms_yoga.HomePage;
 
 
+import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -25,7 +28,10 @@ import com.example.madhav.bms_yoga.controller.VolleySingleton;
 import com.example.madhav.bms_yoga.model.mSchedule;
 import com.example.madhav.bms_yoga.network.mAPI;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -42,9 +48,9 @@ public class package_book extends DialogFragment {
         // Required empty public constructor
     }
     private EditText mpsd;
-    private EditText mpsc;
-    private EditText mpss;
-
+    private Spinner mpsc;
+    private Spinner mpss;
+    Calendar myCalendar = Calendar.getInstance();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,6 +65,30 @@ public class package_book extends DialogFragment {
         progB_bookp.setVisibility(View.GONE);
 
 
+
+        mpsd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog dialog = new DatePickerDialog(getContext(), new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        myCalendar.set(Calendar.YEAR, year);
+                        myCalendar.set(Calendar.MONTH, monthOfYear);
+                        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+
+                        updateLabel();
+                    }
+                }, myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH), myCalendar.get(Calendar.DAY_OF_MONTH));
+                dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+
+                long now = System.currentTimeMillis() - 1000;
+                dialog.getDatePicker().setMaxDate(now+(1000*60*60*24*7));
+                dialog.show();
+            }
+        });
         imageView_closeSchp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,9 +103,15 @@ public class package_book extends DialogFragment {
         });
         return v;
     }
+    private void updateLabel() {
+        String myFormat = "yyyy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+
+        mpsd.setText(sdf.format(myCalendar.getTime()));
+    }
 
     private void bookpack() {
-        final mSchedule msch = new mSchedule(mpsd.getText().toString(),mpsc.getText().toString(),mpss.getText().toString());
+        final mSchedule msch = new mSchedule(mpsd.getText().toString(),mpsc.getSelectedItem().toString(),mpss.getSelectedItem().toString());
         SharedPreferences prefs = this.getActivity().getSharedPreferences("email_pref",MODE_PRIVATE);
         String restoredText = prefs.getString("email", null);
 
@@ -90,8 +126,8 @@ public class package_book extends DialogFragment {
                         Toast.makeText(getContext(), "Your package class is scheduled on "+mpsd.getText(),
                                 Toast.LENGTH_LONG).show();
                         mpsd.setText("");
-                        mpsc.setText("");
-                        mpss.setText("");
+                        mpsc.setSelection( 0 );
+                        mpss.setSelection( 0 );
                         mpsd.requestFocus();
                         getDialog().dismiss();
                     }

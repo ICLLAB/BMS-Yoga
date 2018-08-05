@@ -55,7 +55,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Log.d(TAG, "onBindViewHolder: called.");
+       // Log.d(TAG, "onBindViewHolder: called.");
 
         /*Glide.with(mContext)
                 .asBitmap()

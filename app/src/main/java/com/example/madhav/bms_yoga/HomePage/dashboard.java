@@ -29,6 +29,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class dashboard extends Fragment {
     TextView tipP;
     ImageView schedule_icon;
+    ProgressBar progB_dash;
    // private final static int INTERVAL = 5000;//1000 * 60 * 2; //2 minutes
     private static final String TAG = "dashboard";
 
@@ -80,7 +82,7 @@ public class dashboard extends Fragment {
 
         tipP = v.findViewById(R.id.tip);
         schedule_icon = v.findViewById(R.id.schedule_icon);
-
+        progB_dash = v.findViewById(R.id.progB_dash);
 
 
         schedule_icon.setOnClickListener(new View.OnClickListener() {
@@ -92,6 +94,7 @@ public class dashboard extends Fragment {
 
             }
         });
+        progB_dash.setVisibility(View.GONE);
         mHandler = new Handler();
 
         startRepeatingTask();
@@ -103,18 +106,28 @@ public class dashboard extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.dashboard_menu, menu);
-        super.onCreateOptionsMenu(menu, inflater);
-
         Attendence();
 
+        super.onCreateOptionsMenu(menu, inflater);
+
+
+       // getInfo();
 
     }
-   /* private void getInfo(){
+   /* private void getInfo(String a){
         //Log.d(TAG, "initImageBitmaps: preparing bitmaps.");
         // mImageUrls.add("https://c1.staticflickr.com/5/4636/25316407448_de5fbf183d_o.jpg");
-        String c = "12";
+        //String c = "12";
 
+        mNames.add("No. of Sessions");
+        //Log.d("test",response.get("total").toString());
+        mClassCount.add(a);
 
+        //mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
+        mNames.add("Health Score");
+        mClassCount.add("0");
+
+        initRecyclerView();
 
 
     }*/
@@ -248,20 +261,19 @@ public class dashboard extends Fragment {
 
                         // Process the JSON
                         try{
-
-                            // Get the JSON array
                             JSONArray array = response.getJSONArray("LAST_7_DAYS_ATTENDANCE_OF_PARTICULAR_USER");
+                            // Get the JSON array
                             // Loop through the array elements
-
                             mNames.add("No. of Sessions");
                             //Log.d("test",response.get("total").toString());
-                            mClassCount.add(response.get("total").toString());
+                            mClassCount.add("12");
 
                             //mImageUrls.add("https://i.redd.it/tpsnoz5bzo501.jpg");
                             mNames.add("Health Score");
                             mClassCount.add("0");
-
                             initRecyclerView();
+
+
                             /*for(int i=0;i<array.length();i++){
                                 // Get current json object
                                 JSONObject student = array.getJSONObject(i);
@@ -307,6 +319,46 @@ public class dashboard extends Fragment {
         // requestQueue.add(jsonObjectRequest);
         VolleySingleton.getInstance(getContext()).addToRequestQueue(jsonObjectRequest);
     }
+    /*private class LongOperationLoad extends AsyncTask<String, Void, String> {
+
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            for (int i = 0; i < 5; i++) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    Thread.interrupted();
+                }
+            }
+
+
+            return "Executed";
+        }
+
+        @Override
+        protected void onPostExecute(String result) {
+            //TextView txt = (TextView) findViewById(R.id.output);
+            // txt.setText("Executed"); // txt.setText(result);
+            progB_dash.setVisibility(View.GONE);
+            //Log.d("async", "executed");
+
+            // might want to change "executed" for the returned string passed
+            // into onPostExecute() but that is upto you
+        }
+
+        @Override
+        protected void onPreExecute() {
+
+            progB_dash.setVisibility(View.VISIBLE);
+
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {}
+    }*/
 
 
 

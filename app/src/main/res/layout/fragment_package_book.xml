@@ -44,12 +44,16 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/input_name_datep"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
             android:hint="@string/hint_date"
             android:textColor="@color/colorTrendsBackground"
             android:textSize="18sp"
             />
     </android.support.design.widget.TextInputLayout>
 
+    <!--
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_email_su"
         android:layout_width="match_parent"
@@ -69,7 +73,35 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
             android:textColor="@color/colorTrendsBackground"
             android:textSize="18sp" />
     </android.support.design.widget.TextInputLayout>
+    -->
+    <TextView
+        android:id="@+id/input_layout_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="13dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/select_centre" />
 
+    <Spinner
+
+        android:id="@+id/input_centrep"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="15dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="18sp"
+        android:textColor="@color/colorTrendsBackground"
+
+        android:entries="@array/centres"
+        android:padding="10dp"
+
+        tools:layout_height="wrap_content" />
+
+    <!--
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_password_su"
         android:layout_width="match_parent"
@@ -91,7 +123,33 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 
             android:textSize="18sp" />
     </android.support.design.widget.TextInputLayout>
+    -->
+    <TextView
+        android:id="@+id/input_layout_slot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="13dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/select_slot" />
 
+    <Spinner
+
+        android:id="@+id/input_slotp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="15dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="18sp"
+        android:textColor="@color/colorTrendsBackground"
+
+        android:entries="@array/slots"
+        android:padding="10dp"
+
+        tools:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_bookp"

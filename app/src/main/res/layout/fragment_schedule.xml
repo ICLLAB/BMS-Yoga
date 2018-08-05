@@ -64,11 +64,14 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_date"
+            android:clickable="true"
+            android:editable="false"
+            android:focusable="false"
             android:textColor="@color/colorTrendsBackground"
             android:textSize="18sp"
             />
     </android.support.design.widget.TextInputLayout>
-
+<!--
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_email_su"
         android:layout_width="match_parent"
@@ -88,7 +91,35 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
             android:textColor="@color/colorTrendsBackground"
             android:textSize="18sp" />
     </android.support.design.widget.TextInputLayout>
+-->
 
+    <TextView
+        android:id="@+id/input_layout_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="13dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/select_centre" />
+
+    <Spinner
+
+        android:id="@+id/input_centre"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="15dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="18sp"
+        android:textColor="@color/colorTrendsBackground"
+
+        android:entries="@array/centres"
+        android:padding="10dp"
+
+        tools:layout_height="wrap_content" />
+    <!--
     <android.support.design.widget.TextInputLayout
         android:id="@+id/input_layout_password_su"
         android:layout_width="match_parent"
@@ -110,7 +141,33 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 
             android:textSize="18sp" />
     </android.support.design.widget.TextInputLayout>
+-->
+    <TextView
+        android:id="@+id/input_layout_slot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="13dp"
+        android:textColor="@color/colorAccent"
+        android:text="@string/select_slot" />
 
+    <Spinner
+
+        android:id="@+id/input_slot"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="15dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:textSize="18sp"
+        android:textColor="@color/colorTrendsBackground"
+
+        android:entries="@array/slots"
+        android:padding="10dp"
+
+        tools:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/btn_book"
@@ -126,7 +183,20 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
         android:text="@string/btn_book"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
+    <Button
+        android:id="@+id/btn_bookPack"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
 
+        android:layout_marginTop="15dp"
+        android:background="@color/colorAccent"
+
+        android:text="@string/btn_bookPack"
+        android:textColor="@android:color/white"
+        android:textSize="18sp" />
     <ProgressBar
         android:id="@+id/progB_book"
         android:layout_width="wrap_content"

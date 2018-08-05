@@ -40,7 +40,21 @@
     <string name="hint_centre">Centre</string>
     <string name="hint_slot">Slot</string>
     <string name="btn_book">Book</string>
+    <string name="btn_bookPack">Book Package</string>
+    <string name="select_centre">Select Centre</string>
+    <string name="select_slot">Select Slot</string>
+
     <string name="hint_session_count">Available Trail Classes</string>
     <string name="shp_text_head">Package Booking</string>
+    <string-array name="centres">
+        <item>jayanagar</item>
+        <item>vijayanagar</item>
+
+    </string-array>
+    <string-array name="slots">
+        <item>1</item>
+        <item>2</item>
+
+    </string-array>
 
 </resources>
