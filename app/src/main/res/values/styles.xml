@@ -37,5 +37,9 @@
     <style name="pAccent" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <style name="error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 </resources>
 

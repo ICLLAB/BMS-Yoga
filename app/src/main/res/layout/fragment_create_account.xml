@@ -34,6 +34,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:layout_marginTop="15dp"
+            app:errorTextAppearance="@style/error_appearance"
 
             android:theme="@style/su_TextLabel">
 
@@ -103,6 +104,16 @@
             android:text="@string/btn_signup"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/input_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+
+            />
 
         <ProgressBar
             android:id="@+id/progB_signup"

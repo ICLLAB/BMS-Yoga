@@ -1,10 +1,12 @@
 package com.example.madhav.bms_yoga.LoginScreen;
 
 
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -36,6 +39,7 @@ public class forgot_password extends DialogFragment {
 EditText infw;
     private Button infwb;
     private ImageView disF;
+    private TextView input_status;
     private ProgressBar pdia_fp;
     public forgot_password() {
         // Required empty public constructor
@@ -49,6 +53,7 @@ EditText infw;
         View view=  inflater.inflate(R.layout.fragment_forgot_password, container, false);
         infw = view.findViewById(R.id.input_email_fp);
         infwb = view.findViewById(R.id.btn_fp);
+        input_status= view.findViewById(R.id.input_status);
         disF = view.findViewById(R.id.imageViewF_close);
         pdia_fp = view.findViewById(R.id.progB_fgt);
         pdia_fp.setVisibility(View.GONE);
@@ -56,7 +61,12 @@ EditText infw;
         infwb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new LongOperationForgot().execute("");
+                if( TextUtils.isEmpty(infw.getText())){
+                    input_status.setText("Email cannot be left blank");
+                    input_status.setTextColor(Color.RED);
+                }else{
+                    new LongOperationForgot().execute("");
+                }
             }
         });
 
@@ -130,7 +140,7 @@ EditText infw;
         protected void onPostExecute(String result) {
             //TextView txt = (TextView) findViewById(R.id.output);
             // txt.setText("Executed"); // txt.setText(result);
-            pdia_fp.setVisibility(View.INVISIBLE);
+            pdia_fp.setVisibility(View.GONE);
            // Log.d("async", "executed");
 
             // might want to change "executed" for the returned string passed

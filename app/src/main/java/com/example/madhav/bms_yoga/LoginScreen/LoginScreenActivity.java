@@ -2,6 +2,7 @@ package com.example.madhav.bms_yoga.LoginScreen;
 
 
 import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,10 +13,12 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -59,13 +62,14 @@ public class LoginScreenActivity extends AppCompatActivity {
     private EditText pwText;
     private TextView createA;
     private TextView forgotP;
-
+    private TextView input_status;
     private ProgressBar pdia;
     TextView textview;
     Button lgnButton;
 
 
     RelativeLayout lf;
+
 
 
     @Override
@@ -78,6 +82,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         lgnButton = findViewById(R.id.btn_login);
         createA = findViewById(R.id.createA);
         forgotP = findViewById(R.id.forgotP);
+        input_status = findViewById(R.id.input_status);
 
         pdia = findViewById(R.id.progB);
         pdia.setVisibility(View.GONE);
@@ -96,7 +101,24 @@ public class LoginScreenActivity extends AppCompatActivity {
         lgnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new LongOperation().execute("");
+                if( TextUtils.isEmpty(emailText.getText()) || TextUtils.isEmpty(pwText.getText()) ) {
+                    input_status.setText("Fields cannot be left blank");
+
+                }
+                else
+                {
+                    if(CheckInternet())
+                    {
+                        input_status.setText("");
+                        new LongOperation().execute("");
+                    }
+                    else
+                    {
+                        input_status.setText("No Internet Connection");
+                    }
+
+
+                }
 
             }
         });
@@ -107,6 +129,7 @@ public class LoginScreenActivity extends AppCompatActivity {
             public void onClick(View view) {
                 /*Toast.makeText(LoginScreenActivity.this, "Create Account",
                         Toast.LENGTH_LONG).show();*/
+                input_status.setText("");
                 FragmentManager fm = getSupportFragmentManager();
                 create_account myDialogFragment = new create_account();
                 myDialogFragment.show(fm, "create_account_fragment");
@@ -118,6 +141,7 @@ public class LoginScreenActivity extends AppCompatActivity {
         forgotP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                input_status.setText("");
                 FragmentManager fm = getSupportFragmentManager();
                 forgot_password fp = new forgot_password();
                 fp.show(fm, "forgot_password_fragment");
@@ -170,8 +194,9 @@ public class LoginScreenActivity extends AppCompatActivity {
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(error));
-                        Toast.makeText(LoginScreenActivity.this, "Email or Password is Invalid",
-                                Toast.LENGTH_LONG).show();
+                        /*Toast.makeText(LoginScreenActivity.this, "Email or Password is Invalid",
+                                Toast.LENGTH_LONG).show();*/
+                        input_status.setText("Email or Password is Invalid");
                     }
                 }
         )
@@ -316,6 +341,21 @@ public class LoginScreenActivity extends AppCompatActivity {
 
         @Override
         protected void onProgressUpdate(Void... values) {}
+    }
+
+    public boolean CheckInternet()
+    {
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
+
+        return connected;
     }
 
 

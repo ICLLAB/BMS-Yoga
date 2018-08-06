@@ -125,6 +125,16 @@
             android:text="@string/btn_update"
             android:textColor="@android:color/white"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/input_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            android:layout_marginRight="15dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textColor="#5ec639"
+             />
 
         <ProgressBar
             android:id="@+id/progB_edit"

@@ -2,10 +2,12 @@ package com.example.madhav.bms_yoga.LoginScreen;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,6 +47,7 @@ public class create_account extends DialogFragment {
     private EditText ies;
     private EditText ips;
     private Button signUP;
+    private TextView input_status;
     private ProgressBar pdia_su;
     private ImageView dis;
 
@@ -57,6 +61,7 @@ public class create_account extends DialogFragment {
         ies =  view.findViewById(R.id.input_email_su);
         ips =  view.findViewById(R.id.input_password_su);
         signUP = view.findViewById(R.id.btn_signup);
+        input_status = view.findViewById(R.id.input_status);
         dis = view.findViewById(R.id.imageView_close);
         pdia_su = view.findViewById(R.id.progB_signup);
         pdia_su.setVisibility(View.GONE);
@@ -64,7 +69,15 @@ public class create_account extends DialogFragment {
         signUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new LongOperationSignup().execute("");
+                if( TextUtils.isEmpty(ins.getText()) || TextUtils.isEmpty(ies.getText()) || TextUtils.isEmpty(ips.getText())) {
+                    input_status.setText("Fields cannot be left blank");
+                    input_status.setTextColor(Color.RED);
+                }
+                else
+                {
+                    new LongOperationSignup().execute("");
+                }
+
             }
         });
 

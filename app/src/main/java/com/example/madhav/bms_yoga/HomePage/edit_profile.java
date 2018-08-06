@@ -2,10 +2,12 @@ package com.example.madhav.bms_yoga.HomePage;
 
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -44,6 +47,7 @@ public class edit_profile extends DialogFragment {
     EditText username;
     EditText fname;
     EditText lname;
+    TextView input_status;
     Button e_button;
     private ProgressBar pdia_ep;
     ImageView close;
@@ -64,13 +68,21 @@ public class edit_profile extends DialogFragment {
         lname = v.findViewById(R.id.lname);
         close = v.findViewById(R.id.imageView_closeedit);
         pdia_ep = v.findViewById(R.id.progB_edit);
+        input_status = v.findViewById(R.id.input_status);
+
         pdia_ep.setVisibility(View.GONE);
         e_button = v.findViewById(R.id.btn_update);
 
         e_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                new LongOperationEdit().execute("");
+                input_status.setText("");
+                if( TextUtils.isEmpty(username.getText())){
+                    input_status.setText("Username cannot be left blank");
+                    input_status.setTextColor(Color.RED);
+                }else {
+                    new LongOperationEdit().execute("");
+                }
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -192,9 +204,8 @@ public class edit_profile extends DialogFragment {
                         // response
                         Log.d("Response", response);
 
-                        Toast.makeText(getContext(), "Account updated successfully",
-                                Toast.LENGTH_LONG).show();
-                        getDialog().dismiss();
+
+
                     }
                 },
                 new Response.ErrorListener()
@@ -203,11 +214,12 @@ public class edit_profile extends DialogFragment {
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(error));
-                        Toast.makeText(getContext(), "Error Editing",
-                                Toast.LENGTH_LONG).show();
+
                     }
                 }
+
         )
+
         {
             @Override
             protected Map<String, String> getParams()
@@ -219,6 +231,7 @@ public class edit_profile extends DialogFragment {
                 return params;
             }
         };
+
         VolleySingleton.getInstance(getContext()).addToRequestQueue(postRequest);
     }
 
@@ -227,6 +240,7 @@ public class edit_profile extends DialogFragment {
 
         @Override
         protected String doInBackground(String... params) {
+
             editProfile();
             for (int i = 0; i < 5; i++) {
                 try {
@@ -235,6 +249,7 @@ public class edit_profile extends DialogFragment {
                     Thread.interrupted();
                 }
             }
+
             return "Executed";
         }
 
@@ -242,8 +257,12 @@ public class edit_profile extends DialogFragment {
         protected void onPostExecute(String result) {
             //TextView txt = (TextView) findViewById(R.id.output);
             // txt.setText("Executed"); // txt.setText(result);
-            pdia_ep.setVisibility(View.INVISIBLE);
+            pdia_ep.setVisibility(View.GONE);
+            input_status.setTextColor(Color.parseColor("#5ec639"));
+            input_status.setText("Account Updated Successfully");
+            email.requestFocus();
             Log.d("async", "executed");
+
 
             // might want to change "executed" for the returned string passed
             // into onPostExecute() but that is upto you

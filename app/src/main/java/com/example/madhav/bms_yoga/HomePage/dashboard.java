@@ -277,7 +277,7 @@ public class dashboard extends Fragment {
                             mNames.add("Health Score");
                             mClassCount.add("0");
 
-
+                            initRecyclerView();
                             /*for(int i=0;i<array.length();i++){
                                 // Get current json object
                                 JSONObject student = array.getJSONObject(i);
@@ -309,7 +309,7 @@ public class dashboard extends Fragment {
                         }
 
 
-                        initRecyclerView();
+
 
                     }
 
