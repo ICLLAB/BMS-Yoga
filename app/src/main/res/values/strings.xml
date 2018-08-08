@@ -46,6 +46,7 @@
     <string name="hint_session_count">Available Trail Classes</string>
     <string name="hint_session_count_tv">0</string>
     <string name="shp_text_head">Package Booking</string>
+    <string name="ph_no">Phone Number</string>
     <string-array name="centres">
         <item>jayanagar</item>
         <item>vijayanagar</item>

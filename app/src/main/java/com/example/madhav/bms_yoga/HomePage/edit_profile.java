@@ -44,7 +44,7 @@ import static android.content.Context.MODE_PRIVATE;
 public class edit_profile extends DialogFragment {
 
     EditText email;
-    EditText username;
+    EditText ph_no;
     EditText fname;
     EditText lname;
     TextView input_status;
@@ -62,7 +62,7 @@ public class edit_profile extends DialogFragment {
         // Inflate the layout for this fragment
         View v =  inflater.inflate(R.layout.fragment_edit_profile, container, false);
         email = v.findViewById(R.id.email);
-        username = v.findViewById(R.id.username);
+        ph_no = v.findViewById(R.id.ph_no);
 
         fname = v.findViewById(R.id.fname);
         lname = v.findViewById(R.id.lname);
@@ -77,12 +77,8 @@ public class edit_profile extends DialogFragment {
             @Override
             public void onClick(View view) {
                 input_status.setText("");
-                if( TextUtils.isEmpty(username.getText())){
-                    input_status.setText("Username cannot be left blank");
-                    input_status.setTextColor(Color.RED);
-                }else {
                     new LongOperationEdit().execute("");
-                }
+
             }
         });
         close.setOnClickListener(new View.OnClickListener() {
@@ -135,30 +131,14 @@ public class edit_profile extends DialogFragment {
                                 // Get current json object
                                 JSONObject student = array.getJSONObject(i);
 
-                                // Get the current student (json object) data
-                                //String e_user = student.getString("username");
-                                //String e_fname;
-                                String a = checkKey(student, "username");
+                                String a = checkNumber(student, "phone");
                                 String x = checkKey(student, "f_name");
                                 String y = checkKey(student, "l_name");
-                                //String e_fname = student.getString("f_name");
-                                //String e_lname = student.getString("l_name");
-                                //String Quotes = '"'+ hea_tip+'"';
-                                //String lastName = student.getString("type");
-                                // String age = student.getString("age");
 
-                                // Display the formatted json data in text view
-                                //mTextView.append(firstName +" " + lastName +"\nage : " + age);
-                                // mTextView.append("\n\n");
-                                username.setText(a);
+
+                                ph_no.setText(a);
                                 fname.setText(x);
                                 lname.setText(y);
-                                //lname.setText(e_lname);
-                               /*Intent n = new Intent(LoginScreenActivity.this, HomeActivity.class);
-                               n.putExtra("puttip",Quotes);
-
-                               startActivity(n);*/
-
 
                             }
                         }catch (JSONException e){
@@ -188,6 +168,28 @@ public class edit_profile extends DialogFragment {
         }
         else
             res = "";
+
+        return res ;
+    }
+
+    public String checkNumber(JSONObject student, String s) throws JSONException {
+        String res="";
+
+        if(student.has(s))
+        {
+            res= student.getString(s);
+            if(res == "null")
+                res = String.valueOf(91);
+
+
+
+        }
+        else
+        {
+            res = String.valueOf(91);
+
+        }
+
 
         return res ;
     }
@@ -225,7 +227,7 @@ public class edit_profile extends DialogFragment {
             protected Map<String, String> getParams()
             {
                 Map<String, String>  params = new HashMap<String, String>();
-                params.put("username", username.getText().toString());
+                params.put("phone", ph_no.getText().toString());
                 params.put("f_name", fname.getText().toString());
                 params.put("l_name", lname.getText().toString());
                 return params;
