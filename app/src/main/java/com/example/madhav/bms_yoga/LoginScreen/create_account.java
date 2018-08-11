@@ -32,6 +32,8 @@ import com.example.madhav.bms_yoga.network.mAPI;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -69,13 +71,20 @@ public class create_account extends DialogFragment {
         signUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                input_status.setText("");
                 if( TextUtils.isEmpty(ins.getText()) || TextUtils.isEmpty(ies.getText()) || TextUtils.isEmpty(ips.getText())) {
                     input_status.setText("Fields cannot be left blank");
                     input_status.setTextColor(Color.RED);
                 }
                 else
                 {
-                    new LongOperationSignup().execute("");
+                    if(!CheckEmail())
+                    {
+                        input_status.setText("Invalid Email ID");
+                        input_status.setTextColor(Color.RED);
+                    }
+                    else
+                        new LongOperationSignup().execute("");
                 }
 
             }
@@ -116,8 +125,9 @@ public class create_account extends DialogFragment {
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(error));
-                        Toast.makeText(getContext(), "User exists/empty fields",
-                                Toast.LENGTH_LONG).show();
+                        input_status.setText("Email ID exists");
+                        input_status.setTextColor(Color.RED);
+                        pdia_su.setVisibility(View.GONE);
                     }
                 }
         )
@@ -155,13 +165,7 @@ public class create_account extends DialogFragment {
 
         @Override
         protected void onPostExecute(String result) {
-            //TextView txt = (TextView) findViewById(R.id.output);
-            // txt.setText("Executed"); // txt.setText(result);
-            pdia_su.setVisibility(View.INVISIBLE);
-            //Log.d("async", "executed");
-
-            // might want to change "executed" for the returned string passed
-            // into onPostExecute() but that is upto you
+            pdia_su.setVisibility(View.GONE);
         }
 
         @Override
@@ -174,5 +178,31 @@ public class create_account extends DialogFragment {
         @Override
         protected void onProgressUpdate(Void... values) {}
     }
+    public boolean CheckEmail()
+    {
+        boolean valid = false;
+        String email = ies.getText().toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (email.matches(emailPattern))
+            valid = true;
+        else
+            valid = false;
+
+        return valid;
+    }
+    //to do
+    /*public boolean isValidPassword(final String password) {
+
+        Pattern pattern;
+        Matcher matcher;
+
+        final String PASSWORD_PATTERN = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{4,}$";
+
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        matcher = pattern.matcher(password);
+
+        return matcher.matches();
+
+    }*/
 
 }

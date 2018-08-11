@@ -61,11 +61,18 @@ EditText infw;
         infwb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                input_status.setText("");
                 if( TextUtils.isEmpty(infw.getText())){
-                    input_status.setText("Email cannot be left blank");
+                    input_status.setText("Email ID cannot be left blank");
                     input_status.setTextColor(Color.RED);
                 }else{
-                    new LongOperationForgot().execute("");
+                    if(!CheckEmail())
+                    {
+                        input_status.setText("Invalid Email ID");
+                        input_status.setTextColor(Color.RED);
+                    }
+                    else
+                        new LongOperationForgot().execute("");
                 }
             }
         });
@@ -89,7 +96,7 @@ EditText infw;
                     public void onResponse(String response) {
                         // response
                         Log.d("Response", response);
-                        Toast.makeText(getContext(), "Email Sent Successfully",
+                        Toast.makeText(getContext(), "Email has been sent successfully",
                                 Toast.LENGTH_LONG).show();
                         getDialog().dismiss();
                     }
@@ -100,8 +107,9 @@ EditText infw;
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", String.valueOf(error));
-                        Toast.makeText(getContext(), "Failed",
-                                Toast.LENGTH_LONG).show();
+                        input_status.setText("Email ID doesn't exist");
+                        input_status.setTextColor(Color.RED);
+                        pdia_fp.setVisibility(View.GONE);
                     }
                 }
         )
@@ -138,13 +146,9 @@ EditText infw;
 
         @Override
         protected void onPostExecute(String result) {
-            //TextView txt = (TextView) findViewById(R.id.output);
-            // txt.setText("Executed"); // txt.setText(result);
-            pdia_fp.setVisibility(View.GONE);
-           // Log.d("async", "executed");
 
-            // might want to change "executed" for the returned string passed
-            // into onPostExecute() but that is upto you
+            pdia_fp.setVisibility(View.GONE);
+
         }
 
         @Override
@@ -156,6 +160,19 @@ EditText infw;
 
         @Override
         protected void onProgressUpdate(Void... values) {}
+    }
+
+    public boolean CheckEmail()
+    {
+        boolean valid = false;
+        String email = infw.getText().toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (email.matches(emailPattern))
+            valid = true;
+        else
+            valid = false;
+
+        return valid;
     }
 
 

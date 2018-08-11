@@ -101,20 +101,32 @@ public class LoginScreenActivity extends AppCompatActivity {
         lgnButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                input_status.setText("");
+
                 if( TextUtils.isEmpty(emailText.getText()) || TextUtils.isEmpty(pwText.getText()) ) {
                     input_status.setText("Fields cannot be left blank");
+
 
                 }
                 else
                 {
+
+
                     if(CheckInternet())
                     {
-                        input_status.setText("");
-                        new LongOperation().execute("");
+
+                        if(!CheckEmail())
+                        {
+                            input_status.setText("Invalid Email ID");
+
+                        }
+                        else
+                            new LongOperation().execute("");
                     }
                     else
                     {
                         input_status.setText("No Internet Connection");
+
                     }
 
 
@@ -197,6 +209,8 @@ public class LoginScreenActivity extends AppCompatActivity {
                         /*Toast.makeText(LoginScreenActivity.this, "Email or Password is Invalid",
                                 Toast.LENGTH_LONG).show();*/
                         input_status.setText("Email or Password is Invalid");
+
+                        pdia.setVisibility(View.GONE);
                     }
                 }
         )
@@ -324,8 +338,8 @@ public class LoginScreenActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             //TextView txt = (TextView) findViewById(R.id.output);
             // txt.setText("Executed"); // txt.setText(result);
-            pdia.setVisibility(View.INVISIBLE);
-            Log.d("async", "executed");
+            pdia.setVisibility(View.GONE);
+            //Log.d("async", "executed");
 
 
             // might want to change "executed" for the returned string passed
@@ -356,6 +370,20 @@ public class LoginScreenActivity extends AppCompatActivity {
             connected = false;
 
         return connected;
+    }
+
+
+    public boolean CheckEmail()
+    {
+        boolean valid = false;
+        String email = emailText.getText().toString().trim();
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (email.matches(emailPattern))
+            valid = true;
+        else
+            valid = false;
+
+        return valid;
     }
 
 
