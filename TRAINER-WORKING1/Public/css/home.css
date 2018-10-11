@@ -1,0 +1,13 @@
+.navbar
+{
+    background:rgb(255, 255, 255);
+}
+mdl-layout__header
+{
+    background-color: #37474F;
+}
+.mdl-tooltip
+{
+    background-color:#F5F5F5;
+    color:#212121;
+}
